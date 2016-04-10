@@ -9,7 +9,7 @@ z2
 cModel Technology
 d/userspace/c/chuff2/ece551/homework/homework4
 vAFE
-Z0 !s110 1460317281
+Z0 !s110 1460324961
 !i10b 1
 !s100 CBcR>1kSFiK>eoCYE4dWn0
 IOV<gR[o_U^8GOHZG4R]@L2
@@ -23,7 +23,7 @@ Z3 OL;L;10.4;61
 r1
 !s85 0
 31
-!s108 1460317281.455916
+!s108 1460324961.213004
 !s107 /userspace/c/chuff2/ece551/project/AFE.v|
 !s90 -reportprogress|300|-work|work|-vopt|-stats=none|/userspace/c/chuff2/ece551/project/AFE.v|
 !i113 0
@@ -47,11 +47,34 @@ R3
 r1
 !s85 0
 31
-!s108 1460317281.297196
+!s108 1460324961.040824
 !s107 /userspace/c/chuff2/ece551/project/channel_sample.sv|
 !s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|/userspace/c/chuff2/ece551/project/channel_sample.sv|
 !i113 0
 Z6 o-work work -sv -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+vchannel_sample_tb
+R5
+R0
+!i10b 1
+!s100 i@0AnkD>U@o6_PJW^0bnS2
+ICj42Z:`NMBh?_7JbCUOaO1
+R1
+!s105 channel_sample_tb_sv_unit
+S1
+R2
+w1460324954
+8/userspace/c/chuff2/ece551/project/channel_sample_tb.sv
+F/userspace/c/chuff2/ece551/project/channel_sample_tb.sv
+L0 1
+R3
+r1
+!s85 0
+31
+!s108 1460324961.612622
+!s107 /userspace/c/chuff2/ece551/project/channel_sample_tb.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|/userspace/c/chuff2/ece551/project/channel_sample_tb.sv|
+!i113 0
+R6
 vclk_rst_smpl
 R5
 R0
@@ -70,9 +93,32 @@ R3
 r1
 !s85 0
 31
-!s108 1460317281.506261
+!s108 1460324961.266249
 !s107 /userspace/c/chuff2/ece551/project/clk_rst_smpl.sv|
 !s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|/userspace/c/chuff2/ece551/project/clk_rst_smpl.sv|
+!i113 0
+R6
+vcmd_cfg
+R5
+R0
+!i10b 1
+!s100 :YVUHUE8JI[<:>[09ehm>0
+Iz_hM;O0Yo6UXOfAP_]KH41
+R1
+!s105 cmd_cfg_sv_unit
+S1
+R2
+w1460317416
+8/userspace/c/chuff2/ece551/project/cmd_cfg.sv
+F/userspace/c/chuff2/ece551/project/cmd_cfg.sv
+L0 1
+R3
+r1
+!s85 0
+31
+!s108 1460324961.152061
+!s107 /userspace/c/chuff2/ece551/project/cmd_cfg.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|/userspace/c/chuff2/ece551/project/cmd_cfg.sv|
 !i113 0
 R6
 vdig_core
@@ -93,7 +139,7 @@ R3
 r1
 !s85 0
 31
-!s108 1460317281.557610
+!s108 1460324961.335526
 !s107 /userspace/c/chuff2/ece551/project/dig_core.sv|
 !s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|/userspace/c/chuff2/ece551/project/dig_core.sv|
 !i113 0
@@ -116,7 +162,7 @@ R3
 r1
 !s85 0
 31
-!s108 1460317281.609388
+!s108 1460324961.406711
 !s107 /userspace/c/chuff2/ece551/project/LA_dig.sv|
 !s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|/userspace/c/chuff2/ece551/project/LA_dig.sv|
 !i113 0
@@ -137,7 +183,7 @@ R3
 r1
 !s85 0
 31
-!s108 1460317281.710468
+!s108 1460324961.509491
 !s107 /userspace/c/chuff2/ece551/project/pll8x.v|
 !s90 -reportprogress|300|-work|work|-vopt|-stats=none|/userspace/c/chuff2/ece551/project/pll8x.v|
 !i113 0
@@ -157,7 +203,7 @@ R3
 r1
 !s85 0
 31
-!s108 1460317281.758926
+!s108 1460324961.560899
 !s107 /userspace/c/chuff2/ece551/project/RAMqueue.v|
 !s90 -reportprogress|300|-work|work|-vopt|-stats=none|/userspace/c/chuff2/ece551/project/RAMqueue.v|
 !i113 0

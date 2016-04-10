@@ -1,0 +1,58 @@
+module channel_sample_tb();
+
+	//common signals
+	logic clk;
+
+	//afe originating signals
+	logic CH1L,CH1H;
+  	logic CH2L,CH2H;
+  	logic CH3L,CH3H;
+  	logic CH4L,CH4H;
+  	logic CH5L,CH5H;	
+
+	//pll8x originating signals
+	logic locked, clk50MHz, clk400MHz;
+
+	//clk reset originating signals
+	logic RST_n, smpl_clk, rst_n, wrt_smpl, decimator;
+
+	//channel sample originating signals
+	logic CH1Lff5, CH1Hff5, CH2Lff5, CH2Hff5, CH3Lff5, CH3Hff5, CH4Lff5, CH4Hff5, CH5Lff5, CH5Hff5;
+	logic [7:0] smpl1, smpl2, smpl3, smpl4, smpl5;
+	
+
+
+	//instantiate all the components
+	//i think i can just leave these inputs unconnected because we have AFE
+	AFE afe(.smpl_clk(smpl_clk),.VIH_PWM(),.VIL_PWM(),.CH1L(CH1L),.CH1H(CH1H),.CH2L(CH2L),
+		.CH2H(CH2H),.CH3L(CH3L),.CH3H(CH3H),
+		.CH4L(CH4L),.CH4H(CH4H),.CH5L(CH5L),.CH5H(CH5H));
+
+	pll8x pll_8x(.ref_clk(clk50MHz),.RST_n(RST_n),.out_clk(clk400MHz),.locked(locked));
+
+	clk_rst_smpl clk_reset_smpl(.clk400MHz(clk400MHz),.RST_n(RST_n),.locked(locked),.decimator(decimator),
+		.clk(clk),.smpl_clk(smpl_clk),.rst_n(rst_n),.wrt_smpl(wrt_smpl));
+
+
+	//the 5 channels
+	channel_sample chan_samp1(.CH_Hff5(CH1Hff5), .CH_Lff5(CH1Lff5), .smpl(smpl1), 
+		.CH_H(CH1H), .CH_L(CH1L), .smpl_clk(smpl_clk), .clk(clk));
+	
+	channel_sample chan_samp2(.CH_Hff5(CH2Hff5), .CH_Lff5(CH2Lff5), .smpl(smpl2), 
+		.CH_H(CH2H), .CH_L(CH2L), .smpl_clk(smpl_clk), .clk(clk));
+
+	channel_sample chan_samp3(.CH_Hff5(CH3Hff5), .CH_Lff5(CH3Lff5), .smpl(smpl3), 
+		.CH_H(CH3H), .CH_L(CH3L), .smpl_clk(smpl_clk), .clk(clk));
+
+	channel_sample chan_samp4(.CH_Hff5(CH4Hff5), .CH_Lff5(CH4Lff5), .smpl(smpl4), 
+		.CH_H(CH4H), .CH_L(CH4L), .smpl_clk(smpl_clk), .clk(clk));
+
+	channel_sample chan_samp5(.CH_Hff5(CH5Hff5), .CH_Lff5(CH5Lff5), .smpl(smpl5), 
+		.CH_H(CH5H), .CH_L(CH5L), .smpl_clk(smpl_clk), .clk(clk));
+
+
+	initial begin
+
+	end
+
+endmodule
