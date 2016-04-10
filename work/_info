@@ -1,0 +1,33 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+d/userspace/c/chuff2/ece551/homework/homework4
+vchannel_sample
+DXx6 sv_std 3 std 0 22 WmjPaeP=7F5?QFXzJ>D[Q2
+!s110 1460315704
+!i10b 1
+!s100 fCzaO@1f2_Ihk9k8Y>k3d1
+IB?DLXLkCAc257Ril[FHHm0
+VDg1SIo80bB@j0V0VzS_@n1
+!s105 channel_sample_sv_unit
+S1
+d/userspace/c/chuff2/ece551/project
+w1460314169
+8/userspace/c/chuff2/ece551/project/channel_sample.sv
+F/userspace/c/chuff2/ece551/project/channel_sample.sv
+L0 1
+OL;L;10.4;61
+r1
+!s85 0
+31
+!s108 1460315704.334709
+!s107 /userspace/c/chuff2/ece551/project/channel_sample.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|/userspace/c/chuff2/ece551/project/channel_sample.sv|
+!i113 0
+o-work work -sv -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
