@@ -1,7 +1,7 @@
-module cmd_cfg(clk, rst_n, cmd, cmd_rdy, resp_sent, rd_done, set_capture_done,
+module cmd_cfg(clk, rst_n, cmd, cmd_rdy, resp_sent, set_capture_done, waddr,
 	rdataCH1, rdataCH2, rdataCH3, rdataCH4, rdataCH5, 
-	resp, send_resp, clr_cmd_rdy, strt_rd, trig_pos, decimator, maskL, maskH,
-	matchL, matchH, baud_cntL, baud_cntH, TrigCfg, 
+	resp, send_resp, clr_cmd_rdy, trig_pos, addr_ptr, decimator, 
+	maskL, maskH, matchL, matchH, baud_cntL, baud_cntH, TrigCfg, 
 	CH1TrigCfg, CH2TrigCfg, CH3TrigCfg, CH4TrigCfg, CH5TrigCfg, VIH, VIL);
 
 parameter ENTRIES = 384,		// defaults to 384 for simulation 12288 for DE0
@@ -16,15 +16,15 @@ input clk, rst_n;
 input [15:0] cmd; 		// 16 bit command from UART (host) to be executed
 input cmd_rdy;			// indicates command is valid
 input resp_sent; 		// indicates transmisison of resp to host is complete
-input rd_done; 			// indicates the last byte of sample data has been read
 input set_capture_done;	// from the capture module (sets capture done bit)
+input [LOG2-1:0] waddr;	// indicates the oldest sample in RAMqueue (read start point)
 input [7:0] rdataCH1, rdataCH2, rdataCH3, rdataCH4, rdataCH5;
 
 output logic [7:0] resp; 		// data to send to host as a response
 output logic send_resp; 		// used to inititate transmission to host (via UART)
 output logic clr_cmd_rdy;		// when finished processing command use this to knock down command
-output logic strt_rd;		// asserted to fire off a read of channel RAMs
 output logic [LOG2-1:0] trig_pos;		// how many samples after trigger to capture
+output logic addr_ptr;
 output reg [3:0] decimator;		// goes to clk_rst_smpl block
 output reg [7:0] maskL, maskH; 	// to trigger logic for protocol triggering
 output reg [7:0] matchL, matchH;	// to trigger logic for protocol triggering
@@ -36,8 +36,9 @@ output reg [7:0] VIH, VIL;		// Dual PWM to set thresholds
 
 logic wrt_reg;
 logic [7:0] trig_posH, trig_posL;
+logic [LOG2-1:0] addr_ptr_plus_one;
 
-typedef enum reg [2:0] {IDLE, RD_REG, WRT_REG, DUMP, NEG_ACK, POS_ACK} state_t;
+typedef enum reg [2:0] {IDLE, DUMP, POS_ACK, DUMP_READ, DUMP_SEND} state_t;
 state_t state, nxt_state;
 
 always @(posedge clk, negedge rst_n)
@@ -156,6 +157,7 @@ always_ff @(posedge clk, negedge rst_n)
 		trig_posL <= cmd[7:0];
 		
 assign trig_pos = {trig_posH[LOG2-9:0], trig_posL};
+assign addr_ptr_plus_one = (addr_ptr == ENTRIES) ? 9'h0 : addr_ptr + 1'b1;
 
 // State Machine guts
 always_comb begin
@@ -163,7 +165,6 @@ always_comb begin
 	resp = 8'hxx;
 	send_resp = 0;
 	clr_cmd_rdy = 0;
-	strt_rd = 0;
 	wrt_reg = 0;
 	nxt_state = IDLE;
 
@@ -203,10 +204,8 @@ always_comb begin
 					end
 					2'b10: begin
 						// The DUMP command still needs to be done
-						nxt_state = IDLE;
-						clr_cmd_rdy = 1;
-						send_resp = 1;
-						// nxt_state = DUMP; 
+						addr_ptr = waddr;
+						nxt_state = DUMP_READ;
 					end
 					2'b11: begin	// Invalid command, send NEG_ACK
 						resp = 8'hEE;
@@ -224,8 +223,30 @@ always_comb begin
 			clr_cmd_rdy = 1;
 			nxt_state = IDLE;
 		end
-
+		DUMP_READ: begin
+			case(cmd[10:8])
+				3'b001 : resp = rdataCH1;
+				3'b010 : resp = rdataCH2;
+				3'b011 : resp = rdataCH3;
+				3'b100 : resp = rdataCH4;
+				default: resp = rdataCH5;
+			endcase
+			send_resp = 1;
+			nxt_state = DUMP_SEND;
+		end
+		DUMP_SEND: begin
+			if(!resp_sent)
+				nxt_state = DUMP_SEND;
+			else if(addr_ptr_plus_one == waddr) begin
+				nxt_state = IDLE;
+				clr_cmd_rdy = 1;
+			end else begin
+				addr_ptr = addr_ptr_plus_one;
+				nxt_state = DUMP_READ;
+			end	
+		end
 	endcase
+
 end
 
 endmodule
