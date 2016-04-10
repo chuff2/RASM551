@@ -8,26 +8,158 @@ z2
 !i10f 100
 cModel Technology
 d/userspace/c/chuff2/ece551/homework/homework4
+vAFE
+Z0 !s110 1460317281
+!i10b 1
+!s100 CBcR>1kSFiK>eoCYE4dWn0
+IOV<gR[o_U^8GOHZG4R]@L2
+Z1 VDg1SIo80bB@j0V0VzS_@n1
+Z2 d/userspace/c/chuff2/ece551/project
+w1453062146
+8/userspace/c/chuff2/ece551/project/AFE.v
+F/userspace/c/chuff2/ece551/project/AFE.v
+L0 1
+Z3 OL;L;10.4;61
+r1
+!s85 0
+31
+!s108 1460317281.455916
+!s107 /userspace/c/chuff2/ece551/project/AFE.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|/userspace/c/chuff2/ece551/project/AFE.v|
+!i113 0
+Z4 o-work work -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+n@a@f@e
 vchannel_sample
-DXx6 sv_std 3 std 0 22 WmjPaeP=7F5?QFXzJ>D[Q2
-!s110 1460315704
+Z5 DXx6 sv_std 3 std 0 22 WmjPaeP=7F5?QFXzJ>D[Q2
+R0
 !i10b 1
 !s100 fCzaO@1f2_Ihk9k8Y>k3d1
 IB?DLXLkCAc257Ril[FHHm0
-VDg1SIo80bB@j0V0VzS_@n1
+R1
 !s105 channel_sample_sv_unit
 S1
-d/userspace/c/chuff2/ece551/project
+R2
 w1460314169
 8/userspace/c/chuff2/ece551/project/channel_sample.sv
 F/userspace/c/chuff2/ece551/project/channel_sample.sv
 L0 1
-OL;L;10.4;61
+R3
 r1
 !s85 0
 31
-!s108 1460315704.334709
+!s108 1460317281.297196
 !s107 /userspace/c/chuff2/ece551/project/channel_sample.sv|
 !s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|/userspace/c/chuff2/ece551/project/channel_sample.sv|
 !i113 0
-o-work work -sv -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+Z6 o-work work -sv -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+vclk_rst_smpl
+R5
+R0
+!i10b 1
+!s100 HgCzZPz<RHO43X3dV]5Pl2
+I:?b=LK92JH3M8h?YLRPJI3
+R1
+!s105 clk_rst_smpl_sv_unit
+S1
+R2
+w1456086834
+8/userspace/c/chuff2/ece551/project/clk_rst_smpl.sv
+F/userspace/c/chuff2/ece551/project/clk_rst_smpl.sv
+L0 1
+R3
+r1
+!s85 0
+31
+!s108 1460317281.506261
+!s107 /userspace/c/chuff2/ece551/project/clk_rst_smpl.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|/userspace/c/chuff2/ece551/project/clk_rst_smpl.sv|
+!i113 0
+R6
+vdig_core
+R5
+R0
+!i10b 1
+!s100 NYmNkW4K:9:In_aW1EiMk1
+Ib[zFT4FFAQZ:FkQ@acmf61
+R1
+!s105 dig_core_sv_unit
+S1
+R2
+w1458274588
+8/userspace/c/chuff2/ece551/project/dig_core.sv
+F/userspace/c/chuff2/ece551/project/dig_core.sv
+L0 1
+R3
+r1
+!s85 0
+31
+!s108 1460317281.557610
+!s107 /userspace/c/chuff2/ece551/project/dig_core.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|/userspace/c/chuff2/ece551/project/dig_core.sv|
+!i113 0
+R6
+vLA_dig
+R5
+R0
+!i10b 1
+!s100 RW:=Xkzf9G6DPJJ`zb?PJ0
+Izd[M`fW@2InMe4B9P50Rz3
+R1
+!s105 LA_dig_sv_unit
+S1
+R2
+w1458274450
+8/userspace/c/chuff2/ece551/project/LA_dig.sv
+F/userspace/c/chuff2/ece551/project/LA_dig.sv
+L0 1
+R3
+r1
+!s85 0
+31
+!s108 1460317281.609388
+!s107 /userspace/c/chuff2/ece551/project/LA_dig.sv|
+!s90 -reportprogress|300|-work|work|-vopt|-sv|-stats=none|/userspace/c/chuff2/ece551/project/LA_dig.sv|
+!i113 0
+R6
+n@l@a_dig
+vpll8x
+R0
+!i10b 1
+!s100 l?zL<GOQN_K^Y=0c7z2^K0
+I;l5b>2b7JQIC7Y79FReYl1
+R1
+R2
+w1451773704
+8/userspace/c/chuff2/ece551/project/pll8x.v
+F/userspace/c/chuff2/ece551/project/pll8x.v
+L0 2
+R3
+r1
+!s85 0
+31
+!s108 1460317281.710468
+!s107 /userspace/c/chuff2/ece551/project/pll8x.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|/userspace/c/chuff2/ece551/project/pll8x.v|
+!i113 0
+R4
+vRAMqueue
+R0
+!i10b 1
+!s100 zDHVoDZWMBCNSoj5P^:J62
+I8]A<V^7JB_cNI8h<R1onH3
+R1
+R2
+w1458616762
+8/userspace/c/chuff2/ece551/project/RAMqueue.v
+F/userspace/c/chuff2/ece551/project/RAMqueue.v
+L0 1
+R3
+r1
+!s85 0
+31
+!s108 1460317281.758926
+!s107 /userspace/c/chuff2/ece551/project/RAMqueue.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|/userspace/c/chuff2/ece551/project/RAMqueue.v|
+!i113 0
+R4
+n@r@a@mqueue

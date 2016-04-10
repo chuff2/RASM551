@@ -18,3 +18,13 @@
 # Compile of channel_sample.sv was successful.
 # Compile of cmd_cfg.sv failed with 1 errors.
 # 2 compiles, 1 failed with 1 error.
+# Compile of channel_sample.sv was successful.
+# Compile of cmd_cfg.sv failed with 1 errors.
+# Compile of AFE.v was successful.
+# Compile of clk_rst_smpl.sv was successful.
+# Compile of dig_core.sv was successful.
+# Compile of LA_dig.sv was successful.
+# Compile of LA_dig_tb.sv failed with 1 errors.
+# Compile of pll8x.v was successful.
+# Compile of RAMqueue.v was successful.
+# 9 compiles, 2 failed with 2 errors.
