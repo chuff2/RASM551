@@ -111,3 +111,21 @@ quit -sim
 # Compile of channel_sample_tb.sv was successful.
 # 10 compiles, 1 failed with 1 error.
 vsim -novopt work.channel_sample_tb
+# vsim 
+# Start time: 19:17:42 on Apr 10,2016
+# ** Warning: (vsim-8891) All optimizations are turned off because the -novopt switch is in effect. This will cause your simulation to run very slowly. If you are using this switch to preserve visibility for Debug or PLI features please see the User's Manual section on Preserving Object Visibility with vopt.
+# Refreshing /userspace/c/chuff2/ece551/project/work.channel_sample_tb
+# Loading sv_std.std
+# Loading work.channel_sample_tb
+# Refreshing /userspace/c/chuff2/ece551/project/work.AFE
+# Loading work.AFE
+# Refreshing /userspace/c/chuff2/ece551/project/work.pll8x
+# Loading work.pll8x
+# Refreshing /userspace/c/chuff2/ece551/project/work.clk_rst_smpl
+# Loading work.clk_rst_smpl
+# Refreshing /userspace/c/chuff2/ece551/project/work.channel_sample
+# Loading work.channel_sample
+run -all
+# WARNING: this PLL model should be used with a ref_clk with period 200 or greater
+# Achieved wrt_smpl
+# Success!

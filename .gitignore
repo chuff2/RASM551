@@ -4,3 +4,4 @@ Project.cr.mti
 Project.mpf
 *.mpf
 *.bak
+.nfs*
