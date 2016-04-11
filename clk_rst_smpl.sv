@@ -1,3 +1,4 @@
+`timescale 100ps / 10ps
 module clk_rst_smpl(clk400MHz,RST_n,locked,decimator,clk,smpl_clk,rst_n,wrt_smpl);
 
 input clk400MHz;		// 400MHz clock from PLL

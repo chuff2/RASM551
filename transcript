@@ -12,22 +12,8 @@
 # //  FURTHERMORE, THIS INFORMATION IS PROHIBITED FROM DISCLOSURE UNDER
 # //  THE TRADE SECRETS ACT, 18 U.S.C. SECTION 1905.
 # //
-# Loading project Prob4
-# reading /cae/apps/data/mentor-2015/modeltech/linux_x86_64/../modelsim.ini
 # Loading project Project
-# Compile of channel_sample.sv was successful.
-# Compile of cmd_cfg.sv failed with 1 errors.
-# 2 compiles, 1 failed with 1 error.
-# Compile of channel_sample.sv was successful.
-# Compile of cmd_cfg.sv failed with 1 errors.
-# Compile of AFE.v was successful.
-# Compile of clk_rst_smpl.sv was successful.
-# Compile of dig_core.sv was successful.
-# Compile of LA_dig.sv was successful.
-# Compile of LA_dig_tb.sv failed with 1 errors.
-# Compile of pll8x.v was successful.
-# Compile of RAMqueue.v was successful.
-# 9 compiles, 2 failed with 2 errors.
+# Compile of channel_sample_tb.sv was successful.
 # Compile of channel_sample.sv was successful.
 # Compile of cmd_cfg.sv was successful.
 # Compile of AFE.v was successful.
@@ -50,7 +36,69 @@
 # Compile of RAMqueue.v was successful.
 # Compile of channel_sample_tb.sv was successful.
 # 10 compiles, 1 failed with 1 error.
-# Break key hit
+vsim -novopt work.channel_sample_tb
+# vsim 
+# Start time: 18:57:04 on Apr 10,2016
+# ** Warning: (vsim-8891) All optimizations are turned off because the -novopt switch is in effect. This will cause your simulation to run very slowly. If you are using this switch to preserve visibility for Debug or PLI features please see the User's Manual section on Preserving Object Visibility with vopt.
+# Refreshing /userspace/c/chuff2/ece551/project/work.channel_sample_tb
+# Loading sv_std.std
+# Loading work.channel_sample_tb
+# Refreshing /userspace/c/chuff2/ece551/project/work.AFE
+# Loading work.AFE
+# Refreshing /userspace/c/chuff2/ece551/project/work.pll8x
+# Loading work.pll8x
+# Refreshing /userspace/c/chuff2/ece551/project/work.clk_rst_smpl
+# Loading work.clk_rst_smpl
+# Refreshing /userspace/c/chuff2/ece551/project/work.channel_sample
+# Loading work.channel_sample
+add wave sim:/channel_sample_tb/*
+add wave sim:/channel_sample_tb/afe/*
+add wave sim:/channel_sample_tb/chan_samp1/*
+run -all
+# WARNING: this PLL model should be used with a ref_clk with period 200 or greater
+# Achieved wrt_smpl
+# 1: 55
+# 2: 55
+# 3: 55
+# 4: 55
+# 5: 55
+restart -f
+# ** Warning: (vsim-8891) All optimizations are turned off because the -novopt switch is in effect. This will cause your simulation to run very slowly. If you are using this switch to preserve visibility for Debug or PLI features please see the User's Manual section on Preserving Object Visibility with vopt.
+# Loading sv_std.std
+# Loading work.channel_sample_tb
+# Loading work.clk_rst_smpl
+# Loading work.channel_sample
+run -all
+# WARNING: this PLL model should be used with a ref_clk with period 200 or greater
+# Achieved wrt_smpl
+# 1: 55
+# 2: 55
+# 3: 55
+# 4: 55
+# 5: 55
+quit -sim
+# Compile of channel_sample.sv was successful.
+# Compile of cmd_cfg.sv was successful.
+# Compile of AFE.v was successful.
+# Compile of clk_rst_smpl.sv was successful.
+# Compile of dig_core.sv was successful.
+# Compile of LA_dig.sv was successful.
+# Compile of LA_dig_tb.sv failed with 1 errors.
+# Compile of pll8x.v was successful.
+# Compile of RAMqueue.v was successful.
+# Compile of channel_sample_tb.sv failed with 1 errors.
+# 10 compiles, 2 failed with 2 errors.
+# Compile of channel_sample.sv was successful.
+# Compile of cmd_cfg.sv was successful.
+# Compile of AFE.v was successful.
+# Compile of clk_rst_smpl.sv was successful.
+# Compile of dig_core.sv was successful.
+# Compile of LA_dig.sv was successful.
+# Compile of LA_dig_tb.sv failed with 1 errors.
+# Compile of pll8x.v was successful.
+# Compile of RAMqueue.v was successful.
+# Compile of channel_sample_tb.sv failed with 1 errors.
+# 10 compiles, 2 failed with 2 errors.
 # Compile of channel_sample.sv was successful.
 # Compile of cmd_cfg.sv was successful.
 # Compile of AFE.v was successful.
@@ -62,14 +110,22 @@
 # Compile of RAMqueue.v was successful.
 # Compile of channel_sample_tb.sv was successful.
 # 10 compiles, 1 failed with 1 error.
-# Compile of channel_sample.sv was successful.
-# Compile of cmd_cfg.sv was successful.
-# Compile of AFE.v was successful.
-# Compile of clk_rst_smpl.sv was successful.
-# Compile of dig_core.sv was successful.
-# Compile of LA_dig.sv was successful.
-# Compile of LA_dig_tb.sv failed with 1 errors.
-# Compile of pll8x.v was successful.
-# Compile of RAMqueue.v was successful.
-# Compile of channel_sample_tb.sv was successful.
-# 10 compiles, 1 failed with 1 error.
+vsim -novopt work.channel_sample_tb
+# vsim 
+# Start time: 19:17:42 on Apr 10,2016
+# ** Warning: (vsim-8891) All optimizations are turned off because the -novopt switch is in effect. This will cause your simulation to run very slowly. If you are using this switch to preserve visibility for Debug or PLI features please see the User's Manual section on Preserving Object Visibility with vopt.
+# Refreshing /userspace/c/chuff2/ece551/project/work.channel_sample_tb
+# Loading sv_std.std
+# Loading work.channel_sample_tb
+# Refreshing /userspace/c/chuff2/ece551/project/work.AFE
+# Loading work.AFE
+# Refreshing /userspace/c/chuff2/ece551/project/work.pll8x
+# Loading work.pll8x
+# Refreshing /userspace/c/chuff2/ece551/project/work.clk_rst_smpl
+# Loading work.clk_rst_smpl
+# Refreshing /userspace/c/chuff2/ece551/project/work.channel_sample
+# Loading work.channel_sample
+run -all
+# WARNING: this PLL model should be used with a ref_clk with period 200 or greater
+# Achieved wrt_smpl
+# Success!

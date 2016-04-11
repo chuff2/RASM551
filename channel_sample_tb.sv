@@ -1,3 +1,4 @@
+`timescale 100ps / 10ps
 module channel_sample_tb();
 
 	//common signals
@@ -14,7 +15,8 @@ module channel_sample_tb();
 	logic locked, clk50MHz, clk400MHz;
 
 	//clk reset originating signals
-	logic RST_n, smpl_clk, rst_n, wrt_smpl, decimator;
+	logic RST_n, smpl_clk, rst_n, wrt_smpl;
+	logic [3:0] decimator;
 
 	//channel sample originating signals
 	logic CH1Lff5, CH1Hff5, CH2Lff5, CH2Hff5, CH3Lff5, CH3Hff5, CH4Lff5, CH4Hff5, CH5Lff5, CH5Hff5;
@@ -52,7 +54,29 @@ module channel_sample_tb();
 
 
 	initial begin
+		clk50MHz = 0;
+		decimator = 0;
+		RST_n = 0;
+
+		repeat (2) @(negedge clk50MHz);
+		RST_n = 1;
 		
+		
+		@(posedge wrt_smpl) begin
+			//only worry about testing the first channel since the rest of them are just repeats of themselves
+			$display("Achieved wrt_smpl");
+			if ((smpl1[7] == chan_samp1.CH_Hff2 && smpl1[6] == chan_samp1.CH_Lff2) &&
+				(smpl1[5] == chan_samp1.CH_Hff3 && smpl1[4] == chan_samp1.CH_Lff3) &&
+				(smpl1[3] == chan_samp1.CH_Hff4 && smpl1[2] == chan_samp1.CH_Lff4) &&
+				(smpl1[1] == chan_samp1.CH_Hff5 && smpl1[0] == chan_samp1.CH_Lff5)) begin
+				$display("Success!");
+			end
+			else begin
+				$display("Failure...");
+			end
+		end
 	end
+
+	always #5 clk50MHz = ~clk50MHz;
 
 endmodule
