@@ -1,3 +1,4 @@
+`timescale 100ps / 10ps
 module channel_sample (CH_Hff5, CH_Lff5, smpl, CH_H, CH_L, smpl_clk, clk);
 
 output reg [7:0] smpl;

@@ -1,3 +1,4 @@
+`timescale 100ps / 10ps
 module AFE(smpl_clk,VIH_PWM,VIL_PWM,CH1L,CH1H,CH2L,CH2H,CH3L,CH3H,
            CH4L,CH4H,CH5L,CH5H);
 		   
