@@ -1,0 +1,41 @@
+Rage Against the State Machine Division of Tasks
+
+John Hogan
+Adam Shufelt
+Conner Huff
+Nick Koxlien
+
+Coding DUT
+	Trigger Logic
+		- Adam
+	Capture Logic
+		- Conner and Nick
+	Channel Sample Logic
+		- Adam
+	Command and Config
+		- John
+	UART
+		- Adam
+	Top Level DUT
+		- John
+
+Individual Module TB
+	- whoever didn't do the DUT
+		
+Top Level TB 
+	- Conner and Nick
+	
+Writing Test Cases
+	- John and Adam
+
+Initial Debug of Top level
+	- Whole team effort
+
+Synthesis Script
+	- Conner and Nick
+
+Post Synthesis Simulation
+	- John
+
+Code Coverage
+	- TBD
