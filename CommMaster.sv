@@ -1,16 +1,20 @@
 //This is the CommMaster used for the cmd_cfg_tb
 
 
-module CommMaster(clk, rst_n, snd_cmd, cmd, TX, RX, cmd_cmplt);
+module CommMaster(clk, rst_n, snd_cmd, cmd, TX, RX, cmd_cmplt, response, response_cmplt);
 
 input logic clk, rst_n, snd_cmd, RX;
 input logic [15:0] cmd;
-output logic TX, cmd_cmplt;
-logic sel, trmt, tx_done;
+output logic TX, cmd_cmplt, response_cmplt;
+output [7:0] response;
+logic sel, trmt, tx_done, clr_rdy;
 logic [7:0] tx_data, cmd_lower;
 
 typedef enum reg [2:0] {IDLE, SEND_HIGH, SEND_LOW, CMD_SENT} state_t;
 state_t state, nxt_state;
+
+typedef enum reg {IDLE, RESPONSE_CMPLT} rx_state_t;
+rx_state_t rx_state, rx_nxt_state;
 
 always_ff @(posedge clk or negedge rst_n)
     if(!rst_n)
@@ -18,6 +22,12 @@ always_ff @(posedge clk or negedge rst_n)
     else
 		state <= nxt_state;
 
+always_ff @(posedge clk, negedge rst_n)
+	if(!rst_n)
+		rx_state <= IDLE;
+	else
+		rx_state <= rx_nxt_state;
+		
 // SM control		
 always_comb begin
 	sel = 1'b0;
@@ -56,6 +66,24 @@ always_comb begin
 	endcase
 end
 
+always_comb begin
+	rx_nxt_state = IDLE;
+	clr_rdy = 1'b0;
+	
+	case(rx_state)
+		
+		IDLE: begin
+			if(rdy) begin
+			 nxt_state = RESPONSE_CMPLT;
+			end
+		end
+		
+		RESPONSE_CMPLT: begin
+			clr_rdy = 1'b1;
+		end
+	endcase
+end
+
 assign tx_data = sel ? cmd[15:8] : cmd_lower;
 
 always @(posedge clk)
@@ -63,8 +91,9 @@ always @(posedge clk)
 		cmd_lower <= cmd[7:0];
 		
 // Instantiate UART TX
-uart_tx UART_TX_INST(.clk(clk), .rst_n(rst_n), .tx_data(tx_data), .trmt(trmt), .TX(TX), 
-	.tx_done(tx_done) );
+/*uart_tx UART_TX_INST(.clk(clk), .rst_n(rst_n), .tx_data(tx_data), .trmt(trmt), .TX(TX), 
+	.tx_done(tx_done) );*/
+uart UART_INST(.clk(clk), .rst_n(rst_n), .trmt(trmt), .tx_data(tx_data), .TX(TX), .RX(RX), .tx_done(tx_done), .clr_rdy(clr_rdy), .cmd(response), .rdy(rdy));
 
 endmodule
 	
