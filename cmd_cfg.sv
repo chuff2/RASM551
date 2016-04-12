@@ -36,9 +36,9 @@ output reg [7:0] VIH, VIL;		// Dual PWM to set thresholds
 
 logic wrt_reg;
 logic [7:0] trig_posH, trig_posL;
-logic [LOG2-1:0] addr_ptr_plus_one;
+logic [LOG2-1:0] nxt_addr_ptr;
 
-typedef enum reg [2:0] {IDLE, DUMP, POS_ACK, DUMP_READ, DUMP_SEND} state_t;
+typedef enum reg [1:0] {IDLE, WAIT_SEND, DUMP_READ, DUMP_SEND} state_t;
 state_t state, nxt_state;
 
 always @(posedge clk, negedge rst_n)
@@ -195,12 +195,13 @@ always_comb begin
 							default: resp = 8'hEE;
 						endcase
 						send_resp = 1;
-						clr_cmd_rdy = 1;
-						nxt_state = IDLE;
+						nxt_state = WAIT_SEND;
 					end
 					2'b01: begin	// Write reg			
-						nxt_state = POS_ACK;
+						nxt_state = WAIT_SEND;
 						wrt_reg = 1;
+						resp = 8'hA5;
+						send_resp = 1;
 					end
 					2'b10: begin
 						// The DUMP command still needs to be done
@@ -210,18 +211,18 @@ always_comb begin
 					2'b11: begin	// Invalid command, send NEG_ACK
 						resp = 8'hEE;
 						send_resp = 1;
-						clr_cmd_rdy = 1;
-						nxt_state = IDLE;
+						nxt_state = WAIT_SEND;
 					end
 				endcase
 			end else 
 				nxt_state = IDLE;
 		end
-		POS_ACK: begin
-			resp = 8'hA5;
-			send_resp = 1;
-			clr_cmd_rdy = 1;
-			nxt_state = IDLE;
+		WAIT_SEND: begin
+			if(send_resp) begin
+				clr_cmd_rdy = 1;
+				nxt_state = IDLE;
+			end else
+				nxt_state = WAIT_SEND;
 		end
 		DUMP_READ: begin
 			case(cmd[10:8])
@@ -237,11 +238,11 @@ always_comb begin
 		DUMP_SEND: begin
 			if(!resp_sent)
 				nxt_state = DUMP_SEND;
-			else if(addr_ptr_plus_one == waddr) begin
+			else if(nxt_addr_ptr == waddr) begin
 				nxt_state = IDLE;
 				clr_cmd_rdy = 1;
 			end else begin
-				addr_ptr = addr_ptr_plus_one;
+				addr_ptr = nxt_addr_ptr;
 				nxt_state = DUMP_READ;
 			end	
 		end
