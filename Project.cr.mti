@@ -1,16 +1,16 @@
-/userspace/c/chuff2/ece551/project/dig_core.sv {1 {vlog -work work -vopt -sv -stats=none /userspace/c/chuff2/ece551/project/dig_core.sv
+/userspace/c/chuff2/ece551/project/pwm8.sv {1 {vlog -work work -vopt -sv -stats=none /userspace/c/chuff2/ece551/project/pwm8.sv
 Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  2 2014
--- Compiling module dig_core
+-- Compiling module pwm8
 
 Top level modules:
-	dig_core
+	pwm8
 
-} {} {}} /userspace/c/chuff2/ece551/project/LA_dig.sv {1 {vlog -work work -vopt -sv -stats=none /userspace/c/chuff2/ece551/project/LA_dig.sv
+} {} {}} /userspace/c/chuff2/ece551/project/UART_wrapper.sv {1 {vlog -work work -vopt -sv -stats=none /userspace/c/chuff2/ece551/project/UART_wrapper.sv
 Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  2 2014
--- Compiling module LA_dig
+-- Compiling module UART_wrapper
 
 Top level modules:
-	LA_dig
+	UART_wrapper
 
 } {} {}} /userspace/c/chuff2/ece551/project/LA_dig_tb.sv {0 {vlog -work work -vopt -sv -stats=none /userspace/c/chuff2/ece551/project/LA_dig_tb.sv
 Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  2 2014
@@ -18,26 +18,12 @@ Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  2 2014
 ** Error: /userspace/c/chuff2/ece551/project/LA_dig_tb.sv(104): Cannot find `include file "tb_tasks.v" in directories:
     /cae/apps/data/mentor-2015/modeltech/ovm-2.1.2/../verilog_src/ovm-2.1.2/src, /cae/apps/data/mentor-2015/modeltech/uvm-1.1d/../verilog_src/uvm-1.1d/src
 
-} {4.0 5.0} {}} /userspace/c/chuff2/ece551/project/pll8x.v {1 {vlog -work work -vopt -stats=none /userspace/c/chuff2/ece551/project/pll8x.v
+} {4.0 5.0} {}} /userspace/c/chuff2/ece551/project/CommMasterSM.sv {1 {vlog -work work -vopt -sv -stats=none /userspace/c/chuff2/ece551/project/CommMasterSM.sv
 Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  2 2014
--- Compiling module pll8x
+-- Compiling module CommMasterSM
 
 Top level modules:
-	pll8x
-
-} {} {}} /userspace/c/chuff2/ece551/project/AFE.v {1 {vlog -work work -vopt -stats=none /userspace/c/chuff2/ece551/project/AFE.v
-Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  2 2014
--- Compiling module AFE
-
-Top level modules:
-	AFE
-
-} {} {}} /userspace/c/chuff2/ece551/project/clk_rst_smpl.sv {1 {vlog -work work -vopt -sv -stats=none /userspace/c/chuff2/ece551/project/clk_rst_smpl.sv
-Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  2 2014
--- Compiling module clk_rst_smpl
-
-Top level modules:
-	clk_rst_smpl
+	CommMasterSM
 
 } {} {}} /userspace/c/chuff2/ece551/project/RAMqueue.v {1 {vlog -work work -vopt -stats=none /userspace/c/chuff2/ece551/project/RAMqueue.v
 Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  2 2014
@@ -53,11 +39,81 @@ Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  2 2014
 Top level modules:
 	channel_sample
 
-} {} {}} /userspace/c/chuff2/ece551/project/cmd_cfg.sv {1 {vlog -work work -vopt -sv -stats=none /userspace/c/chuff2/ece551/project/cmd_cfg.sv
+} {} {}} /userspace/c/chuff2/ece551/project/dig_core.sv {1 {vlog -work work -vopt -sv -stats=none /userspace/c/chuff2/ece551/project/dig_core.sv
 Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  2 2014
--- Compiling module cmd_cfg
+-- Compiling module dig_core
 
 Top level modules:
-	cmd_cfg
+	dig_core
+
+} {} {}} /userspace/c/chuff2/ece551/project/pll8x.v {1 {vlog -work work -vopt -stats=none /userspace/c/chuff2/ece551/project/pll8x.v
+Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  2 2014
+-- Compiling module pll8x
+
+Top level modules:
+	pll8x
+
+} {} {}} /userspace/c/chuff2/ece551/project/clk_rst_smpl.sv {1 {vlog -work work -vopt -sv -stats=none /userspace/c/chuff2/ece551/project/clk_rst_smpl.sv
+Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  2 2014
+-- Compiling module clk_rst_smpl
+
+Top level modules:
+	clk_rst_smpl
+
+} {} {}} /userspace/c/chuff2/ece551/project/uart_rx.sv {1 {vlog -work work -vopt -sv -stats=none /userspace/c/chuff2/ece551/project/uart_rx.sv
+Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  2 2014
+-- Compiling module uart_rx
+
+Top level modules:
+	uart_rx
+
+} {} {}} /userspace/c/chuff2/ece551/project/dual_PWM.v {1 {vlog -work work -vopt -stats=none /userspace/c/chuff2/ece551/project/dual_PWM.v
+Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  2 2014
+-- Compiling module dual_PWM
+
+Top level modules:
+	dual_PWM
+
+} {} {}} /userspace/c/chuff2/ece551/project/pwm8_tb.v {1 {vlog -work work -vopt -stats=none /userspace/c/chuff2/ece551/project/pwm8_tb.v
+Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  2 2014
+-- Compiling module pwm8_tb
+
+Top level modules:
+	pwm8_tb
+
+} {} {}} /userspace/c/chuff2/ece551/project/channel_sample_tb.sv {1 {vlog -work work -vopt -sv -stats=none /userspace/c/chuff2/ece551/project/channel_sample_tb.sv
+Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  2 2014
+-- Compiling module channel_sample_tb
+
+Top level modules:
+	channel_sample_tb
+
+} {} {}} /userspace/c/chuff2/ece551/project/uart_tx.sv {1 {vlog -work work -vopt -sv -stats=none /userspace/c/chuff2/ece551/project/uart_tx.sv
+Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  2 2014
+-- Compiling module uart_tx
+
+Top level modules:
+	uart_tx
+
+} {} {}} /userspace/c/chuff2/ece551/project/LA_dig.sv {1 {vlog -work work -vopt -sv -stats=none /userspace/c/chuff2/ece551/project/LA_dig.sv
+Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  2 2014
+-- Compiling module LA_dig
+
+Top level modules:
+	LA_dig
+
+} {} {}} /userspace/c/chuff2/ece551/project/AFE.v {1 {vlog -work work -vopt -stats=none /userspace/c/chuff2/ece551/project/AFE.v
+Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  2 2014
+-- Compiling module AFE
+
+Top level modules:
+	AFE
+
+} {} {}} /userspace/c/chuff2/ece551/project/dual_PWM_tb.v {1 {vlog -work work -vopt -stats=none /userspace/c/chuff2/ece551/project/dual_PWM_tb.v
+Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  2 2014
+-- Compiling module dual_PWM_tb
+
+Top level modules:
+	dual_PWM_tb
 
 } {} {}}

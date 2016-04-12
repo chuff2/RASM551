@@ -4,6 +4,10 @@ module channel_sample_tb();
 	//common signals
 	logic clk;
 
+	//dual_PWM originating signals
+	logic [7:0] VIL, VIH;
+	logic VIL_PWM, VIH_PWM;
+
 	//afe originating signals
 	logic CH1L,CH1H;
   	logic CH2L,CH2H;
@@ -25,6 +29,9 @@ module channel_sample_tb();
 
 
 	//instantiate all the components
+	//dual PWM instantiation
+	dual_PWM dPWM(.VIL_PWM(VIL_PWM), .VIH_PWM(VIH_PWM), .VIL(VIL), .VIH(VIH), .clk(clk), .rst_n(rst_n));
+
 	//i think i can just leave these inputs unconnected because we have AFE
 	AFE afe(.smpl_clk(smpl_clk),.VIH_PWM(),.VIL_PWM(),.CH1L(CH1L),.CH1H(CH1H),.CH2L(CH2L),
 		.CH2H(CH2H),.CH3L(CH3L),.CH3H(CH3H),
@@ -57,6 +64,8 @@ module channel_sample_tb();
 		clk50MHz = 0;
 		decimator = 0;
 		RST_n = 0;
+		VIL = 8'h55;
+		VIH = 8'haa;
 
 		repeat (2) @(negedge clk50MHz);
 		RST_n = 1;
@@ -74,6 +83,7 @@ module channel_sample_tb();
 			else begin
 				$display("Failure...");
 			end
+			$stop;
 		end
 	end
 
