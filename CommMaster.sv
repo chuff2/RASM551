@@ -90,9 +90,6 @@ always @(posedge clk)
 	if(snd_cmd)
 		cmd_lower <= cmd[7:0];
 		
-// Instantiate UART TX
-/*uart_tx UART_TX_INST(.clk(clk), .rst_n(rst_n), .tx_data(tx_data), .trmt(trmt), .TX(TX), 
-	.tx_done(tx_done) );*/
 uart UART_INST(.clk(clk), .rst_n(rst_n), .trmt(trmt), .tx_data(tx_data), .TX(TX), .RX(RX), .tx_done(tx_done), .clr_rdy(clr_rdy), .cmd(response), .rdy(rdy));
 
 endmodule
