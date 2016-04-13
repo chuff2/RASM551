@@ -22,8 +22,11 @@ module CommMaster_UART_wrapper_tb();
 			rst_n = 1'b1;
 		end
 
-		repeat(2^8) begin
+		repeat(256) begin
 				
+			repeat(4) begin
+				@(negedge clk);
+			end				
 			@(negedge clk) begin
 				send_resp = 1'b1;
 			end
@@ -37,13 +40,14 @@ module CommMaster_UART_wrapper_tb();
 				end	
 
 				else begin
-
 					resp_to_send = resp_to_send + 1;
+					@(posedge resp_sent);
 				end
 			end
 		end
-
+		
 		$display("SUCCESS!!\n");
+		$stop;
 	end
 	always #2 clk = ~clk;
 endmodule
