@@ -1,6 +1,6 @@
 module cmd_cfg_tb();
 
-  	logic clk, rst_n, clr_cmd_rdy, send_resp, RX, cmd_rdy, resp_sent, TX, RX;
+  	logic clk, rst_n, clr_cmd_rdy, send_resp, RX, cmd_rdy, resp_sent, TX;
 	logic [7:0] resp;
 	logic [15:0] cmd;
 		

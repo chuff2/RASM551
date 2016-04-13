@@ -13,7 +13,7 @@ logic [7:0] tx_data, cmd_lower;
 typedef enum reg [2:0] {IDLE, SEND_HIGH, SEND_LOW, CMD_SENT} state_t;
 state_t state, nxt_state;
 
-typedef enum reg {IDLE, RESPONSE_CMPLT} rx_state_t;
+typedef enum reg {RX_IDLE, RESPONSE_CMPLT} rx_state_t;
 rx_state_t rx_state, rx_nxt_state;
 
 always_ff @(posedge clk or negedge rst_n)
@@ -24,7 +24,7 @@ always_ff @(posedge clk or negedge rst_n)
 
 always_ff @(posedge clk, negedge rst_n)
 	if(!rst_n)
-		rx_state <= IDLE;
+		rx_state <= RX_IDLE;
 	else
 		rx_state <= rx_nxt_state;
 		
@@ -67,14 +67,14 @@ always_comb begin
 end
 
 always_comb begin
-	rx_nxt_state = IDLE;
+	rx_nxt_state = RX_IDLE;
 	clr_rdy = 1'b0;
 	
 	case(rx_state)
 		
-		IDLE: begin
-			if(rdy) begin
-			 nxt_state = RESPONSE_CMPLT;
+		RX_IDLE: begin
+			if(response_cmplt) begin
+			 rx_nxt_state = RESPONSE_CMPLT;
 			end
 		end
 		
@@ -90,7 +90,7 @@ always @(posedge clk)
 	if(snd_cmd)
 		cmd_lower <= cmd[7:0];
 		
-uart UART_INST(.clk(clk), .rst_n(rst_n), .trmt(trmt), .tx_data(tx_data), .TX(TX), .RX(RX), .tx_done(tx_done), .clr_rdy(clr_rdy), .cmd(response), .rdy(rdy));
+uart UART_INST(.clk(clk), .rst_n(rst_n), .trmt(trmt), .tx_data(tx_data), .TX(TX), .RX(RX), .tx_done(tx_done), .clr_rdy(clr_rdy), .cmd(response), .rdy(response_cmplt));
 
 endmodule
 	
