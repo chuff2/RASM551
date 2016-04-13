@@ -1,12 +1,12 @@
 //This is the CommMaster used for the cmd_cfg_tb
 
 
-module CommMaster(clk, rst_n, snd_cmd, cmd, TX, RX, cmd_cmplt, response, response_cmplt);
+module CommMaster(clk, rst_n, snd_cmd, cmd, TX, RX, cmd_cmplt, resp, resp_cmplt);
 
 input logic clk, rst_n, snd_cmd, RX;
 input logic [15:0] cmd;
-output logic TX, cmd_cmplt, response_cmplt;
-output [7:0] response;
+output logic TX, cmd_cmplt, resp_cmplt;
+output [7:0] resp;
 logic sel, trmt, tx_done, clr_rdy;
 logic [7:0] tx_data, cmd_lower;
 
@@ -73,7 +73,7 @@ always_comb begin
 	case(rx_state)
 		
 		RX_IDLE: begin
-			if(response_cmplt) begin
+			if(resp_cmplt) begin
 			 rx_nxt_state = RESPONSE_CMPLT;
 			end
 		end
@@ -90,7 +90,7 @@ always @(posedge clk)
 	if(snd_cmd)
 		cmd_lower <= cmd[7:0];
 		
-uart UART_INST(.clk(clk), .rst_n(rst_n), .trmt(trmt), .tx_data(tx_data), .TX(TX), .RX(RX), .tx_done(tx_done), .clr_rdy(clr_rdy), .cmd(response), .rdy(response_cmplt));
+uart UART_INST(.clk(clk), .rst_n(rst_n), .trmt(trmt), .tx_data(tx_data), .TX(TX), .RX(RX), .tx_done(tx_done), .clr_rdy(clr_rdy), .cmd(resp), .rdy(resp_cmplt));
 
 endmodule
 	
