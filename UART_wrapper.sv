@@ -10,7 +10,7 @@ logic [7:0] rx_data;
 logic [7:0] cmd_upper, nxt_cmd_upper;
 
 // Instantiate UART
-uart UART_INST (.clk(clk), .rst_n(rst_n), .trmt(resp_sent), .tx_data(resp), 
+uart UART_INST (.clk(clk), .rst_n(rst_n), .trmt(send_resp), .tx_data(resp), 
 	.TX(TX), .RX(RX), .tx_done(resp_sent), .clr_rdy(clr_rdy), .cmd(rx_data), .rdy(rdy) );
 
 // UART wrapper SM
