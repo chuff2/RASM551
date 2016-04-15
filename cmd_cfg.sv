@@ -24,7 +24,7 @@ output logic [7:0] resp; 		// data to send to host as a response
 output logic send_resp; 		// used to inititate transmission to host (via UART)
 output logic clr_cmd_rdy;		// when finished processing command use this to knock down command
 output logic [LOG2-1:0] trig_pos;		// how many samples after trigger to capture
-output logic addr_ptr;
+output logic [LOG2-1:0] addr_ptr;
 output reg [3:0] decimator;		// goes to clk_rst_smpl block
 output reg [7:0] maskL, maskH; 	// to trigger logic for protocol triggering
 output reg [7:0] matchL, matchH;	// to trigger logic for protocol triggering
@@ -157,7 +157,7 @@ always_ff @(posedge clk, negedge rst_n)
 		trig_posL <= cmd[7:0];
 		
 assign trig_pos = {trig_posH[LOG2-9:0], trig_posL};
-assign addr_ptr_plus_one = (addr_ptr == ENTRIES) ? 9'h0 : addr_ptr + 1'b1;
+assign nxt_addr_ptr = (addr_ptr == ENTRIES) ? 9'h0 : addr_ptr + 1'b1;
 
 // State Machine guts
 always_comb begin
