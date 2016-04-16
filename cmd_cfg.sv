@@ -37,8 +37,9 @@ output reg [7:0] VIH, VIL;		// Dual PWM to set thresholds
 logic wrt_reg;
 logic [7:0] trig_posH, trig_posL;
 logic [LOG2-1:0] nxt_addr_ptr;
+logic set_addr_ptr, inc_addr_ptr;
 
-typedef enum reg [1:0] {IDLE, WAIT_SEND, DUMP_READ, DUMP_SEND} state_t;
+typedef enum reg [2:0] {IDLE, WAIT_SEND, DUMP_READ, DUMP_SEND, PRE_DUMP_READ} state_t;
 state_t state, nxt_state;
 
 always @(posedge clk, negedge rst_n)
@@ -148,16 +149,26 @@ always_ff @(posedge clk, negedge rst_n)
 	if(!rst_n)
 		trig_posH <= 8'h00;
 	else if((wrt_reg) && (cmd[12:8] == 5'h0F))
-		trig_posH <= cmd[LOG2-8:0];
+		trig_posH <= cmd[7:0];
 		
 always_ff @(posedge clk, negedge rst_n)
 	if(!rst_n)
 		trig_posL <= 8'h01;
 	else if((wrt_reg) && (cmd[12:8] == 5'h10))
 		trig_posL <= cmd[7:0];
-		
+
+// Register to update address pointer, which goes to raddr in RAMqueue		
+always_ff @(posedge clk, negedge rst_n)
+	if(!rst_n)
+		addr_ptr = 0;
+	else if(set_addr_ptr)
+		addr_ptr = waddr;
+	else if(inc_addr_ptr)
+		addr_ptr = nxt_addr_ptr;
+	
+
 assign trig_pos = {trig_posH[LOG2-9:0], trig_posL};
-assign nxt_addr_ptr = (addr_ptr == ENTRIES) ? 9'h0 : addr_ptr + 1'b1;
+assign nxt_addr_ptr = (addr_ptr == ENTRIES-1) ? 0 : addr_ptr + 1'b1;
 
 // State Machine guts
 always_comb begin
@@ -167,6 +178,8 @@ always_comb begin
 	clr_cmd_rdy = 0;
 	wrt_reg = 0;
 	nxt_state = IDLE;
+	inc_addr_ptr = 0;
+	set_addr_ptr = 0;
 
 	case(state)
 		IDLE: begin
@@ -205,8 +218,8 @@ always_comb begin
 					end
 					2'b10: begin
 						// The DUMP command still needs to be done
-						addr_ptr = waddr;
-						nxt_state = DUMP_READ;
+						set_addr_ptr = 1;
+						nxt_state = PRE_DUMP_READ;
 					end
 					2'b11: begin	// Invalid command, send NEG_ACK
 						resp = 8'hEE;
@@ -218,7 +231,7 @@ always_comb begin
 				nxt_state = IDLE;
 		end
 		WAIT_SEND: begin
-			if(send_resp) begin
+			if(resp_sent) begin
 				clr_cmd_rdy = 1;
 				nxt_state = IDLE;
 			end else
@@ -242,10 +255,13 @@ always_comb begin
 				nxt_state = IDLE;
 				clr_cmd_rdy = 1;
 			end else begin
-				addr_ptr = nxt_addr_ptr;
-				nxt_state = DUMP_READ;
+				inc_addr_ptr = 1;
+				nxt_state = PRE_DUMP_READ;
 			end	
 		end
+		// Dummy state to delay one clock cycle so addr_ptr can update before we read in rdata
+		PRE_DUMP_READ: nxt_state = DUMP_READ;
+		default: nxt_state = IDLE;
 	endcase
 
 end

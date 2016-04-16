@@ -23,8 +23,7 @@ module cmd_cfg_tb();
 	//capture unit model signals
 	logic we1, we2, we3, we4, we5;
 	logic [2:0] writeSelect, weSelect, weCounter;
-	logic [8:0] wdata;
-	logic [9:0] waddr1, waddr2, waddr3, waddr4, waddr5;
+	logic [7:0] wdata;
 	logic capturing;
 
 	//TB signals
@@ -32,7 +31,18 @@ module cmd_cfg_tb();
 	logic [5:0] address;
 	logic [7:0] data;
 	logic [7:0] response_counter;	
-
+	
+	/*
+	Process: 
+	1. CommMaster sends a 2 Byte command. snd_cmd goes high
+	2. When cmd_cmplt goes high the transmission is done and UART should have received command.
+	    So cmd_rdy signal from UART should have already gone high. This trips the cmd_cfg SM.
+	3. cmd_cfg decodes the command and figures out what response to send
+	4. cmd_cfg tells UART_wrapper the response (resp_to_send) and when to send it (send_resp pulse)
+	5. commMaster receives the signal and resp_rcvd should pulse
+	
+	
+	*/
 	UART_wrapper UART_wrapper(.clk(clk), .rst_n(rst_n), .clr_cmd_rdy(clr_cmd_rdy), .send_resp(send_resp), 
 		.resp(resp_to_send), .RX(TX_RX), .cmd_rdy(cmd_rdy), .cmd(cmd_rcvd), .resp_sent(resp_sent), .TX(RX_TX));
 	
@@ -50,20 +60,22 @@ module cmd_cfg_tb();
 		.VIH(VIH), .VIL(VIL));
 	
 		
-	RAMqueue RAM1 (.clk(clk), .we(we1), .waddr(waddr1), .raddr(addr_ptr), .wdata(wdata), .rdata(rdataCH1));
-	RAMqueue RAM2 (.clk(clk), .we(we2), .waddr(waddr2), .raddr(addr_ptr), .wdata(wdata), .rdata(rdataCH2));
-	RAMqueue RAM3 (.clk(clk), .we(we3), .waddr(waddr3), .raddr(addr_ptr), .wdata(wdata), .rdata(rdataCH3));
-	RAMqueue RAM4 (.clk(clk), .we(we4), .waddr(waddr4), .raddr(addr_ptr), .wdata(wdata), .rdata(rdataCH4));
-	RAMqueue RAM5 (.clk(clk), .we(we5), .waddr(waddr5), .raddr(addr_ptr), .wdata(wdata), .rdata(rdataCH5));
+	RAMqueue RAM1 (.clk(clk), .we(we1), .waddr(waddr), .raddr(addr_ptr), .wdata(wdata), .rdata(rdataCH1));
+	RAMqueue RAM2 (.clk(clk), .we(we2), .waddr(waddr), .raddr(addr_ptr), .wdata(wdata), .rdata(rdataCH2));
+	RAMqueue RAM3 (.clk(clk), .we(we3), .waddr(waddr), .raddr(addr_ptr), .wdata(wdata), .rdata(rdataCH3));
+	RAMqueue RAM4 (.clk(clk), .we(we4), .waddr(waddr), .raddr(addr_ptr), .wdata(wdata), .rdata(rdataCH4));
+	RAMqueue RAM5 (.clk(clk), .we(we5), .waddr(waddr), .raddr(addr_ptr), .wdata(wdata), .rdata(rdataCH5));
 
 	assign cfg_set_capture_done = ~capturing;
-        
+    
+	/*
 	assign waddr = (writeSelect == 1) ? waddr1 :
 		       (writeSelect == 2) ? waddr2 :
 		       (writeSelect == 3) ? waddr3 :
 		       (writeSelect == 4) ? waddr4 :
 		       (writeSelect == 5) ? waddr5 : 
 		       10'b0;
+	*/
 
 	assign we1 = (weSelect == 3'd1);
 	assign we2 = (weSelect == 3'd2);	
@@ -82,22 +94,27 @@ module cmd_cfg_tb();
 		wdata = 8'h00;
 		weCounter = 3'b0;
 		weSelect = 3'b0;
+		waddr = 9'h0;
 	
 		@(negedge clk) rst_n = 1'b1;
 		capturing = 1'b1;
+		@(negedge clk);	
 
 		//write data to RAMQueue
 		repeat(384) begin
-		        repeat(5) begin
- 				@(negedge clk);	
-				
-				if(weCounter == 6) 
+		    repeat(5) begin				
+				if(weCounter == 5) 
 					weCounter = 3'b1;
 				else 
 					weCounter = weCounter + 1;
 				
 				weSelect = weCounter;
-			end		
+				@(negedge clk);
+			end
+			if(waddr == 383)
+				waddr = 0;
+			else
+				waddr = waddr + 1;
 			writeSelect = writeSelect + 1;
 			wdata = wdata + 1;	
 		end
@@ -114,9 +131,11 @@ module cmd_cfg_tb();
 		repeat(17) begin
 			cmd_to_send = {command, address, data};
 			snd_cmd = 1'b1;
+			clr_cmd_rdy = 1'b1;
 
 			@(negedge clk);
 			@(negedge clk) snd_cmd = 1'b0;
+			clr_cmd_rdy = 1'b0;
 
 			@(posedge resp_cmplt) begin
 
@@ -146,18 +165,25 @@ module cmd_cfg_tb();
 			@(negedge clk) snd_cmd = 1'b0;
 
 			@(posedge resp_cmplt) begin
-				if(resp_rcvd != (address + 1)) begin
+				// Cover the case where set_capture_done = 1; Then, we don't store exactly what we wrote
+				if(address == 6'b0 && cfg_set_capture_done) begin
+					if(resp_rcvd != 6'h11) begin
+					$display("Error in reading from register: incorrect data");
+					$stop;	
+					end
+				end
+				else if((resp_rcvd != (address + 1))) begin
 					$display("Error in reading from register: incorrect data");
 					$stop;	
 				end
-				else address = address + 1;
+				address = address + 1;
 			end	
 		end	
 		
 		//Channel dump
 		command = 2'b10;
 		address = 6'b1;
-		response_counter = 8'b1;
+		response_counter = waddr;
 
 		repeat(5) begin
 			cmd_to_send = {command, address, data};
@@ -168,7 +194,7 @@ module cmd_cfg_tb();
 			
 			repeat(384) begin
 				@(posedge resp_cmplt) begin
-					if(resp_rcvd != response_counter) begin
+					if(resp_rcvd != response_counter[7:0]) begin
 						$display("Channel dump error: Incorrect data\n");
 						$stop;
 					end
@@ -178,7 +204,7 @@ module cmd_cfg_tb();
 				
 				@(negedge clk);
 			end
-			response_counter = 8'b1;
+			response_counter = 0;
 			address = address + 1;
 		end
 		
