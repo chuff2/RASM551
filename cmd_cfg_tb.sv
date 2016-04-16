@@ -140,7 +140,7 @@ module cmd_cfg_tb();
 		address = 6'b0;
 			
 		repeat(17) begin
-			cmd_to_snd = {command, address, data};
+			cmd_to_send = {command, address, data};
 			snd_cmd = 1'b1;
 
 			@(negedge clk);
@@ -164,7 +164,7 @@ module cmd_cfg_tb();
 		response_counter = 8'b1;
 
 		repeat(5) begin
-			cmd_to_snd = {command, address, data};
+			cmd_to_send = {command, address, data};
 			snd_cmd = 1'b1;
 			
 			@(negedge clk);
@@ -190,7 +190,7 @@ module cmd_cfg_tb();
 		
 		//Reserved case
 		command = 2'b11;
-  		cmd_to_snd = {command, address, data};
+  		cmd_to_send = {command, address, data};
 		
 		snd_cmd = 1'b1;
 
