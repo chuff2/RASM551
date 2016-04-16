@@ -15,7 +15,8 @@ module cmd_cfg_tb();
 	logic [3:0] decimator;
 	logic [4:0] CH1TrigCfg, CH2TrigCfg, CH3TrigCfg, CH4TrigCfg, CH5TrigCfg;
 	logic [5:0] TrigCfg;
-	logic [7:0] rdataCH1, rdataCH2, rdataCH3, rdataCH4, rdataCH5, maskL, maskH, matchL, matchH, baud_cntL, baud_cntH, VIH, VIL;
+	logic [7:0] rdataCH1, rdataCH2, rdataCH3, rdataCH4, rdataCH5, maskL, maskH;
+	logic [7:0] matchL, matchH, baud_cntL, baud_cntH, VIH, VIL;
 	logic [8:0] waddr, trig_pos, addr_ptr;	
 	
 	//capture unit model signals
@@ -23,19 +24,29 @@ module cmd_cfg_tb();
 	logic [2:0] writeSelect, weSelect, weCounter;
 	logic [8:0] wdata;
 	logic [9:0] waddr1, waddr2, waddr3, waddr4, waddr5;
-	logic capturing;	
-	UART_wrapper UART_wrapper(.clk(clk), .rst_n(rst_n), .clr_cmd_rdy(clr_cmd_rdy), .send_resp(send_resp), .resp(resp_to_send), 
-		.RX(TX_RX), .cmd_rdy(cmd_rdy), .cmd(cmd_rcvd), .resp_sent(resp_sent), .TX(RX_TX));
+	logic capturing;
+
+	//TB signals
+	logic [1:0] command;
+	logic [5:0] address;
+	logic [7:0] data;
+	logic [7:0] response_counter;	
+
+	UART_wrapper UART_wrapper(.clk(clk), .rst_n(rst_n), .clr_cmd_rdy(clr_cmd_rdy), .send_resp(send_resp), 
+		.resp(resp_to_send), .RX(TX_RX), .cmd_rdy(cmd_rdy), .cmd(cmd_rcvd), .resp_sent(resp_sent), .TX(RX_TX));
 	
-	CommMaster commMaster(.clk(clk), .rst_n(rst_n), .snd_cmd(snd_cmd), .cmd(cmd_to_send), .TX(TX_RX), .RX(RX_TX), .cmd_cmplt(cmd_cmplt),
-		.resp(resp_rcvd), .resp_cmplt(resp_cmplt));
+	CommMaster commMaster(.clk(clk), .rst_n(rst_n), .snd_cmd(snd_cmd), .cmd(cmd_to_send), .TX(TX_RX), 
+		.RX(RX_TX), .cmd_cmplt(cmd_cmplt),.resp(resp_rcvd), .resp_cmplt(resp_cmplt));
 	
 	
-	cmd_cfg cmd_cfg_INST(.clk(clk), .rst_n(rst_n), .cmd(cmd_rcvd), .cmd_rdy(cmd_rdy), .resp_sent(resp_sent), .set_capture_done(cfg_set_capture_done), .waddr(waddr),
-		.rdataCH1(rdataCH1), .rdataCH2(rdataCH2), .rdataCH3(rdataCH3), .rdataCH4(rdataCH4), .rdataCH5(rdataCH5), 
-		.resp(resp_to_send), .send_resp(send_resp), .clr_cmd_rdy(clr_cmd_rdy), .trig_pos(trig_pos), .addr_ptr(addr_ptr), .decimator(decimator), 
-		.maskL(maskL), .maskH(maskH), .matchL(matchL), .matchH(matchH), .baud_cntL(baud_cntL), .baud_cntH(baud_cntH), .TrigCfg(TrigCfg), 
-		.CH1TrigCfg(CH1TrigCfg), .CH2TrigCfg(CH2TrigCfg), .CH3TrigCfg(CH3TrigCfg), .CH4TrigCfg(CH4TrigCfg), .CH5TrigCfg(CH5TrigCfg), .VIH(VIH), .VIL(VIL));
+	cmd_cfg cmd_cfg_INST(.clk(clk), .rst_n(rst_n), .cmd(cmd_rcvd), .cmd_rdy(cmd_rdy), .resp_sent(resp_sent), 
+		.set_capture_done(cfg_set_capture_done), .waddr(waddr),.rdataCH1(rdataCH1), .rdataCH2(rdataCH2), 
+		.rdataCH3(rdataCH3), .rdataCH4(rdataCH4), .rdataCH5(rdataCH5), .resp(resp_to_send), 
+		.send_resp(send_resp), .clr_cmd_rdy(clr_cmd_rdy), .trig_pos(trig_pos), .addr_ptr(addr_ptr), 
+		.decimator(decimator), .maskL(maskL), .maskH(maskH), .matchL(matchL), .matchH(matchH), 
+		.baud_cntL(baud_cntL), .baud_cntH(baud_cntH), .TrigCfg(TrigCfg), .CH1TrigCfg(CH1TrigCfg), 
+		.CH2TrigCfg(CH2TrigCfg), .CH3TrigCfg(CH3TrigCfg), .CH4TrigCfg(CH4TrigCfg), .CH5TrigCfg(CH5TrigCfg), 
+		.VIH(VIH), .VIL(VIL));
 	
 		
 	RAMqueue RAM1 (.clk(clk), .we(we1), .waddr(waddr1), .raddr(addr_ptr), .wdata(wdata), .rdata(rdataCH1));
@@ -73,6 +84,8 @@ module cmd_cfg_tb();
 
 		@(negedge clk) rst_n = 1'b1;
 		capturing = 1'b1;
+
+		//write data to RAMQueue
 		repeat(384) begin
 		        repeat(5) begin
  				@(negedge clk);	
@@ -88,9 +101,113 @@ module cmd_cfg_tb();
 			wdata = wdata + 1;	
 		end
 		
-		$stop;
+		weSelect = 3'b0;	
+		@(negedge clk) capturing = 1'b0;
+		@(negedge clk);
+
+		command = 2'b01;
+		address = 6'b0;
+		data = 8'b1;
+		
+		//writing to all registers
+		repeat(17) begin
+			cmd_to_send = {command, address, data};
+			snd_cmd = 1'b1;
+
+			@(negedge clk);
+			@(negedge clk) snd_cmd = 1'b0;
+
+			@(posedge resp_cmplt) begin
+
+				if(resp_rcvd != 8'hA5) begin
+
+					$display("Error in writing to register: positive ACK not received.\n");
+					$stop;
+				end
+				
+				else begin
+					data = data + 1;
+					address = address + 1;
+				end
+			end
+			@(negedge clk) clr_cmd_rdy = 1'b1;
+			@(negedge clk);
+			@(negedge clk) clr_cmd_rdy = 1'b0;			
+		end
+		
+		//Reading from all registers
+		command = 2'b00;
+		address = 6'b0;
+			
+		repeat(17) begin
+			cmd_to_snd = {command, address, data};
+			snd_cmd = 1'b1;
+
+			@(negedge clk);
+			@(negedge clk) snd_cmd = 1'b0;
+
+			@(posedge resp_cmplt) begin
+				if(resp_rcvd != (address + 1)) begin
+					$display("Error in reading from register: incorrect data");
+					$stop;	
+				end
+				else address = address + 1;
+			end	
+			@(negedge clk) clr_cmd_rdy = 1'b1;
+			@(negedge clk);
+			@(negedge clk) clr_cmd_rdy = 1'b0;			
+		end	
+		
+		//Channel dump
+		command = 2'b10;
+		address = 6'b1;
+		response_counter = 8'b1;
+
+		repeat(5) begin
+			cmd_to_snd = {command, address, data};
+			snd_cmd = 1'b1;
+			
+			@(negedge clk);
+			@(negedge clk) snd_cmd = 1'b0;
+			
+			repeat(384) begin
+				@(posedge resp_cmplt) begin
+					if(resp_rcvd != response_counter) begin
+						$display("Channel dump error: Incorrect data\n");
+						$stop;
+					end
+					
+					else response_counter = response_counter + 1;
+				end
+				
+				@(negedge clk) clr_cmd_rdy = 1'b1;
+				@(negedge clk);
+				@(negedge clk) clr_cmd_rdy = 1'b0;			
+			end
+			response_counter = 8'b1;
+			address = address + 1;
+		end
+		
+		//Reserved case
+		command = 2'b11;
+  		cmd_to_snd = {command, address, data};
+		
+		snd_cmd = 1'b1;
 
 		@(negedge clk);
+		@(negedge clk) snd_cmd = 1'b0;
+		
+		@(posedge resp_cmplt) begin
+			if(resp_rcvd != 8'hee) begin
+				$display("Negative ACK not received for reserved function\n");
+				$stop;
+			end
+
+			else begin
+				$display("Success!!\n");
+				$stop;
+			end
+		end
 	end
 	
 	always #2 clk = ~clk;
