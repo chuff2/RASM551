@@ -18,6 +18,7 @@ module cmd_cfg_tb();
 	logic [7:0] rdataCH1, rdataCH2, rdataCH3, rdataCH4, rdataCH5, maskL, maskH;
 	logic [7:0] matchL, matchH, baud_cntL, baud_cntH, VIH, VIL;
 	logic [8:0] waddr, trig_pos, addr_ptr;	
+	logic cmd_cfg_clr_cmd_rdy;
 	
 	//capture unit model signals
 	logic we1, we2, we3, we4, we5;
@@ -61,7 +62,8 @@ module cmd_cfg_tb();
 		       (writeSelect == 2) ? waddr2 :
 		       (writeSelect == 3) ? waddr3 :
 		       (writeSelect == 4) ? waddr4 :
-		       waddr5;
+		       (writeSelect == 5) ? waddr5 : 
+		       10'b0;
 
 	assign we1 = (weSelect == 3'd1);
 	assign we2 = (weSelect == 3'd2);	
@@ -75,13 +77,12 @@ module cmd_cfg_tb();
 		clk = 1'b0;
 		rst_n = 1'b0;
 		capturing = 1'b0;
-		clr_cmd_rdy = 1'b0;
 		snd_cmd = 1'b0;
 		writeSelect = 3'd0;
 		wdata = 8'h00;
 		weCounter = 3'b0;
 		weSelect = 3'b0;
-
+	
 		@(negedge clk) rst_n = 1'b1;
 		capturing = 1'b1;
 
@@ -130,9 +131,7 @@ module cmd_cfg_tb();
 					address = address + 1;
 				end
 			end
-			@(negedge clk) clr_cmd_rdy = 1'b1;
 			@(negedge clk);
-			@(negedge clk) clr_cmd_rdy = 1'b0;			
 		end
 		
 		//Reading from all registers
@@ -153,9 +152,6 @@ module cmd_cfg_tb();
 				end
 				else address = address + 1;
 			end	
-			@(negedge clk) clr_cmd_rdy = 1'b1;
-			@(negedge clk);
-			@(negedge clk) clr_cmd_rdy = 1'b0;			
 		end	
 		
 		//Channel dump
@@ -180,9 +176,7 @@ module cmd_cfg_tb();
 					else response_counter = response_counter + 1;
 				end
 				
-				@(negedge clk) clr_cmd_rdy = 1'b1;
 				@(negedge clk);
-				@(negedge clk) clr_cmd_rdy = 1'b0;			
 			end
 			response_counter = 8'b1;
 			address = address + 1;
