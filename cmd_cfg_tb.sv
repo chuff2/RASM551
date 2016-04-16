@@ -15,12 +15,11 @@ module cmd_cfg_tb();
 	logic [3:0] decimator;
 	logic [4:0] CH1TrigCfg, CH2TrigCfg, CH3TrigCfg, CH4TrigCfg, CH5TrigCfg;
 	logic [5:0] TrigCfg;
-	logic [7:0] rdataCH1, rdataCH2, rdataCH2, rdataCH3, rdataCH4, rdataCH5, maskL, maskH, matchL, matchH, baud_cntL, baud_cntH, VIH, VIL;
+	logic [7:0] rdataCH1, rdataCH2, rdataCH3, rdataCH4, rdataCH5, maskL, maskH, matchL, matchH, baud_cntL, baud_cntH, VIH, VIL;
 	logic [8:0] waddr, trig_pos, addr_ptr;	
 	
 	//capture unit model signals
 	logic we1, we2, we3, we4, we5;
-	logic [2:0] weSelect;
 	logic [2:0] writeSelect, weSelect, weCounter;
 	logic [8:0] wdata;
 	logic [9:0] waddr1, waddr2, waddr3, waddr4, waddr5;
@@ -88,7 +87,11 @@ module cmd_cfg_tb();
 			writeSelect = writeSelect + 1;
 			wdata = wdata + 1;	
 		end
-	end
+		
+		$stop;
 
+		@(negedge clk);
+	end
+	
 	always #2 clk = ~clk;
 endmodule
