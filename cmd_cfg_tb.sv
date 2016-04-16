@@ -24,7 +24,7 @@ module cmd_cfg_tb();
 	logic [2:0] writeSelect, weSelect, weCounter;
 	logic [8:0] wdata;
 	logic [9:0] waddr1, waddr2, waddr3, waddr4, waddr5;
-	
+	logic capturing;	
 	UART_wrapper UART_wrapper(.clk(clk), .rst_n(rst_n), .clr_cmd_rdy(clr_cmd_rdy), .send_resp(send_resp), .resp(resp_to_send), 
 		.RX(TX_RX), .cmd_rdy(cmd_rdy), .cmd(cmd_rcvd), .resp_sent(resp_sent), .TX(RX_TX));
 	
@@ -73,17 +73,20 @@ module cmd_cfg_tb();
 		weSelect = 3'b0;
 
 		@(negedge clk) rst_n = 1'b1;
-
-		repeat(384*5) begin
-		        
- 			@(negedge clk);	
+		capturing = 1'b1;
+		repeat(384) begin
+		        repeat(5) begin
+ 				@(negedge clk);	
+				
+				if(weCounter == 6) 
+					weCounter = 3'b1;
+				else 
+					weCounter = weCounter + 1;
+				
+				weSelect = weCounter;
+			end		
 			writeSelect = writeSelect + 1;
-			wdata = wdata + 1;
-			weCounter = weCounter + 1;
-			weSelect = weCounter;
-	
-			@(negedge clk);
-			@(negedge clk) weSelect = 1'b0;		
+			wdata = wdata + 1;	
 		end
 	end
 
