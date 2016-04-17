@@ -19,32 +19,46 @@ Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  2 2014
 Top level modules:
 	pwm8
 
-} {} {}} /userspace/c/chuff2/ece551/project/chan_capture.sv {1 {vlog -work work -vopt -sv -stats=none /userspace/c/chuff2/ece551/project/chan_capture.sv
-Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  2 2014
--- Compiling module chan_capture
-
-Top level modules:
-	chan_capture
-
 } {} {}} /userspace/c/chuff2/ece551/project/LA_dig_tb.sv {0 {vlog -work work -vopt -sv -stats=none /userspace/c/chuff2/ece551/project/LA_dig_tb.sv
 Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  2 2014
 -- Compiling module LA_dig_tb
 ** Error: /userspace/c/chuff2/ece551/project/LA_dig_tb.sv(104): Cannot find `include file "tb_tasks.v" in directories:
     /cae/apps/data/mentor-2015/modeltech/ovm-2.1.2/../verilog_src/ovm-2.1.2/src, /cae/apps/data/mentor-2015/modeltech/uvm-1.1d/../verilog_src/uvm-1.1d/src
 
-} {4.0 5.0} {}} /userspace/c/chuff2/ece551/project/CommMasterSM.sv {1 {vlog -work work -vopt -sv -stats=none /userspace/c/chuff2/ece551/project/CommMasterSM.sv
+} {4.0 5.0} {}} /userspace/c/chuff2/ece551/project/chan_capture.sv {1 {vlog -work work -vopt -sv -stats=none /userspace/c/chuff2/ece551/project/chan_capture.sv
+Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  2 2014
+-- Compiling module chan_capture
+
+Top level modules:
+	chan_capture
+
+} {} {}} /userspace/c/chuff2/ece551/project/SPI_mstr.v {1 {vlog -work work -vopt -stats=none /userspace/c/chuff2/ece551/project/SPI_mstr.v
+Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  2 2014
+-- Compiling module SPI_mstr
+
+Top level modules:
+	SPI_mstr
+
+} {} {}} /userspace/c/chuff2/ece551/project/chan_trig.sv {1 {vlog -work work -vopt -sv -stats=none /userspace/c/chuff2/ece551/project/chan_trig.sv
+Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  2 2014
+-- Compiling module chan_trig
+
+Top level modules:
+	chan_trig
+
+} {} {}} /userspace/c/chuff2/ece551/project/CommMasterSM.sv {1 {vlog -work work -vopt -sv -stats=none /userspace/c/chuff2/ece551/project/CommMasterSM.sv
 Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  2 2014
 -- Compiling module CommMasterSM
 
 Top level modules:
 	CommMasterSM
 
-} {} {}} /userspace/c/chuff2/ece551/project/prot_trig.sv {1 {vlog -work work -vopt -sv -stats=none /userspace/c/chuff2/ece551/project/prot_trig.sv
+} {} {}} /userspace/c/chuff2/ece551/project/SPI_tb.sv {1 {vlog -work work -vopt -sv -stats=none /userspace/c/chuff2/ece551/project/SPI_tb.sv
 Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  2 2014
--- Compiling module prot_trig
+-- Compiling module SPI_tb
 
 Top level modules:
-	prot_trig
+	SPI_tb
 
 } {} {}} /userspace/c/chuff2/ece551/project/RAMqueue.v {1 {vlog -work work -vopt -stats=none /userspace/c/chuff2/ece551/project/RAMqueue.v
 Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  2 2014
@@ -73,6 +87,13 @@ Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  2 2014
 
 Top level modules:
 	uart_rx
+
+} {} {}} /userspace/c/chuff2/ece551/project/SPI_RX.sv {1 {vlog -work work -vopt -sv -stats=none /userspace/c/chuff2/ece551/project/SPI_RX.sv
+Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  2 2014
+-- Compiling module SPI_RX
+
+Top level modules:
+	SPI_RX
 
 } {} {}} /userspace/c/chuff2/ece551/project/pll8x.v {1 {vlog -work work -vopt -stats=none /userspace/c/chuff2/ece551/project/pll8x.v
 Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  2 2014
@@ -150,6 +171,13 @@ Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  2 2014
 
 Top level modules:
 	AFE
+
+} {} {}} /userspace/c/chuff2/ece551/project/UART_trig_rx.sv {1 {vlog -work work -vopt -sv -stats=none /userspace/c/chuff2/ece551/project/UART_trig_rx.sv
+Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  2 2014
+-- Compiling module UART_trig_rx
+
+Top level modules:
+	UART_trig_rx
 
 } {} {}} /userspace/c/chuff2/ece551/project/dual_PWM_tb.v {1 {vlog -work work -vopt -stats=none /userspace/c/chuff2/ece551/project/dual_PWM_tb.v
 Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  2 2014
