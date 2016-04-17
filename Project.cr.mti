@@ -60,6 +60,13 @@ Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  2 2014
 Top level modules:
 	SPI_tb
 
+} {} {}} /userspace/c/chuff2/ece551/project/prot_trig.sv {1 {vlog -work work -vopt -sv -stats=none /userspace/c/chuff2/ece551/project/prot_trig.sv
+Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  2 2014
+-- Compiling module prot_trig
+
+Top level modules:
+	prot_trig
+
 } {} {}} /userspace/c/chuff2/ece551/project/RAMqueue.v {1 {vlog -work work -vopt -stats=none /userspace/c/chuff2/ece551/project/RAMqueue.v
 Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  2 2014
 -- Compiling module RAMqueue
@@ -73,13 +80,6 @@ Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  2 2014
 
 Top level modules:
 	channel_sample
-
-} {} {}} /userspace/c/chuff2/ece551/project/dig_core.sv {1 {vlog -work work -vopt -sv -stats=none /userspace/c/chuff2/ece551/project/dig_core.sv
-Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  2 2014
--- Compiling module dig_core
-
-Top level modules:
-	dig_core
 
 } {} {}} /userspace/c/chuff2/ece551/project/uart_rx.sv {1 {vlog -work work -vopt -sv -stats=none /userspace/c/chuff2/ece551/project/uart_rx.sv
 Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  2 2014

@@ -1,6 +1,7 @@
-module prot_trig(protTrig, clk, rst_n,  TrigCfg, maskH, maskL, matchH, matchL, CH1L, CH2L, CH3L, CH1L, baud_cntH, baud_cntL);
+module prot_trig(protTrig, clk, rst_n,  TrigCfg, maskH, maskL, matchH, matchL, CH1L, CH2L, CH3L, baud_cntH, baud_cntL);
 
-input logic clk, rst_n, maskH, maskL, matchH, matchL, CH1L, CH2L, CH3L, baud_cntH, baud_cntL;
+input logic clk, rst_n, CH1L, CH2L, CH3L;
+input logic [7:0] maskH, maskL, matchH, matchL, baud_cntH, baud_cntL;
 input logic [5:0] TrigCfg;
 output logic protTrig;
 

@@ -42,9 +42,51 @@ module dig_core(clk,rst_n,smpl_clk,wrt_smpl, decimator, VIH, VIL, CH1L, CH1H,
   ///////////////////////////////////////////////////////
   // delcare any needed internal signals as type wire //
   /////////////////////////////////////////////////////
-  
+  logic CH1Trig, CH2Trig, CH3Trig, CH4Trig, CH5Trig;
+  logic [4:0] CH1TrigCfg, CH2TrigCfg, CH3TrigCfg, CH4TrigCfg, CH5TrigCfg;
+  logic CH1Hff5, CH2Hff5, CH3Hff5, CH4Hff5, CH5Hff5;
+  logic CH1Lff5, CH2Lff5, CH3Lff5, CH4Lff5, CH5Lff5;
+  logic CH1L, CH2L, CH3L, CH4L, CH5L;
+  logic CH1H, CH2H, CH3H, CH4H, CH5H;
+  logic [5:0] TrigCfg;
+  logic protTrig;
+  logic [7:0] baud_cntH, baud_cntL;
+  logic [7:0] maskH, maskL;
+  logic [7:0] matchH, matchL;
   ///////////////////////////////////////////////////////////////
   // Instantiate the sub units that make up your digital core //
   /////////////////////////////////////////////////////////////
+  //unsure about:: set_armed, set_capture_done...(maybe need to be outputs of the chan_capture module)
+
+  //trigger logic
+  prot_trig protTrigLogic(.protTrig(protTrig), .clk(clk), .rst_n(rst_n),  .TrigCfg(TrigCfg), 
+	.maskH(maskH), .maskL(maskL), .matchH(matchH), .matchL(matchL), .CH1L(CH1L), 
+	.CH2L(CH2L), .CH3L(CH3L), .baud_cntH(baud_cntH), .baud_cntL(baud_cntL));
+
+  chan_trig chan1Trig(.clk(clk), .set_armed(), .CHxTrigCfg(CH1TrigCfg), .CHxTrig(CH1Trig), 
+	.CHxHff5(CH1Hff5), .CHxLff5(CH1Lff5));
+
+  chan_trig chan2Trig(.clk(clk), .set_armed(), .CHxTrigCfg(CH2TrigCfg), .CHxTrig(CH2Trig), 
+	.CHxHff5(CH2Hff5), .CHxLff5(CH2Lff5));
+
+  chan_trig chan3Trig(.clk(clk), .set_armed(), .CHxTrigCfg(CH3TrigCfg), .CHxTrig(CH3Trig), 
+	.CHxHff5(CH3Hff5), .CHxLff5(CH3Lff5));
+
+  chan_trig chan4Trig(.clk(clk), .set_armed(), .CHxTrigCfg(CH4TrigCfg), .CHxTrig(CH4Trig), 
+	.CHxHff5(CH4Hff5), .CHxLff5(CH4Lff5));
+
+  chan_trig chan5Trig(.clk(clk), .set_armed(), .CHxTrigCfg(CH5TrigCfg), .CHxTrig(CH5Trig), 
+	.CHxHff5(CH5Hff5), .CHxLff5(CH5Lff5));
+
+  //command config
+  cmd_cfg cmd_config(.clk(clk), .rst_n(rst_n), .cmd(), .cmd_rdy(), 
+	.resp_sent(), .set_capture_done(), .waddr(),
+	.rdataCH1(), .rdataCH2(), .rdataCH3(), .rdataCH4(), .rdataCH5(), 
+	.resp(), .send_resp(), .clr_cmd_rdy(), .trig_pos(), .addr_ptr(), .decimator(), 
+	.maskL(maskL), .maskH(maskH), .matchL(matchL), .matchH(matchH), .baud_cntL(baud_cntL),
+	 .baud_cntH(baud_cntH), .TrigCfg(TrigCfg), .CH1TrigCfg(CH1TrigCfg), 
+	.CH2TrigCfg(CH2TrigCfg), .CH3TrigCfg(CH3TrigCfg), .CH4TrigCfg(CH4TrigCfg),
+	 .CH5TrigCfg(CH5TrigCfg), .VIH(), .VIL());
+
 			   
 endmodule  
