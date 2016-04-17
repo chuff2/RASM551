@@ -19,6 +19,13 @@ Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  2 2014
 Top level modules:
 	pwm8
 
+} {} {}} /userspace/c/chuff2/ece551/project/chan_capture.sv {1 {vlog -work work -vopt -sv -stats=none /userspace/c/chuff2/ece551/project/chan_capture.sv
+Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  2 2014
+-- Compiling module chan_capture
+
+Top level modules:
+	chan_capture
+
 } {} {}} /userspace/c/chuff2/ece551/project/LA_dig_tb.sv {0 {vlog -work work -vopt -sv -stats=none /userspace/c/chuff2/ece551/project/LA_dig_tb.sv
 Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  2 2014
 -- Compiling module LA_dig_tb
@@ -31,6 +38,13 @@ Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  2 2014
 
 Top level modules:
 	CommMasterSM
+
+} {} {}} /userspace/c/chuff2/ece551/project/prot_trig.sv {1 {vlog -work work -vopt -sv -stats=none /userspace/c/chuff2/ece551/project/prot_trig.sv
+Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  2 2014
+-- Compiling module prot_trig
+
+Top level modules:
+	prot_trig
 
 } {} {}} /userspace/c/chuff2/ece551/project/RAMqueue.v {1 {vlog -work work -vopt -stats=none /userspace/c/chuff2/ece551/project/RAMqueue.v
 Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  2 2014
