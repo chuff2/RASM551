@@ -32,433 +32,484 @@
 # Compile of pwm8.sv was successful.
 # Compile of pwm8_tb.v was successful.
 # 18 compiles, 1 failed with 1 error.
-# Compile of channel_sample.sv was successful.
-# Compile of cmd_cfg.sv was successful.
 # Compile of AFE.v was successful.
+# Compile of chan_capture.sv failed with 2 errors.
+# Compile of channel_sample.sv was successful.
+# Compile of channel_sample_tb.sv was successful.
 # Compile of clk_rst_smpl.sv was successful.
+# Compile of cmd_cfg.sv was successful.
+# Compile of cmd_cfg_tb.sv was successful.
+# Compile of CommMaster.sv was successful.
+# Compile of CommMaster_UART_wrapper_tb.sv was successful.
+# Compile of CommMasterSM.sv was successful.
 # Compile of dig_core.sv was successful.
+# Compile of dual_PWM.v was successful.
+# Compile of dual_PWM_tb.v was successful.
 # Compile of LA_dig.sv was successful.
 # Compile of LA_dig_tb.sv failed with 1 errors.
 # Compile of pll8x.v was successful.
+# Compile of pwm8.sv was successful.
+# Compile of pwm8_tb.v was successful.
 # Compile of RAMqueue.v was successful.
-# Compile of channel_sample_tb.sv was successful.
-# Compile of CommMasterSM.sv was successful.
+# Compile of uart.sv was successful.
 # Compile of uart_rx.sv was successful.
 # Compile of uart_tx.sv was successful.
 # Compile of UART_wrapper.sv was successful.
+# 23 compiles, 2 failed with 3 errors.
+# Compile of AFE.v was successful.
+# Compile of chan_capture.sv failed with 2 errors.
+# Compile of channel_sample.sv was successful.
+# Compile of channel_sample_tb.sv was successful.
+# Compile of clk_rst_smpl.sv was successful.
+# Compile of cmd_cfg.sv was successful.
+# Compile of cmd_cfg_tb.sv was successful.
+# Compile of CommMaster.sv was successful.
+# Compile of CommMaster_UART_wrapper_tb.sv was successful.
+# Compile of CommMasterSM.sv was successful.
+# Compile of dig_core.sv was successful.
 # Compile of dual_PWM.v was successful.
 # Compile of dual_PWM_tb.v was successful.
-# Compile of pwm8.sv was successful.
-# Compile of pwm8_tb.v was successful.
-# 18 compiles, 1 failed with 1 error.
-# Compile of channel_sample.sv was successful.
-# Compile of cmd_cfg.sv was successful.
-# Compile of AFE.v was successful.
-# Compile of clk_rst_smpl.sv was successful.
-# Compile of dig_core.sv was successful.
 # Compile of LA_dig.sv was successful.
 # Compile of LA_dig_tb.sv failed with 1 errors.
 # Compile of pll8x.v was successful.
+# Compile of pwm8.sv was successful.
+# Compile of pwm8_tb.v was successful.
 # Compile of RAMqueue.v was successful.
-# Compile of channel_sample_tb.sv was successful.
-# Compile of CommMasterSM.sv was successful.
+# Compile of uart.sv was successful.
 # Compile of uart_rx.sv was successful.
 # Compile of uart_tx.sv was successful.
 # Compile of UART_wrapper.sv was successful.
+# 23 compiles, 2 failed with 3 errors.
+# Compile of AFE.v was successful.
+# Compile of chan_capture.sv failed with 2 errors.
+# Compile of channel_sample.sv was successful.
+# Compile of channel_sample_tb.sv was successful.
+# Compile of clk_rst_smpl.sv was successful.
+# Compile of cmd_cfg.sv was successful.
+# Compile of cmd_cfg_tb.sv was successful.
+# Compile of CommMaster.sv was successful.
+# Compile of CommMaster_UART_wrapper_tb.sv was successful.
+# Compile of CommMasterSM.sv was successful.
+# Compile of dig_core.sv was successful.
 # Compile of dual_PWM.v was successful.
 # Compile of dual_PWM_tb.v was successful.
-# Compile of pwm8.sv was successful.
-# Compile of pwm8_tb.v was successful.
-# 18 compiles, 1 failed with 1 error.
-vsim -novopt work.pwm8_tb
-# vsim 
-# Start time: 10:33:54 on Apr 12,2016
-# ** Warning: (vsim-8891) All optimizations are turned off because the -novopt switch is in effect. This will cause your simulation to run very slowly. If you are using this switch to preserve visibility for Debug or PLI features please see the User's Manual section on Preserving Object Visibility with vopt.
-# Refreshing /userspace/c/chuff2/ece551/project/work.pwm8_tb
-# Loading work.pwm8_tb
-# Refreshing /userspace/c/chuff2/ece551/project/work.pwm8
-# Loading sv_std.std
-# Loading work.pwm8
-add wave sim:/pwm8_tb/*
-run -all
-# Failure...
-# ** Note: $stop    : /userspace/c/chuff2/ece551/project/pwm8_tb.v(26)
-#    Time: 2655 ns  Iteration: 1  Instance: /pwm8_tb
-# Break in Module pwm8_tb at /userspace/c/chuff2/ece551/project/pwm8_tb.v line 26
-quit -sim
-# Compile of channel_sample.sv was successful.
-# Compile of cmd_cfg.sv was successful.
-# Compile of AFE.v was successful.
-# Compile of clk_rst_smpl.sv was successful.
-# Compile of dig_core.sv was successful.
 # Compile of LA_dig.sv was successful.
 # Compile of LA_dig_tb.sv failed with 1 errors.
 # Compile of pll8x.v was successful.
+# Compile of pwm8.sv was successful.
+# Compile of pwm8_tb.v was successful.
 # Compile of RAMqueue.v was successful.
-# Compile of channel_sample_tb.sv was successful.
-# Compile of CommMasterSM.sv was successful.
+# Compile of uart.sv was successful.
 # Compile of uart_rx.sv was successful.
 # Compile of uart_tx.sv was successful.
 # Compile of UART_wrapper.sv was successful.
+# 23 compiles, 2 failed with 3 errors.
+# Compile of AFE.v was successful.
+# Compile of chan_capture.sv failed with 1 errors.
+# Compile of channel_sample.sv was successful.
+# Compile of channel_sample_tb.sv was successful.
+# Compile of clk_rst_smpl.sv was successful.
+# Compile of cmd_cfg.sv was successful.
+# Compile of cmd_cfg_tb.sv was successful.
+# Compile of CommMaster.sv was successful.
+# Compile of CommMaster_UART_wrapper_tb.sv was successful.
+# Compile of CommMasterSM.sv was successful.
+# Compile of dig_core.sv was successful.
 # Compile of dual_PWM.v was successful.
 # Compile of dual_PWM_tb.v was successful.
-# Compile of pwm8.sv was successful.
-# Compile of pwm8_tb.v was successful.
-# 18 compiles, 1 failed with 1 error.
-vsim -novopt work.pwm8_tb
-# vsim 
-# Start time: 10:34:49 on Apr 12,2016
-# ** Warning: (vsim-8891) All optimizations are turned off because the -novopt switch is in effect. This will cause your simulation to run very slowly. If you are using this switch to preserve visibility for Debug or PLI features please see the User's Manual section on Preserving Object Visibility with vopt.
-# Refreshing /userspace/c/chuff2/ece551/project/work.pwm8_tb
-# Loading work.pwm8_tb
-# Refreshing /userspace/c/chuff2/ece551/project/work.pwm8
-# Loading sv_std.std
-# Loading work.pwm8
-add wave sim:/pwm8_tb/*
-run -all
-# Failure...
-# ** Note: $stop    : /userspace/c/chuff2/ece551/project/pwm8_tb.v(27)
-#    Time: 2755 ns  Iteration: 0  Instance: /pwm8_tb
-# Break in Module pwm8_tb at /userspace/c/chuff2/ece551/project/pwm8_tb.v line 27
-add wave sim:/pwm8_tb/DUT/*
-restart -f
-# ** Warning: (vsim-8891) All optimizations are turned off because the -novopt switch is in effect. This will cause your simulation to run very slowly. If you are using this switch to preserve visibility for Debug or PLI features please see the User's Manual section on Preserving Object Visibility with vopt.
-# Loading sv_std.std
-# Loading work.pwm8
-run -all
-# Failure...
-# ** Note: $stop    : /userspace/c/chuff2/ece551/project/pwm8_tb.v(27)
-#    Time: 2755 ns  Iteration: 0  Instance: /pwm8_tb
-# Break in Module pwm8_tb at /userspace/c/chuff2/ece551/project/pwm8_tb.v line 27
-quit -sim
-# Compile of channel_sample.sv was successful.
-# Compile of cmd_cfg.sv was successful.
-# Compile of AFE.v was successful.
-# Compile of clk_rst_smpl.sv was successful.
-# Compile of dig_core.sv was successful.
 # Compile of LA_dig.sv was successful.
 # Compile of LA_dig_tb.sv failed with 1 errors.
 # Compile of pll8x.v was successful.
+# Compile of pwm8.sv was successful.
+# Compile of pwm8_tb.v was successful.
 # Compile of RAMqueue.v was successful.
-# Compile of channel_sample_tb.sv was successful.
-# Compile of CommMasterSM.sv was successful.
+# Compile of uart.sv was successful.
 # Compile of uart_rx.sv was successful.
 # Compile of uart_tx.sv was successful.
 # Compile of UART_wrapper.sv was successful.
+# 23 compiles, 2 failed with 2 errors.
+# Compile of AFE.v was successful.
+# Compile of chan_capture.sv failed with 1 errors.
+# Compile of channel_sample.sv was successful.
+# Compile of channel_sample_tb.sv was successful.
+# Compile of clk_rst_smpl.sv was successful.
+# Compile of cmd_cfg.sv was successful.
+# Compile of cmd_cfg_tb.sv was successful.
+# Compile of CommMaster.sv was successful.
+# Compile of CommMaster_UART_wrapper_tb.sv was successful.
+# Compile of CommMasterSM.sv was successful.
+# Compile of dig_core.sv was successful.
 # Compile of dual_PWM.v was successful.
 # Compile of dual_PWM_tb.v was successful.
-# Compile of pwm8.sv was successful.
-# Compile of pwm8_tb.v was successful.
-# 18 compiles, 1 failed with 1 error.
-vsim -novopt work.pwm8_tb
-# vsim 
-# Start time: 10:39:05 on Apr 12,2016
-# ** Warning: (vsim-8891) All optimizations are turned off because the -novopt switch is in effect. This will cause your simulation to run very slowly. If you are using this switch to preserve visibility for Debug or PLI features please see the User's Manual section on Preserving Object Visibility with vopt.
-# Refreshing /userspace/c/chuff2/ece551/project/work.pwm8_tb
-# Loading work.pwm8_tb
-# Refreshing /userspace/c/chuff2/ece551/project/work.pwm8
-# Loading sv_std.std
-# Loading work.pwm8
-add wave sim:/pwm8_tb/*
-add wave sim:/pwm8_tb/DUT/*
-run -all
-# Failure...
-# ** Note: $stop    : /userspace/c/chuff2/ece551/project/pwm8_tb.v(27)
-#    Time: 2765 ns  Iteration: 0  Instance: /pwm8_tb
-# Break in Module pwm8_tb at /userspace/c/chuff2/ece551/project/pwm8_tb.v line 27
-quit -sim
-# Compile of channel_sample.sv was successful.
-# Compile of cmd_cfg.sv was successful.
-# Compile of AFE.v was successful.
-# Compile of clk_rst_smpl.sv was successful.
-# Compile of dig_core.sv was successful.
 # Compile of LA_dig.sv was successful.
 # Compile of LA_dig_tb.sv failed with 1 errors.
 # Compile of pll8x.v was successful.
+# Compile of pwm8.sv was successful.
+# Compile of pwm8_tb.v was successful.
 # Compile of RAMqueue.v was successful.
-# Compile of channel_sample_tb.sv was successful.
-# Compile of CommMasterSM.sv was successful.
+# Compile of uart.sv was successful.
 # Compile of uart_rx.sv was successful.
 # Compile of uart_tx.sv was successful.
 # Compile of UART_wrapper.sv was successful.
+# 23 compiles, 2 failed with 2 errors.
+# Compile of AFE.v was successful.
+# Compile of chan_capture.sv failed with 1 errors.
+# Compile of channel_sample.sv was successful.
+# Compile of channel_sample_tb.sv was successful.
+# Compile of clk_rst_smpl.sv was successful.
+# Compile of cmd_cfg.sv was successful.
+# Compile of cmd_cfg_tb.sv was successful.
+# Compile of CommMaster.sv was successful.
+# Compile of CommMaster_UART_wrapper_tb.sv was successful.
+# Compile of CommMasterSM.sv was successful.
+# Compile of dig_core.sv was successful.
 # Compile of dual_PWM.v was successful.
 # Compile of dual_PWM_tb.v was successful.
-# Compile of pwm8.sv was successful.
-# Compile of pwm8_tb.v was successful.
-# 18 compiles, 1 failed with 1 error.
-# Compile of channel_sample.sv was successful.
-# Compile of cmd_cfg.sv was successful.
-# Compile of AFE.v was successful.
-# Compile of clk_rst_smpl.sv was successful.
-# Compile of dig_core.sv was successful.
 # Compile of LA_dig.sv was successful.
 # Compile of LA_dig_tb.sv failed with 1 errors.
 # Compile of pll8x.v was successful.
+# Compile of pwm8.sv was successful.
+# Compile of pwm8_tb.v was successful.
 # Compile of RAMqueue.v was successful.
-# Compile of channel_sample_tb.sv was successful.
-# Compile of CommMasterSM.sv was successful.
+# Compile of uart.sv was successful.
 # Compile of uart_rx.sv was successful.
 # Compile of uart_tx.sv was successful.
 # Compile of UART_wrapper.sv was successful.
+# 23 compiles, 2 failed with 2 errors.
+# Compile of AFE.v was successful.
+# Compile of chan_capture.sv failed with 1 errors.
+# Compile of channel_sample.sv was successful.
+# Compile of channel_sample_tb.sv was successful.
+# Compile of clk_rst_smpl.sv was successful.
+# Compile of cmd_cfg.sv was successful.
+# Compile of cmd_cfg_tb.sv was successful.
+# Compile of CommMaster.sv was successful.
+# Compile of CommMaster_UART_wrapper_tb.sv was successful.
+# Compile of CommMasterSM.sv was successful.
+# Compile of dig_core.sv was successful.
 # Compile of dual_PWM.v was successful.
 # Compile of dual_PWM_tb.v was successful.
-# Compile of pwm8.sv was successful.
-# Compile of pwm8_tb.v was successful.
-# 18 compiles, 1 failed with 1 error.
-vsim -novopt work.pwm8_tb
-# vsim 
-# Start time: 10:40:46 on Apr 12,2016
-# ** Warning: (vsim-8891) All optimizations are turned off because the -novopt switch is in effect. This will cause your simulation to run very slowly. If you are using this switch to preserve visibility for Debug or PLI features please see the User's Manual section on Preserving Object Visibility with vopt.
-# Refreshing /userspace/c/chuff2/ece551/project/work.pwm8_tb
-# Loading work.pwm8_tb
-# Refreshing /userspace/c/chuff2/ece551/project/work.pwm8
-# Loading sv_std.std
-# Loading work.pwm8
-run -all
-# Success!!!
-# ** Note: $stop    : /userspace/c/chuff2/ece551/project/pwm8_tb.v(27)
-#    Time: 2775 ns  Iteration: 0  Instance: /pwm8_tb
-# Break in Module pwm8_tb at /userspace/c/chuff2/ece551/project/pwm8_tb.v line 27
-quit -sim
-vsim work.channel_sample_tb
-# vsim 
-# Start time: 10:41:59 on Apr 12,2016
-# ** Note: (vsim-3812) Design is being optimized...
-# Loading sv_std.std
-# Loading work.channel_sample_tb(fast)
-# Loading work.AFE(fast)
-# Loading work.pll8x(fast)
-quit -sim
-vsim work.channel_sample_tb
-# vsim 
-# Start time: 10:42:22 on Apr 12,2016
-# ** Note: (vsim-8009) Loading existing optimized design _opt
-# Loading sv_std.std
-# Loading work.channel_sample_tb(fast)
-# Loading work.AFE(fast)
-# Loading work.pll8x(fast)
-quit -sim
-vsim work.channel_sample_tb
-# vsim 
-# Start time: 10:42:36 on Apr 12,2016
-# ** Note: (vsim-8009) Loading existing optimized design _opt
-# Loading sv_std.std
-# Loading work.channel_sample_tb(fast)
-# Loading work.AFE(fast)
-# Loading work.pll8x(fast)
-# Compile of channel_sample.sv was successful.
-# Compile of cmd_cfg.sv was successful.
-# Compile of AFE.v was successful.
-# Compile of clk_rst_smpl.sv was successful.
-# Compile of dig_core.sv was successful.
 # Compile of LA_dig.sv was successful.
 # Compile of LA_dig_tb.sv failed with 1 errors.
 # Compile of pll8x.v was successful.
+# Compile of pwm8.sv was successful.
+# Compile of pwm8_tb.v was successful.
 # Compile of RAMqueue.v was successful.
-# Compile of channel_sample_tb.sv was successful.
-# Compile of CommMasterSM.sv was successful.
+# Compile of uart.sv was successful.
 # Compile of uart_rx.sv was successful.
 # Compile of uart_tx.sv was successful.
 # Compile of UART_wrapper.sv was successful.
+# 23 compiles, 2 failed with 2 errors.
+# Compile of AFE.v was successful.
+# Compile of chan_capture.sv failed with 1 errors.
+# Compile of channel_sample.sv was successful.
+# Compile of channel_sample_tb.sv was successful.
+# Compile of clk_rst_smpl.sv was successful.
+# Compile of cmd_cfg.sv was successful.
+# Compile of cmd_cfg_tb.sv was successful.
+# Compile of CommMaster.sv was successful.
+# Compile of CommMaster_UART_wrapper_tb.sv was successful.
+# Compile of CommMasterSM.sv was successful.
+# Compile of dig_core.sv was successful.
 # Compile of dual_PWM.v was successful.
 # Compile of dual_PWM_tb.v was successful.
-# Compile of pwm8.sv was successful.
-# Compile of pwm8_tb.v was successful.
-# 18 compiles, 1 failed with 1 error.
-vsim -novopt work.dual_PWM_tb
-# vsim 
-# Start time: 10:44:02 on Apr 12,2016
-# ** Warning: (vsim-8891) All optimizations are turned off because the -novopt switch is in effect. This will cause your simulation to run very slowly. If you are using this switch to preserve visibility for Debug or PLI features please see the User's Manual section on Preserving Object Visibility with vopt.
-# Refreshing /userspace/c/chuff2/ece551/project/work.dual_PWM_tb
-# Loading work.dual_PWM_tb
-# Refreshing /userspace/c/chuff2/ece551/project/work.dual_PWM
-# Loading work.dual_PWM
-# Refreshing /userspace/c/chuff2/ece551/project/work.pwm8
-# Loading sv_std.std
-# Loading work.pwm8
-add wave sim:/dual_PWM_tb/*
-add wave sim:/dual_PWM_tb/DUT/*
-run -all
-# ** Note: $stop    : /userspace/c/chuff2/ece551/project/dual_PWM_tb.v(23)
-#    Time: 100405 ns  Iteration: 0  Instance: /dual_PWM_tb
-# Break in Module dual_PWM_tb at /userspace/c/chuff2/ece551/project/dual_PWM_tb.v line 23
-quit -sim
-# Compile of channel_sample.sv was successful.
-# Compile of cmd_cfg.sv was successful.
-# Compile of AFE.v was successful.
-# Compile of clk_rst_smpl.sv was successful.
-# Compile of dig_core.sv was successful.
 # Compile of LA_dig.sv was successful.
 # Compile of LA_dig_tb.sv failed with 1 errors.
 # Compile of pll8x.v was successful.
+# Compile of pwm8.sv was successful.
+# Compile of pwm8_tb.v was successful.
 # Compile of RAMqueue.v was successful.
-# Compile of channel_sample_tb.sv was successful.
-# Compile of CommMasterSM.sv was successful.
+# Compile of uart.sv was successful.
 # Compile of uart_rx.sv was successful.
 # Compile of uart_tx.sv was successful.
 # Compile of UART_wrapper.sv was successful.
+# 23 compiles, 2 failed with 2 errors.
+# Compile of AFE.v was successful.
+# Compile of chan_capture.sv failed with 1 errors.
+# Compile of channel_sample.sv was successful.
+# Compile of channel_sample_tb.sv was successful.
+# Compile of clk_rst_smpl.sv was successful.
+# Compile of cmd_cfg.sv was successful.
+# Compile of cmd_cfg_tb.sv was successful.
+# Compile of CommMaster.sv was successful.
+# Compile of CommMaster_UART_wrapper_tb.sv was successful.
+# Compile of CommMasterSM.sv was successful.
+# Compile of dig_core.sv was successful.
 # Compile of dual_PWM.v was successful.
 # Compile of dual_PWM_tb.v was successful.
-# Compile of pwm8.sv was successful.
-# Compile of pwm8_tb.v was successful.
-# 18 compiles, 1 failed with 1 error.
-# Compile of channel_sample.sv was successful.
-# Compile of cmd_cfg.sv was successful.
-# Compile of AFE.v was successful.
-# Compile of clk_rst_smpl.sv was successful.
-# Compile of dig_core.sv was successful.
 # Compile of LA_dig.sv was successful.
 # Compile of LA_dig_tb.sv failed with 1 errors.
 # Compile of pll8x.v was successful.
+# Compile of pwm8.sv was successful.
+# Compile of pwm8_tb.v was successful.
 # Compile of RAMqueue.v was successful.
-# Compile of channel_sample_tb.sv was successful.
-# Compile of CommMasterSM.sv was successful.
+# Compile of uart.sv was successful.
 # Compile of uart_rx.sv was successful.
 # Compile of uart_tx.sv was successful.
 # Compile of UART_wrapper.sv was successful.
+# 23 compiles, 2 failed with 2 errors.
+# Compile of AFE.v was successful.
+# Compile of chan_capture.sv failed with 1 errors.
+# Compile of channel_sample.sv was successful.
+# Compile of channel_sample_tb.sv was successful.
+# Compile of clk_rst_smpl.sv was successful.
+# Compile of cmd_cfg.sv was successful.
+# Compile of cmd_cfg_tb.sv was successful.
+# Compile of CommMaster.sv was successful.
+# Compile of CommMaster_UART_wrapper_tb.sv was successful.
+# Compile of CommMasterSM.sv was successful.
+# Compile of dig_core.sv was successful.
 # Compile of dual_PWM.v was successful.
 # Compile of dual_PWM_tb.v was successful.
-# Compile of pwm8.sv was successful.
-# Compile of pwm8_tb.v was successful.
-# 18 compiles, 1 failed with 1 error.
-vsim -novopt work.channel_sample_tb
-# vsim 
-# Start time: 11:00:45 on Apr 12,2016
-# ** Warning: (vsim-8891) All optimizations are turned off because the -novopt switch is in effect. This will cause your simulation to run very slowly. If you are using this switch to preserve visibility for Debug or PLI features please see the User's Manual section on Preserving Object Visibility with vopt.
-# Refreshing /userspace/c/chuff2/ece551/project/work.channel_sample_tb
-# Loading sv_std.std
-# Loading work.channel_sample_tb
-# ** Error: (vsim-3037) /userspace/c/chuff2/ece551/project/channel_sample_tb.sv(33): Missing instance name in instantiation of 'dual_PWM'.
-#    Time: 0 ns  Iteration: 0  Instance: /channel_sample_tb File: /userspace/c/chuff2/ece551/project/channel_sample_tb.sv
-# Refreshing /userspace/c/chuff2/ece551/project/work.AFE
-# Loading work.AFE
-# Refreshing /userspace/c/chuff2/ece551/project/work.pll8x
-# Loading work.pll8x
-# Refreshing /userspace/c/chuff2/ece551/project/work.clk_rst_smpl
-# Loading work.clk_rst_smpl
-# Refreshing /userspace/c/chuff2/ece551/project/work.channel_sample
-# Loading work.channel_sample
-# Error loading design
-# Compile of channel_sample.sv was successful.
-# Compile of cmd_cfg.sv was successful.
-# Compile of AFE.v was successful.
-# Compile of clk_rst_smpl.sv was successful.
-# Compile of dig_core.sv was successful.
 # Compile of LA_dig.sv was successful.
 # Compile of LA_dig_tb.sv failed with 1 errors.
 # Compile of pll8x.v was successful.
+# Compile of pwm8.sv was successful.
+# Compile of pwm8_tb.v was successful.
 # Compile of RAMqueue.v was successful.
-# Compile of channel_sample_tb.sv was successful.
-# Compile of CommMasterSM.sv was successful.
+# Compile of uart.sv was successful.
 # Compile of uart_rx.sv was successful.
 # Compile of uart_tx.sv was successful.
 # Compile of UART_wrapper.sv was successful.
+# 23 compiles, 2 failed with 2 errors.
+# Compile of AFE.v was successful.
+# Compile of chan_capture.sv failed with 1 errors.
+# Compile of channel_sample.sv was successful.
+# Compile of channel_sample_tb.sv was successful.
+# Compile of clk_rst_smpl.sv was successful.
+# Compile of cmd_cfg.sv was successful.
+# Compile of cmd_cfg_tb.sv was successful.
+# Compile of CommMaster.sv was successful.
+# Compile of CommMaster_UART_wrapper_tb.sv was successful.
+# Compile of CommMasterSM.sv was successful.
+# Compile of dig_core.sv was successful.
 # Compile of dual_PWM.v was successful.
 # Compile of dual_PWM_tb.v was successful.
-# Compile of pwm8.sv was successful.
-# Compile of pwm8_tb.v was successful.
-# 18 compiles, 1 failed with 1 error.
-# Compile of channel_sample.sv was successful.
-# Compile of cmd_cfg.sv was successful.
-# Compile of AFE.v was successful.
-# Compile of clk_rst_smpl.sv was successful.
-# Compile of dig_core.sv was successful.
 # Compile of LA_dig.sv was successful.
 # Compile of LA_dig_tb.sv failed with 1 errors.
 # Compile of pll8x.v was successful.
+# Compile of pwm8.sv was successful.
+# Compile of pwm8_tb.v was successful.
 # Compile of RAMqueue.v was successful.
-# Compile of channel_sample_tb.sv was successful.
-# Compile of CommMasterSM.sv was successful.
+# Compile of uart.sv was successful.
 # Compile of uart_rx.sv was successful.
 # Compile of uart_tx.sv was successful.
 # Compile of UART_wrapper.sv was successful.
+# 23 compiles, 2 failed with 2 errors.
+# Compile of AFE.v was successful.
+# Compile of chan_capture.sv failed with 1 errors.
+# Compile of channel_sample.sv was successful.
+# Compile of channel_sample_tb.sv was successful.
+# Compile of clk_rst_smpl.sv was successful.
+# Compile of cmd_cfg.sv was successful.
+# Compile of cmd_cfg_tb.sv was successful.
+# Compile of CommMaster.sv was successful.
+# Compile of CommMaster_UART_wrapper_tb.sv was successful.
+# Compile of CommMasterSM.sv was successful.
+# Compile of dig_core.sv was successful.
 # Compile of dual_PWM.v was successful.
 # Compile of dual_PWM_tb.v was successful.
-# Compile of pwm8.sv was successful.
-# Compile of pwm8_tb.v was successful.
-# 18 compiles, 1 failed with 1 error.
-vsim -novopt work.channel_sample_tb
-# vsim 
-# Start time: 11:03:12 on Apr 12,2016
-# ** Warning: (vsim-8891) All optimizations are turned off because the -novopt switch is in effect. This will cause your simulation to run very slowly. If you are using this switch to preserve visibility for Debug or PLI features please see the User's Manual section on Preserving Object Visibility with vopt.
-# Refreshing /userspace/c/chuff2/ece551/project/work.channel_sample_tb
-# Loading sv_std.std
-# Loading work.channel_sample_tb
-# Refreshing /userspace/c/chuff2/ece551/project/work.dual_PWM
-# Loading work.dual_PWM
-# Refreshing /userspace/c/chuff2/ece551/project/work.pwm8
-# Loading work.pwm8
-# Refreshing /userspace/c/chuff2/ece551/project/work.AFE
-# Loading work.AFE
-# Refreshing /userspace/c/chuff2/ece551/project/work.pll8x
-# Loading work.pll8x
-# Refreshing /userspace/c/chuff2/ece551/project/work.clk_rst_smpl
-# Loading work.clk_rst_smpl
-# Refreshing /userspace/c/chuff2/ece551/project/work.channel_sample
-# Loading work.channel_sample
-add wave sim:/channel_sample_tb/*
-run -all
-# WARNING: this PLL model should be used with a ref_clk with period 200 or greater
-# Achieved wrt_smpl
-# Success!
-quit -sim
-vsim work.UART_wrapper
-# vsim 
-# Start time: 11:04:17 on Apr 12,2016
-# ** Note: (vsim-3812) Design is being optimized...
-# ** Error: /userspace/c/chuff2/ece551/project/UART_wrapper.sv(13): Module 'uart' is not defined.
-# Optimization failed
-# Error loading design
-vsim work.uart_tx
-# vsim 
-# Start time: 11:04:20 on Apr 12,2016
-# ** Note: (vsim-3812) Design is being optimized...
-# Loading sv_std.std
-# Loading work.uart_tx(fast)
-quit -sim
-# Compile of channel_sample.sv was successful.
-# Compile of cmd_cfg.sv was successful.
-# Compile of AFE.v was successful.
-# Compile of clk_rst_smpl.sv was successful.
-# Compile of dig_core.sv was successful.
 # Compile of LA_dig.sv was successful.
 # Compile of LA_dig_tb.sv failed with 1 errors.
 # Compile of pll8x.v was successful.
+# Compile of pwm8.sv was successful.
+# Compile of pwm8_tb.v was successful.
 # Compile of RAMqueue.v was successful.
-# Compile of channel_sample_tb.sv was successful.
-# Compile of CommMasterSM.sv was successful.
+# Compile of uart.sv was successful.
 # Compile of uart_rx.sv was successful.
 # Compile of uart_tx.sv was successful.
 # Compile of UART_wrapper.sv was successful.
+# 23 compiles, 2 failed with 2 errors.
+# Compile of AFE.v was successful.
+# Compile of chan_capture.sv failed with 1 errors.
+# Compile of channel_sample.sv was successful.
+# Compile of channel_sample_tb.sv was successful.
+# Compile of clk_rst_smpl.sv was successful.
+# Compile of cmd_cfg.sv was successful.
+# Compile of cmd_cfg_tb.sv was successful.
+# Compile of CommMaster.sv was successful.
+# Compile of CommMaster_UART_wrapper_tb.sv was successful.
+# Compile of CommMasterSM.sv was successful.
+# Compile of dig_core.sv was successful.
 # Compile of dual_PWM.v was successful.
 # Compile of dual_PWM_tb.v was successful.
+# Compile of LA_dig.sv was successful.
+# Compile of LA_dig_tb.sv failed with 1 errors.
+# Compile of pll8x.v was successful.
 # Compile of pwm8.sv was successful.
 # Compile of pwm8_tb.v was successful.
-# 18 compiles, 1 failed with 1 error.
-vsim -novopt work.channel_sample_tb
-# vsim 
-# Start time: 11:06:08 on Apr 12,2016
-# ** Warning: (vsim-8891) All optimizations are turned off because the -novopt switch is in effect. This will cause your simulation to run very slowly. If you are using this switch to preserve visibility for Debug or PLI features please see the User's Manual section on Preserving Object Visibility with vopt.
-# Refreshing /userspace/c/chuff2/ece551/project/work.channel_sample_tb
-# Loading sv_std.std
-# Loading work.channel_sample_tb
-# Refreshing /userspace/c/chuff2/ece551/project/work.dual_PWM
-# Loading work.dual_PWM
-# Refreshing /userspace/c/chuff2/ece551/project/work.pwm8
-# Loading work.pwm8
-# Refreshing /userspace/c/chuff2/ece551/project/work.AFE
-# Loading work.AFE
-# Refreshing /userspace/c/chuff2/ece551/project/work.pll8x
-# Loading work.pll8x
-# Refreshing /userspace/c/chuff2/ece551/project/work.clk_rst_smpl
-# Loading work.clk_rst_smpl
-# Refreshing /userspace/c/chuff2/ece551/project/work.channel_sample
-# Loading work.channel_sample
-add wave sim:/channel_sample_tb/*
-run -all
-# WARNING: this PLL model should be used with a ref_clk with period 200 or greater
-# Achieved wrt_smpl
-# Success!
-# ** Note: $stop    : /userspace/c/chuff2/ece551/project/channel_sample_tb.sv(86)
-#    Time: 19650 ps  Iteration: 4  Instance: /channel_sample_tb
-# Break in Module channel_sample_tb at /userspace/c/chuff2/ece551/project/channel_sample_tb.sv line 86
+# Compile of RAMqueue.v was successful.
+# Compile of uart.sv was successful.
+# Compile of uart_rx.sv was successful.
+# Compile of uart_tx.sv was successful.
+# Compile of UART_wrapper.sv was successful.
+# 23 compiles, 2 failed with 2 errors.
+# Compile of AFE.v was successful.
+# Compile of chan_capture.sv failed with 1 errors.
+# Compile of channel_sample.sv was successful.
+# Compile of channel_sample_tb.sv was successful.
+# Compile of clk_rst_smpl.sv was successful.
+# Compile of cmd_cfg.sv was successful.
+# Compile of cmd_cfg_tb.sv was successful.
+# Compile of CommMaster.sv was successful.
+# Compile of CommMaster_UART_wrapper_tb.sv was successful.
+# Compile of CommMasterSM.sv was successful.
+# Compile of dig_core.sv was successful.
+# Compile of dual_PWM.v was successful.
+# Compile of dual_PWM_tb.v was successful.
+# Compile of LA_dig.sv was successful.
+# Compile of LA_dig_tb.sv failed with 1 errors.
+# Compile of pll8x.v was successful.
+# Compile of pwm8.sv was successful.
+# Compile of pwm8_tb.v was successful.
+# Compile of RAMqueue.v was successful.
+# Compile of uart.sv was successful.
+# Compile of uart_rx.sv was successful.
+# Compile of uart_tx.sv was successful.
+# Compile of UART_wrapper.sv was successful.
+# 23 compiles, 2 failed with 2 errors.
+# Compile of AFE.v was successful.
+# Compile of chan_capture.sv failed with 1 errors.
+# Compile of channel_sample.sv was successful.
+# Compile of channel_sample_tb.sv was successful.
+# Compile of clk_rst_smpl.sv was successful.
+# Compile of cmd_cfg.sv was successful.
+# Compile of cmd_cfg_tb.sv was successful.
+# Compile of CommMaster.sv was successful.
+# Compile of CommMaster_UART_wrapper_tb.sv was successful.
+# Compile of CommMasterSM.sv was successful.
+# Compile of dig_core.sv was successful.
+# Compile of dual_PWM.v was successful.
+# Compile of dual_PWM_tb.v was successful.
+# Compile of LA_dig.sv was successful.
+# Compile of LA_dig_tb.sv failed with 1 errors.
+# Compile of pll8x.v was successful.
+# Compile of pwm8.sv was successful.
+# Compile of pwm8_tb.v was successful.
+# Compile of RAMqueue.v was successful.
+# Compile of uart.sv was successful.
+# Compile of uart_rx.sv was successful.
+# Compile of uart_tx.sv was successful.
+# Compile of UART_wrapper.sv was successful.
+# 23 compiles, 2 failed with 2 errors.
+# Compile of AFE.v was successful.
+# Compile of chan_capture.sv failed with 1 errors.
+# Compile of channel_sample.sv was successful.
+# Compile of channel_sample_tb.sv was successful.
+# Compile of clk_rst_smpl.sv was successful.
+# Compile of cmd_cfg.sv was successful.
+# Compile of cmd_cfg_tb.sv was successful.
+# Compile of CommMaster.sv was successful.
+# Compile of CommMaster_UART_wrapper_tb.sv was successful.
+# Compile of CommMasterSM.sv was successful.
+# Compile of dig_core.sv was successful.
+# Compile of dual_PWM.v was successful.
+# Compile of dual_PWM_tb.v was successful.
+# Compile of LA_dig.sv was successful.
+# Compile of LA_dig_tb.sv failed with 1 errors.
+# Compile of pll8x.v was successful.
+# Compile of pwm8.sv was successful.
+# Compile of pwm8_tb.v was successful.
+# Compile of RAMqueue.v was successful.
+# Compile of uart.sv was successful.
+# Compile of uart_rx.sv was successful.
+# Compile of uart_tx.sv was successful.
+# Compile of UART_wrapper.sv was successful.
+# 23 compiles, 2 failed with 2 errors.
+# Compile of AFE.v was successful.
+# Compile of chan_capture.sv failed with 1 errors.
+# Compile of channel_sample.sv was successful.
+# Compile of channel_sample_tb.sv was successful.
+# Compile of clk_rst_smpl.sv was successful.
+# Compile of cmd_cfg.sv was successful.
+# Compile of cmd_cfg_tb.sv was successful.
+# Compile of CommMaster.sv was successful.
+# Compile of CommMaster_UART_wrapper_tb.sv was successful.
+# Compile of CommMasterSM.sv was successful.
+# Compile of dig_core.sv was successful.
+# Compile of dual_PWM.v was successful.
+# Compile of dual_PWM_tb.v was successful.
+# Compile of LA_dig.sv was successful.
+# Compile of LA_dig_tb.sv failed with 1 errors.
+# Compile of pll8x.v was successful.
+# Compile of pwm8.sv was successful.
+# Compile of pwm8_tb.v was successful.
+# Compile of RAMqueue.v was successful.
+# Compile of uart.sv was successful.
+# Compile of uart_rx.sv was successful.
+# Compile of uart_tx.sv was successful.
+# Compile of UART_wrapper.sv was successful.
+# 23 compiles, 2 failed with 2 errors.
+# Compile of AFE.v was successful.
+# Compile of chan_capture.sv was successful.
+# Compile of channel_sample.sv was successful.
+# Compile of channel_sample_tb.sv was successful.
+# Compile of clk_rst_smpl.sv was successful.
+# Compile of cmd_cfg.sv was successful.
+# Compile of cmd_cfg_tb.sv was successful.
+# Compile of CommMaster.sv was successful.
+# Compile of CommMaster_UART_wrapper_tb.sv was successful.
+# Compile of CommMasterSM.sv was successful.
+# Compile of dig_core.sv was successful.
+# Compile of dual_PWM.v was successful.
+# Compile of dual_PWM_tb.v was successful.
+# Compile of LA_dig.sv was successful.
+# Compile of LA_dig_tb.sv failed with 1 errors.
+# Compile of pll8x.v was successful.
+# Compile of pwm8.sv was successful.
+# Compile of pwm8_tb.v was successful.
+# Compile of RAMqueue.v was successful.
+# Compile of uart.sv was successful.
+# Compile of uart_rx.sv was successful.
+# Compile of uart_tx.sv was successful.
+# Compile of UART_wrapper.sv was successful.
+# 23 compiles, 1 failed with 1 error.
+# Compile of AFE.v was successful.
+# Compile of chan_capture.sv was successful.
+# Compile of channel_sample.sv was successful.
+# Compile of channel_sample_tb.sv was successful.
+# Compile of clk_rst_smpl.sv was successful.
+# Compile of cmd_cfg.sv was successful.
+# Compile of cmd_cfg_tb.sv was successful.
+# Compile of CommMaster.sv was successful.
+# Compile of CommMaster_UART_wrapper_tb.sv was successful.
+# Compile of CommMasterSM.sv was successful.
+# Compile of dig_core.sv was successful.
+# Compile of dual_PWM.v was successful.
+# Compile of dual_PWM_tb.v was successful.
+# Compile of LA_dig.sv was successful.
+# Compile of LA_dig_tb.sv failed with 1 errors.
+# Compile of pll8x.v was successful.
+# Compile of pwm8.sv was successful.
+# Compile of pwm8_tb.v was successful.
+# Compile of RAMqueue.v was successful.
+# Compile of uart.sv was successful.
+# Compile of uart_rx.sv was successful.
+# Compile of uart_tx.sv was successful.
+# Compile of UART_wrapper.sv was successful.
+# 23 compiles, 1 failed with 1 error.
+# Compile of chan_capture.sv was successful.
+# Compile of AFE.v was successful.
+# Compile of chan_capture.sv was successful.
+# Compile of channel_sample.sv was successful.
+# Compile of channel_sample_tb.sv was successful.
+# Compile of clk_rst_smpl.sv was successful.
+# Compile of cmd_cfg.sv was successful.
+# Compile of cmd_cfg_tb.sv was successful.
+# Compile of CommMaster.sv was successful.
+# Compile of CommMaster_UART_wrapper_tb.sv was successful.
+# Compile of CommMasterSM.sv was successful.
+# Compile of dig_core.sv was successful.
+# Compile of dual_PWM.v was successful.
+# Compile of dual_PWM_tb.v was successful.
+# Compile of LA_dig.sv was successful.
+# Compile of LA_dig_tb.sv failed with 1 errors.
+# Compile of pll8x.v was successful.
+# Compile of pwm8.sv was successful.
+# Compile of pwm8_tb.v was successful.
+# Compile of RAMqueue.v was successful.
+# Compile of uart.sv was successful.
+# Compile of uart_rx.sv was successful.
+# Compile of uart_tx.sv was successful.
+# Compile of UART_wrapper.sv was successful.
+# 23 compiles, 1 failed with 1 error.

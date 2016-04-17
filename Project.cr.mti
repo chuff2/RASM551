@@ -1,16 +1,23 @@
-/userspace/c/chuff2/ece551/project/pwm8.sv {1 {vlog -work work -vopt -sv -stats=none /userspace/c/chuff2/ece551/project/pwm8.sv
-Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  2 2014
--- Compiling module pwm8
-
-Top level modules:
-	pwm8
-
-} {} {}} /userspace/c/chuff2/ece551/project/UART_wrapper.sv {1 {vlog -work work -vopt -sv -stats=none /userspace/c/chuff2/ece551/project/UART_wrapper.sv
+/userspace/c/chuff2/ece551/project/UART_wrapper.sv {1 {vlog -work work -vopt -sv -stats=none /userspace/c/chuff2/ece551/project/UART_wrapper.sv
 Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  2 2014
 -- Compiling module UART_wrapper
 
 Top level modules:
 	UART_wrapper
+
+} {} {}} /userspace/c/chuff2/ece551/project/uart.sv {1 {vlog -work work -vopt -sv -stats=none /userspace/c/chuff2/ece551/project/uart.sv
+Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  2 2014
+-- Compiling module uart
+
+Top level modules:
+	uart
+
+} {} {}} /userspace/c/chuff2/ece551/project/pwm8.sv {1 {vlog -work work -vopt -sv -stats=none /userspace/c/chuff2/ece551/project/pwm8.sv
+Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  2 2014
+-- Compiling module pwm8
+
+Top level modules:
+	pwm8
 
 } {} {}} /userspace/c/chuff2/ece551/project/LA_dig_tb.sv {0 {vlog -work work -vopt -sv -stats=none /userspace/c/chuff2/ece551/project/LA_dig_tb.sv
 Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  2 2014
@@ -46,6 +53,13 @@ Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  2 2014
 Top level modules:
 	dig_core
 
+} {} {}} /userspace/c/chuff2/ece551/project/uart_rx.sv {1 {vlog -work work -vopt -sv -stats=none /userspace/c/chuff2/ece551/project/uart_rx.sv
+Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  2 2014
+-- Compiling module uart_rx
+
+Top level modules:
+	uart_rx
+
 } {} {}} /userspace/c/chuff2/ece551/project/pll8x.v {1 {vlog -work work -vopt -stats=none /userspace/c/chuff2/ece551/project/pll8x.v
 Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  2 2014
 -- Compiling module pll8x
@@ -60,12 +74,12 @@ Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  2 2014
 Top level modules:
 	clk_rst_smpl
 
-} {} {}} /userspace/c/chuff2/ece551/project/uart_rx.sv {1 {vlog -work work -vopt -sv -stats=none /userspace/c/chuff2/ece551/project/uart_rx.sv
+} {} {}} /userspace/c/chuff2/ece551/project/pwm8_tb.v {1 {vlog -work work -vopt -stats=none /userspace/c/chuff2/ece551/project/pwm8_tb.v
 Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  2 2014
--- Compiling module uart_rx
+-- Compiling module pwm8_tb
 
 Top level modules:
-	uart_rx
+	pwm8_tb
 
 } {} {}} /userspace/c/chuff2/ece551/project/dual_PWM.v {1 {vlog -work work -vopt -stats=none /userspace/c/chuff2/ece551/project/dual_PWM.v
 Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  2 2014
@@ -74,12 +88,12 @@ Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  2 2014
 Top level modules:
 	dual_PWM
 
-} {} {}} /userspace/c/chuff2/ece551/project/pwm8_tb.v {1 {vlog -work work -vopt -stats=none /userspace/c/chuff2/ece551/project/pwm8_tb.v
+} {} {}} /userspace/c/chuff2/ece551/project/uart_tx.sv {1 {vlog -work work -vopt -sv -stats=none /userspace/c/chuff2/ece551/project/uart_tx.sv
 Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  2 2014
--- Compiling module pwm8_tb
+-- Compiling module uart_tx
 
 Top level modules:
-	pwm8_tb
+	uart_tx
 
 } {} {}} /userspace/c/chuff2/ece551/project/channel_sample_tb.sv {1 {vlog -work work -vopt -sv -stats=none /userspace/c/chuff2/ece551/project/channel_sample_tb.sv
 Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  2 2014
@@ -88,19 +102,33 @@ Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  2 2014
 Top level modules:
 	channel_sample_tb
 
-} {} {}} /userspace/c/chuff2/ece551/project/uart_tx.sv {1 {vlog -work work -vopt -sv -stats=none /userspace/c/chuff2/ece551/project/uart_tx.sv
-Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  2 2014
--- Compiling module uart_tx
-
-Top level modules:
-	uart_tx
-
 } {} {}} /userspace/c/chuff2/ece551/project/LA_dig.sv {1 {vlog -work work -vopt -sv -stats=none /userspace/c/chuff2/ece551/project/LA_dig.sv
 Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  2 2014
 -- Compiling module LA_dig
 
 Top level modules:
 	LA_dig
+
+} {} {}} /userspace/c/chuff2/ece551/project/CommMaster_UART_wrapper_tb.sv {1 {vlog -work work -vopt -sv -stats=none /userspace/c/chuff2/ece551/project/CommMaster_UART_wrapper_tb.sv
+Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  2 2014
+-- Compiling module CommMaster_UART_wrapper_tb
+
+Top level modules:
+	CommMaster_UART_wrapper_tb
+
+} {} {}} /userspace/c/chuff2/ece551/project/CommMaster.sv {1 {vlog -work work -vopt -sv -stats=none /userspace/c/chuff2/ece551/project/CommMaster.sv
+Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  2 2014
+-- Compiling module CommMaster
+
+Top level modules:
+	CommMaster
+
+} {} {}} /userspace/c/chuff2/ece551/project/cmd_cfg_tb.sv {1 {vlog -work work -vopt -sv -stats=none /userspace/c/chuff2/ece551/project/cmd_cfg_tb.sv
+Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  2 2014
+-- Compiling module cmd_cfg_tb
+
+Top level modules:
+	cmd_cfg_tb
 
 } {} {}} /userspace/c/chuff2/ece551/project/AFE.v {1 {vlog -work work -vopt -stats=none /userspace/c/chuff2/ece551/project/AFE.v
 Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  2 2014
@@ -115,5 +143,12 @@ Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  2 2014
 
 Top level modules:
 	dual_PWM_tb
+
+} {} {}} /userspace/c/chuff2/ece551/project/cmd_cfg.sv {1 {vlog -work work -vopt -sv -stats=none /userspace/c/chuff2/ece551/project/cmd_cfg.sv
+Model Technology ModelSim SE-64 vlog 10.4 Compiler 2014.12 Dec  2 2014
+-- Compiling module cmd_cfg
+
+Top level modules:
+	cmd_cfg
 
 } {} {}}
