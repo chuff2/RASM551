@@ -78,6 +78,9 @@ module dig_core(clk,rst_n,smpl_clk,wrt_smpl, decimator, VIH, VIL, CH1L, CH1H,
   chan_trig chan5Trig(.clk(clk), .set_armed(), .CHxTrigCfg(CH5TrigCfg), .CHxTrig(CH5Trig), 
 	.CHxHff5(CH5Hff5), .CHxLff5(CH5Lff5));
 
+  trigger_logic(.clk(clk), .rst_n(rst_n), .CH1Trig(CH1Trig), .CH2Trig(CH2Trig), .CH3Trig(CH3Trig), .CH4Trig(CH4Trig),
+	.CH5Trig(CH5Trig), .protTrig(protTrig), .armed(armed), .set_capture_done(), .triggered());
+
   //command config
   cmd_cfg cmd_config(.clk(clk), .rst_n(rst_n), .cmd(), .cmd_rdy(), 
 	.resp_sent(), .set_capture_done(), .waddr(),
@@ -88,5 +91,10 @@ module dig_core(clk,rst_n,smpl_clk,wrt_smpl, decimator, VIH, VIL, CH1L, CH1H,
 	.CH2TrigCfg(CH2TrigCfg), .CH3TrigCfg(CH3TrigCfg), .CH4TrigCfg(CH4TrigCfg),
 	 .CH5TrigCfg(CH5TrigCfg), .VIH(), .VIL());
 
+  //channel capture
+  chan_capture chan_cap(.clk(clk), .rst_n(rst_n), .trig_pos(), .run_mode(), .wrt_smpl(), .armed(armed), .capture_done(), .we(), .smpl_cnt(), .trig());
+
+  //5 instances of channel sample logic TODO
+  
 			   
 endmodule  
