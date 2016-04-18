@@ -3,10 +3,10 @@ module dig_core(clk,rst_n,smpl_clk,wrt_smpl, decimator, VIH, VIL, CH1L, CH1H,
                 clr_cmd_rdy, resp, send_resp, resp_sent, LED, we, waddr,
 				raddr, wdataCH1, wdataCH2, wdataCH3, wdataCH4, wdataCH5, rdataCH1,
                 rdataCH2, rdataCH3, rdataCH4, rdataCH5);
-				
+
   parameter ENTRIES = 384,	// defaults to 384 for simulation, use 12288 for DE-0
             LOG2 = 9;		// Log base 2 of number of entries
-			
+
   input clk,rst_n;			// 100MHz clock and active low asynch reset
   input wrt_smpl;			// indicates when timing is right to write a smpl
   input smpl_clk;			// goes to channel sample logic (decimated 400MHz clock)
@@ -22,8 +22,8 @@ module dig_core(clk,rst_n,smpl_clk,wrt_smpl, decimator, VIH, VIL, CH1L, CH1H,
   input [7:0] rdataCH2;		// sample read from CH2 RAM
   input [7:0] rdataCH3;		// sample read from CH3 RAM
   input [7:0] rdataCH4;		// sample read from CH4 RAM
-  input [7:0] rdataCH5;		// sample read from CH5 RAM  
-  
+  input [7:0] rdataCH5;		// sample read from CH5 RAM
+
   output [7:0] VIH,VIL;		// sets PWM level for VIH and VIL thresholds
   output clr_cmd_rdy;		// asserted to knock down cmd_rdy after command interpretted
   output [7:0] resp;		// response to host
@@ -53,48 +53,74 @@ module dig_core(clk,rst_n,smpl_clk,wrt_smpl, decimator, VIH, VIL, CH1L, CH1H,
   logic [7:0] baud_cntH, baud_cntL;
   logic [7:0] maskH, maskL;
   logic [7:0] matchH, matchL;
+	logic triggered;
+	logic [LOG2-1:0] trig_pos;
+	logic set_capture_done;
   ///////////////////////////////////////////////////////////////
   // Instantiate the sub units that make up your digital core //
   /////////////////////////////////////////////////////////////
-  //unsure about:: set_armed, set_capture_done...(maybe need to be outputs of the chan_capture module)
+  //unsure about:: set_armed...(maybe need to be outputs of the chan_capture module)
+	//unsure about:: smpl output in the channel_sample modules. Do they go straight to the RAM blocks?
+	//unsure about:: addr_ptr
+	//unsure about:: run_mode in the channel_capture module
+	//unsure about:: should set_capture_done be an output of chan_capture
+	//unsure about:: capture_done is used as an input/output in channel capture. is this right?
 
   //trigger logic
-  prot_trig protTrigLogic(.protTrig(protTrig), .clk(clk), .rst_n(rst_n),  .TrigCfg(TrigCfg), 
-	.maskH(maskH), .maskL(maskL), .matchH(matchH), .matchL(matchL), .CH1L(CH1L), 
+  prot_trig protTrigLogic(.protTrig(protTrig), .clk(clk), .rst_n(rst_n),  .TrigCfg(TrigCfg),
+	.maskH(maskH), .maskL(maskL), .matchH(matchH), .matchL(matchL), .CH1L(CH1L),
 	.CH2L(CH2L), .CH3L(CH3L), .baud_cntH(baud_cntH), .baud_cntL(baud_cntL));
 
-  chan_trig chan1Trig(.clk(clk), .set_armed(), .CHxTrigCfg(CH1TrigCfg), .CHxTrig(CH1Trig), 
+  chan_trig chan1Trig(.clk(clk), .set_armed(), .CHxTrigCfg(CH1TrigCfg), .CHxTrig(CH1Trig),
 	.CHxHff5(CH1Hff5), .CHxLff5(CH1Lff5));
 
-  chan_trig chan2Trig(.clk(clk), .set_armed(), .CHxTrigCfg(CH2TrigCfg), .CHxTrig(CH2Trig), 
+  chan_trig chan2Trig(.clk(clk), .set_armed(), .CHxTrigCfg(CH2TrigCfg), .CHxTrig(CH2Trig),
 	.CHxHff5(CH2Hff5), .CHxLff5(CH2Lff5));
 
-  chan_trig chan3Trig(.clk(clk), .set_armed(), .CHxTrigCfg(CH3TrigCfg), .CHxTrig(CH3Trig), 
+  chan_trig chan3Trig(.clk(clk), .set_armed(), .CHxTrigCfg(CH3TrigCfg), .CHxTrig(CH3Trig),
 	.CHxHff5(CH3Hff5), .CHxLff5(CH3Lff5));
 
-  chan_trig chan4Trig(.clk(clk), .set_armed(), .CHxTrigCfg(CH4TrigCfg), .CHxTrig(CH4Trig), 
+  chan_trig chan4Trig(.clk(clk), .set_armed(), .CHxTrigCfg(CH4TrigCfg), .CHxTrig(CH4Trig),
 	.CHxHff5(CH4Hff5), .CHxLff5(CH4Lff5));
 
-  chan_trig chan5Trig(.clk(clk), .set_armed(), .CHxTrigCfg(CH5TrigCfg), .CHxTrig(CH5Trig), 
+  chan_trig chan5Trig(.clk(clk), .set_armed(), .CHxTrigCfg(CH5TrigCfg), .CHxTrig(CH5Trig),
 	.CHxHff5(CH5Hff5), .CHxLff5(CH5Lff5));
 
   trigger_logic(.clk(clk), .rst_n(rst_n), .CH1Trig(CH1Trig), .CH2Trig(CH2Trig), .CH3Trig(CH3Trig), .CH4Trig(CH4Trig),
-	.CH5Trig(CH5Trig), .protTrig(protTrig), .armed(armed), .set_capture_done(), .triggered());
+	.CH5Trig(CH5Trig), .protTrig(protTrig), .armed(armed), .set_capture_done(set_capture_done), .triggered(triggered));
 
   //command config
-  cmd_cfg cmd_config(.clk(clk), .rst_n(rst_n), .cmd(), .cmd_rdy(), 
-	.resp_sent(), .set_capture_done(), .waddr(),
-	.rdataCH1(), .rdataCH2(), .rdataCH3(), .rdataCH4(), .rdataCH5(), 
-	.resp(), .send_resp(), .clr_cmd_rdy(), .trig_pos(), .addr_ptr(), .decimator(), 
+  cmd_cfg cmd_config(.clk(clk), .rst_n(rst_n), .cmd(cmd), .cmd_rdy(cmd_rdy),
+	.resp_sent(resp_sent), .set_capture_done(set_capture_done), .waddr(waddr),
+	.rdataCH1(rdataCH1), .rdataCH2(rdataCH2), .rdataCH3(rdataCH3), .rdataCH4(rdataCH4), .rdataCH5(rdataCH5),
+	.resp(resp), .send_resp(send_resp), .clr_cmd_rdy(clr_cmd_rdy), .trig_pos(trig_pos), .addr_ptr(), .decimator(decimator),
 	.maskL(maskL), .maskH(maskH), .matchL(matchL), .matchH(matchH), .baud_cntL(baud_cntL),
-	 .baud_cntH(baud_cntH), .TrigCfg(TrigCfg), .CH1TrigCfg(CH1TrigCfg), 
+	 .baud_cntH(baud_cntH), .TrigCfg(TrigCfg), .CH1TrigCfg(CH1TrigCfg),
 	.CH2TrigCfg(CH2TrigCfg), .CH3TrigCfg(CH3TrigCfg), .CH4TrigCfg(CH4TrigCfg),
-	 .CH5TrigCfg(CH5TrigCfg), .VIH(), .VIL());
+	 .CH5TrigCfg(CH5TrigCfg), .VIH(VIH), .VIL(VIL));
 
   //channel capture
-  chan_capture chan_cap(.clk(clk), .rst_n(rst_n), .trig_pos(), .run_mode(), .wrt_smpl(), .armed(armed), .capture_done(), .we(), .smpl_cnt(), .trig());
+  chan_capture chan_cap(.clk(clk), .rst_n(rst_n), .trig_pos(trig_pos),
+	.run_mode(TrigCfg[4]), .wrt_smpl(wrt_smpl), .armed(armed), .capture_done(TrigCfg[5]),
+	.we(we), .smpl_cnt(), .trig(triggered));
 
   //5 instances of channel sample logic TODO
-  
-			   
-endmodule  
+	channel_sample chan_sample1(.CH_Hff5(CH1Hff5), .CH_Lff5(CH1Lff5), .smpl(),
+	 .CH_H(CH1H), .CH_L(CH1L), .smpl_clk(smpl_clk), .clk(clk));
+
+	channel_sample chan_sample2(.CH_Hff5(CH2Hff5), .CH_Lff5(CH2Lff5), .smpl(),
+	 .CH_H(CH2H), .CH_L(CH2L), .smpl_clk(smpl_clk), .clk(clk));
+
+	channel_sample chan_sample3(.CH_Hff5(CH3Hff5), .CH_Lff5(CH3Lff5), .smpl(),
+	.CH_H(CH3H), .CH_L(CH3L), .smpl_clk(smpl_clk), .clk(clk));
+
+	channel_sample chan_sample4(.CH_Hff5(CH4Hff5), .CH_Lff5(CH4Lff5), .smpl(),
+	.CH_H(CH4H), .CH_L(CH4L), .smpl_clk(smpl_clk), .clk(clk));
+
+	channel_sample chan_sample5(.CH_Hff5(CH5Hff5), .CH_Lff5(CH5Lff5), .smpl(),
+	.CH_H(CH5H), .CH_L(CH5L), .smpl_clk(smpl_clk), .clk(clk));
+
+
+
+
+endmodule
