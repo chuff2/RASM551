@@ -5,3 +5,5 @@ Project.mpf
 *.mpf
 *.bak
 .nfs*
+vsim.wlf
+
