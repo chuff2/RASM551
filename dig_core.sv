@@ -56,6 +56,7 @@ module dig_core(clk,rst_n,smpl_clk,wrt_smpl, decimator, VIH, VIL, CH1L, CH1H,
   logic triggered;
   logic [LOG2-1:0] trig_pos;
   logic set_capture_done;
+  logic armed;
   ///////////////////////////////////////////////////////////////
   // Instantiate the sub units that make up your digital core //
   /////////////////////////////////////////////////////////////
@@ -69,19 +70,19 @@ module dig_core(clk,rst_n,smpl_clk,wrt_smpl, decimator, VIH, VIL, CH1L, CH1H,
 	.maskH(maskH), .maskL(maskL), .matchH(matchH), .matchL(matchL), .CH1L(CH1L),
 	.CH2L(CH2L), .CH3L(CH3L), .baud_cntH(baud_cntH), .baud_cntL(baud_cntL));
 
-  chan_trig chan1Trig(.clk(clk), .set_armed(), .CHxTrigCfg(CH1TrigCfg), .CHxTrig(CH1Trig),
+  chan_trig chan1Trig(.clk(clk), .armed(armed), .CHxTrigCfg(CH1TrigCfg), .CHxTrig(CH1Trig),
 	.CHxHff5(CH1Hff5), .CHxLff5(CH1Lff5));
 
-  chan_trig chan2Trig(.clk(clk), .set_armed(), .CHxTrigCfg(CH2TrigCfg), .CHxTrig(CH2Trig),
+  chan_trig chan2Trig(.clk(clk), .armed(armed), .CHxTrigCfg(CH2TrigCfg), .CHxTrig(CH2Trig),
 	.CHxHff5(CH2Hff5), .CHxLff5(CH2Lff5));
 
-  chan_trig chan3Trig(.clk(clk), .set_armed(), .CHxTrigCfg(CH3TrigCfg), .CHxTrig(CH3Trig),
+  chan_trig chan3Trig(.clk(clk), .armed(armed), .CHxTrigCfg(CH3TrigCfg), .CHxTrig(CH3Trig),
 	.CHxHff5(CH3Hff5), .CHxLff5(CH3Lff5));
 
-  chan_trig chan4Trig(.clk(clk), .set_armed(), .CHxTrigCfg(CH4TrigCfg), .CHxTrig(CH4Trig),
+  chan_trig chan4Trig(.clk(clk), .armed(armed), .CHxTrigCfg(CH4TrigCfg), .CHxTrig(CH4Trig),
 	.CHxHff5(CH4Hff5), .CHxLff5(CH4Lff5));
 
-  chan_trig chan5Trig(.clk(clk), .set_armed(), .CHxTrigCfg(CH5TrigCfg), .CHxTrig(CH5Trig),
+  chan_trig chan5Trig(.clk(clk), .armed(armed), .CHxTrigCfg(CH5TrigCfg), .CHxTrig(CH5Trig),
 	.CHxHff5(CH5Hff5), .CHxLff5(CH5Lff5));
 
   trigger_logic(.clk(clk), .rst_n(rst_n), .CH1Trig(CH1Trig), .CH2Trig(CH2Trig), .CH3Trig(CH3Trig), .CH4Trig(CH4Trig),
@@ -98,7 +99,7 @@ module dig_core(clk,rst_n,smpl_clk,wrt_smpl, decimator, VIH, VIL, CH1L, CH1H,
 	 .CH5TrigCfg(CH5TrigCfg), .VIH(VIH), .VIL(VIL));
 
   //channel capture
-  chan_capture chan_cap(.clk(clk), .rst_n(rst_n), .trig_pos(trig_pos),
+  chan_capture chan_cap(.clk(clk), .rst_n(rst_n), .trig_pos(trig_pos), .set_capture_done(),
 	.run_mode(TrigCfg[4]), .wrt_smpl(wrt_smpl), .armed(armed), .capture_done(TrigCfg[5]),
 	.we(we), .smpl_cnt(), .trig(triggered));
 

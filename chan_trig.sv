@@ -1,8 +1,8 @@
 
 
-module chan_trig(clk, set_armed, CHxTrigCfg, CHxTrig, CHxHff5, CHxLff5);
+module chan_trig(clk, armed, CHxTrigCfg, CHxTrig, CHxHff5, CHxLff5);
 
-	input clk, set_armed, CHxHff5, CHxLff5;
+	input clk, armed, CHxHff5, CHxLff5;
 	input logic [7:0] CHxTrigCfg;
 	
 	output CHxTrig;
@@ -21,15 +21,15 @@ module chan_trig(clk, set_armed, CHxTrigCfg, CHxTrig, CHxHff5, CHxLff5);
 	assign CHxTrig = posedge_trig | negedge_trig | HL_trig | LL_trig | CHxTrigCfg[0];
 	
 	//Channel Trigger Logic flops
-	always_ff @(posedge CHxHff5, negedge set_armed) begin
-		if(!set_armed)
+	always_ff @(posedge CHxHff5, negedge armed) begin
+		if(!armed)
 			CHxH_armed_ff <= 1'b0;
 		else
 			CHxH_armed_ff <= 1'b1;
 	end
 	
-	always_ff @(posedge CHxLff5, negedge set_armed) begin
-		if(!set_armed)
+	always_ff @(posedge CHxLff5, negedge armed) begin
+		if(!armed)
 			CHxL_armed_ff <= 1'b0;
 		else
 			CHxL_armed_ff <= 1'b1;
