@@ -53,18 +53,16 @@ module dig_core(clk,rst_n,smpl_clk,wrt_smpl, decimator, VIH, VIL, CH1L, CH1H,
   logic [7:0] baud_cntH, baud_cntL;
   logic [7:0] maskH, maskL;
   logic [7:0] matchH, matchL;
-	logic triggered;
-	logic [LOG2-1:0] trig_pos;
-	logic set_capture_done;
+  logic triggered;
+  logic [LOG2-1:0] trig_pos;
+  logic set_capture_done;
   ///////////////////////////////////////////////////////////////
   // Instantiate the sub units that make up your digital core //
   /////////////////////////////////////////////////////////////
   //unsure about:: set_armed...(maybe need to be outputs of the chan_capture module)
-	//unsure about:: smpl output in the channel_sample modules. Do they go straight to the RAM blocks?
-	//unsure about:: addr_ptr
-	//unsure about:: run_mode in the channel_capture module
-	//unsure about:: should set_capture_done be an output of chan_capture
-	//unsure about:: capture_done is used as an input/output in channel capture. is this right?
+  //unsure about:: should set_capture_done be an output of chan_capture or is that in the spec the same as capture_done
+  //unsure about:: capture_done is used as an input/output in channel capture. is this right? (honestly dont remember what this is about... ignore?)
+  //unsure about:: how does capture_done ever get reset in chan_capture?
 
   //trigger logic
   prot_trig protTrigLogic(.protTrig(protTrig), .clk(clk), .rst_n(rst_n),  .TrigCfg(TrigCfg),
@@ -93,7 +91,7 @@ module dig_core(clk,rst_n,smpl_clk,wrt_smpl, decimator, VIH, VIL, CH1L, CH1H,
   cmd_cfg cmd_config(.clk(clk), .rst_n(rst_n), .cmd(cmd), .cmd_rdy(cmd_rdy),
 	.resp_sent(resp_sent), .set_capture_done(set_capture_done), .waddr(waddr),
 	.rdataCH1(rdataCH1), .rdataCH2(rdataCH2), .rdataCH3(rdataCH3), .rdataCH4(rdataCH4), .rdataCH5(rdataCH5),
-	.resp(resp), .send_resp(send_resp), .clr_cmd_rdy(clr_cmd_rdy), .trig_pos(trig_pos), .addr_ptr(), .decimator(decimator),
+	.resp(resp), .send_resp(send_resp), .clr_cmd_rdy(clr_cmd_rdy), .trig_pos(trig_pos), .addr_ptr(raddr), .decimator(decimator),
 	.maskL(maskL), .maskH(maskH), .matchL(matchL), .matchH(matchH), .baud_cntL(baud_cntL),
 	 .baud_cntH(baud_cntH), .TrigCfg(TrigCfg), .CH1TrigCfg(CH1TrigCfg),
 	.CH2TrigCfg(CH2TrigCfg), .CH3TrigCfg(CH3TrigCfg), .CH4TrigCfg(CH4TrigCfg),
@@ -105,19 +103,19 @@ module dig_core(clk,rst_n,smpl_clk,wrt_smpl, decimator, VIH, VIL, CH1L, CH1H,
 	.we(we), .smpl_cnt(), .trig(triggered));
 
   //5 instances of channel sample logic TODO
-	channel_sample chan_sample1(.CH_Hff5(CH1Hff5), .CH_Lff5(CH1Lff5), .smpl(),
+	channel_sample chan_sample1(.CH_Hff5(CH1Hff5), .CH_Lff5(CH1Lff5), .smpl(wdataCH1),
 	 .CH_H(CH1H), .CH_L(CH1L), .smpl_clk(smpl_clk), .clk(clk));
 
-	channel_sample chan_sample2(.CH_Hff5(CH2Hff5), .CH_Lff5(CH2Lff5), .smpl(),
+	channel_sample chan_sample2(.CH_Hff5(CH2Hff5), .CH_Lff5(CH2Lff5), .smpl(wdataCH2),
 	 .CH_H(CH2H), .CH_L(CH2L), .smpl_clk(smpl_clk), .clk(clk));
 
-	channel_sample chan_sample3(.CH_Hff5(CH3Hff5), .CH_Lff5(CH3Lff5), .smpl(),
+	channel_sample chan_sample3(.CH_Hff5(CH3Hff5), .CH_Lff5(CH3Lff5), .smpl(wdataCH3),
 	.CH_H(CH3H), .CH_L(CH3L), .smpl_clk(smpl_clk), .clk(clk));
 
-	channel_sample chan_sample4(.CH_Hff5(CH4Hff5), .CH_Lff5(CH4Lff5), .smpl(),
+	channel_sample chan_sample4(.CH_Hff5(CH4Hff5), .CH_Lff5(CH4Lff5), .smpl(wdataCH4),
 	.CH_H(CH4H), .CH_L(CH4L), .smpl_clk(smpl_clk), .clk(clk));
 
-	channel_sample chan_sample5(.CH_Hff5(CH5Hff5), .CH_Lff5(CH5Lff5), .smpl(),
+	channel_sample chan_sample5(.CH_Hff5(CH5Hff5), .CH_Lff5(CH5Lff5), .smpl(wdataCH5),
 	.CH_H(CH5H), .CH_L(CH5L), .smpl_clk(smpl_clk), .clk(clk));
 
 
