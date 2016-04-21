@@ -6,4 +6,5 @@ Project.mpf
 *.bak
 .nfs*
 vsim.wlf
+*.cr.mti
 
