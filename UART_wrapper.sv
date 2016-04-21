@@ -1,81 +1,74 @@
-module UART_wrapper(clk, rst_n, clr_cmd_rdy, send_resp, resp, RX, cmd_rdy, cmd, resp_sent, TX);
-
-input logic clk, rst_n, clr_cmd_rdy, send_resp, RX;
-input logic [7:0] resp;
-output logic [15:0] cmd;
-output logic cmd_rdy, resp_sent, TX;
-
-logic clr_rdy, rdy, sel, set_cmd_rdy;
-logic [7:0] rx_data;
-logic [7:0] cmd_upper, nxt_cmd_upper;
-
-// Instantiate UART
-uart UART_INST (.clk(clk), .rst_n(rst_n), .trmt(send_resp), .tx_data(resp), 
-	.TX(TX), .RX(RX), .tx_done(resp_sent), .clr_rdy(clr_rdy), .cmd(rx_data), .rdy(rdy) );
-
-// UART wrapper SM
-
-typedef enum reg [1:0] {IDLE, UBYTE, LBYTE, CMD_READY} state_t;
-state_t state, nxt_state;
-
-always_ff @(posedge clk, negedge rst_n)
-	if(!rst_n)
-		state <= IDLE;
-	else
-		state <= nxt_state;
-
-
-// SM guts
-always_comb begin
-	clr_rdy = 1'b0;
-	set_cmd_rdy = 1'b0;
-	sel = 1'b0;
-	nxt_state = IDLE;
-
-	case(state)
-		IDLE: 
-		if(clr_cmd_rdy) begin
-			nxt_state = UBYTE;
-			clr_rdy = 1'b1;
-		end else
-			nxt_state = IDLE;
-		UBYTE:
-		if(rdy) begin
-			sel = 1'b1;
-			clr_rdy = 1'b1;
-			nxt_state = LBYTE;
-		end else
-			nxt_state = UBYTE;
-		LBYTE: 
-		if(rdy) begin
-			set_cmd_rdy = 1'b1;
-			nxt_state = CMD_READY;
-		end else
-			nxt_state = LBYTE;
-		// CMD_READY STATE
-		default: 
-		if(clr_cmd_rdy) begin
-			nxt_state = UBYTE;
-			clr_rdy = 1;
-		end else begin
-			nxt_state = CMD_READY;
-		end
-	endcase
-end
-
-always_ff @(posedge clk)
-	cmd_upper <= nxt_cmd_upper;
-
-// cmd_rdy flop
-always_ff @(posedge clk or negedge rst_n)
-	if(!rst_n)
-		cmd_rdy <= 0;
-	else if(clr_cmd_rdy)
-		cmd_rdy <= 0;
-	else if(set_cmd_rdy)
-		cmd_rdy <= 1;
-
-assign nxt_cmd_upper = sel ? rx_data : cmd_upper;
-assign cmd = {cmd_upper, rx_data};
-
+module UART_wrapper(clk, rst_n, clr_cmd_rdy, cmd_rdy, cmd, send_resp, resp, resp_sent, RX, TX);
+	
+	output logic cmd_rdy, TX, resp_sent;
+	output [15:0] cmd;
+	
+	input clk, send_resp, RX, rst_n, clr_cmd_rdy;
+	input [7:0] resp;
+	
+	logic clr_rdy, selectSig, rdy;
+	logic [7:0] rx_data, rx_data_ff, rx_data_ff_next;
+	
+	UART uart(.clk(clk), .rst_n(rst_n), .cmd(rx_data), .clr_rdy(clr_rdy), .trmt(send_resp), .tx_data(resp), .tx_done(resp_sent), .rdy(rdy), .TX(TX), .RX(RX));
+	
+	typedef enum reg [1:0] {IDLE, BYTE_1, BYTE_2} state_t;
+	
+	state_t state, nextState;
+	
+	always @(posedge clk, negedge rst_n) begin
+		if(!rst_n)
+			state <= IDLE;
+		else
+			state <= nextState;
+	end
+	
+	assign cmd = {rx_data_ff, rx_data};
+	assign rx_data_ff_next = (selectSig) ? rx_data : rx_data_ff; 
+	
+	always@(posedge clk, negedge rst_n) begin
+		if(!rst_n)
+			rx_data_ff <= 8'b0;
+		else
+			rx_data_ff <= rx_data_ff_next;
+	end
+	
+	always_comb begin
+		selectSig = 1'b1;
+		nextState = IDLE;
+		cmd_rdy = 1'b0;
+		clr_rdy = 1'b0;
+		case(state)
+			BYTE_2 : begin
+				nextState = BYTE_2;
+				selectSig = 1'b0;
+				cmd_rdy = 1'b1;
+				if(clr_cmd_rdy) begin
+					cmd_rdy = 1'b0;
+					selectSig = 1'b1;
+					nextState = IDLE;
+				end
+			end
+			
+			BYTE_1 : begin
+				selectSig = 1'b0;
+				nextState = BYTE_1;
+				if(rdy) begin
+					clr_rdy = 1'b1;
+					nextState = BYTE_2;
+					cmd_rdy = 1'b1;
+				end
+			end
+			
+			default : begin
+				if(rdy) begin
+					clr_rdy = 1'b1;
+					nextState = BYTE_1;
+					selectSig = 1'b0;
+				end
+			end
+			
+		endcase
+	end
+	
+	
 endmodule

@@ -131,11 +131,9 @@ module cmd_cfg_tb();
 		repeat(17) begin
 			cmd_to_send = {command, address, data};
 			snd_cmd = 1'b1;
-			clr_cmd_rdy = 1'b1;
 
 			@(negedge clk);
 			@(negedge clk) snd_cmd = 1'b0;
-			clr_cmd_rdy = 1'b0;
 
 			@(posedge resp_cmplt) begin
 
