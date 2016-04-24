@@ -36,7 +36,7 @@ module UART_trig_rx(clk, rst_n, RX, baud_cnt, match, mask, UARTtrig);
 		
 	always_ff @(posedge clk)
 		if(shift)
-			rx_sr <= {RX, rx_sr[8:1]};
+			rx_sr <= {rx_ff2, rx_sr[8:1]};
 	
 	//Baud counter
 	always_ff @(posedge clk, negedge rst_n)

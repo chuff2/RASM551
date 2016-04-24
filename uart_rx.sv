@@ -60,7 +60,7 @@ always_ff @(posedge clk or negedge rst_n)
 				
 always_ff @(posedge clk)
 	if(shift)
-		rx_sr <= {RX, rx_sr[8:1]};
+		rx_sr <= {rx_ff2, rx_sr[8:1]};
 		
 assign cmd = rx_sr[7:0];
 		
