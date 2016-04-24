@@ -1,0 +1,14 @@
+TB ToDo
+
+- Trigger Logic
+- Capture Logic
+- LA_dig (top level)
+- dig_core??
+- post synthesis TB for one of our tests
+
+Top Level TB tasks
+
+- Reading and writing to different registers
+- Reading a dump of channel RAM
+- Testing channel triggering and protocol triggering, under different settings
+- Do we need to test the channel sampling?

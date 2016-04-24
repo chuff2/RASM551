@@ -1,5 +1,8 @@
 `timescale 100ps / 10ps
 module LA_dig_tb();
+
+ parameter ENTRIES = 384,	// defaults to 384 for simulation, use 12288 for DE-0
+            LOG2 = 9;		// Log base 2 of number of entries
 			
 //// Interconnects to DUT/support defined as type wire /////
 wire clk400MHz,locked;			// PLL output signals to DUT
@@ -130,6 +133,6 @@ always
   #100 REF_CLK = ~REF_CLK;
 
 ///// Perhaps put some basic tasks in a separate file to keep your test bench less cluttered /////
-//`include "tb_tasks.v"
+`include "tb_tasks.sv"
 
 endmodule	
