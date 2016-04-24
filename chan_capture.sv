@@ -1,10 +1,10 @@
-module chan_capture(clk, rst_n, capture_done, trig_pos, run_mode, wrt_smpl, armed, set_capture_done, we, smpl_cnt, trig);
+module chan_capture(clk, rst_n, capture_done, trig_pos, run_mode, wrt_smpl, armed, set_capture_done, we, trig);
 
 parameter ENTRIES = 384,		// defaults to 384 for simulation 12288 for DE0
 	LOG2 = 9;					// Log base 2 of number of entries
 
 input logic clk, rst_n;
-input logic trig_pos;		// Count how many samples we have recorded after trigger
+input logic [LOG2-1:0] trig_pos;		// Count how many samples we have recorded after trigger
 input logic run_mode;		// starts the capture state macine
 input logic wrt_smpl;		// Tells us when to write a sample to RAM
 input logic trig;
@@ -12,7 +12,8 @@ input logic capture_done;
 output logic armed;			// Tell the trigger logic when we are ready to start checking for triggers
 output logic set_capture_done;	// Signal goes high when capture is finished and stays high
 output logic we;					// we signal going to RAM
-output logic [LOG2-1:0] smpl_cnt;	// This will connect to waddr of RAMqueues
+
+logic [LOG2-1:0] smpl_cnt;	// This will connect to waddr of RAMqueues
 
 logic [LOG2-1:0] trig_cnt;
 

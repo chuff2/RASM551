@@ -85,7 +85,7 @@ module dig_core(clk,rst_n,smpl_clk,wrt_smpl, decimator, VIH, VIL, CH1L, CH1H,
   chan_trig chan5Trig(.clk(clk), .armed(armed), .CHxTrigCfg(CH5TrigCfg), .CHxTrig(CH5Trig),
 	.CHxHff5(CH5Hff5), .CHxLff5(CH5Lff5));
 
-  trigger_logic(.clk(clk), .rst_n(rst_n), .CH1Trig(CH1Trig), .CH2Trig(CH2Trig), .CH3Trig(CH3Trig), .CH4Trig(CH4Trig),
+  trigger_logic trig_log(.clk(clk), .rst_n(rst_n), .CH1Trig(CH1Trig), .CH2Trig(CH2Trig), .CH3Trig(CH3Trig), .CH4Trig(CH4Trig),
 	.CH5Trig(CH5Trig), .protTrig(protTrig), .armed(armed), .set_capture_done(set_capture_done), .triggered(triggered));
 
   //command config
@@ -103,7 +103,7 @@ module dig_core(clk,rst_n,smpl_clk,wrt_smpl, decimator, VIH, VIL, CH1L, CH1H,
 	.run_mode(TrigCfg[4]), .wrt_smpl(wrt_smpl), .armed(armed), .capture_done(TrigCfg[5]),
 	.we(we), .trig(triggered));
 
-  //5 instances of channel sample logic TODO
+  //5 instances of channel sample logic
 	channel_sample chan_sample1(.CH_Hff5(CH1Hff5), .CH_Lff5(CH1Lff5), .smpl(wdataCH1),
 	 .CH_H(CH1H), .CH_L(CH1L), .smpl_clk(smpl_clk), .clk(clk));
 

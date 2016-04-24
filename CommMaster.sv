@@ -1,13 +1,13 @@
 //This is the CommMaster used for the cmd_cfg_tb
 
 
-module CommMaster(clk, rst_n, snd_cmd, cmd, TX, RX, cmd_cmplt, resp, resp_cmplt);
+module CommMaster(clk, rst_n, snd_cmd, cmd, TX, RX, cmd_cmplt, resp, resp_cmplt, clr_rdy);
 
-input logic clk, rst_n, snd_cmd, RX;
+input logic clk, rst_n, snd_cmd, RX, clr_rdy;
 input logic [15:0] cmd;
 output logic TX, cmd_cmplt, resp_cmplt;
 output [7:0] resp;
-logic sel, trmt, tx_done, clr_rdy;
+logic sel, trmt, tx_done;
 logic [7:0] tx_data, cmd_lower;
 
 typedef enum reg [2:0] {IDLE, SEND_HIGH, SEND_LOW, CMD_SENT} state_t;
@@ -68,7 +68,7 @@ end
 
 always_comb begin
 	rx_nxt_state = RX_IDLE;
-	clr_rdy = 1'b0;
+	//clr_rdy = 1'b0;
 	
 	case(rx_state)
 		
@@ -79,7 +79,7 @@ always_comb begin
 		end
 		
 		RESPONSE_CMPLT: begin
-			clr_rdy = 1'b1;
+			//clr_rdy = 1'b1;
 		end
 	endcase
 end

@@ -57,11 +57,13 @@ assign {CH2H_mux,CH2L_mux} = (SPI_triggering) ? {2{SCLK}}: 			// assign to outpu
 assign {CH3H_mux,CH3L_mux} = (SPI_triggering) ? {2{MOSI}}: 			// assign to output of SPI MOSI if SPI triggering
 				             {CH3H,CH3L};					  
 	 
-////// Instantiate DUT ////////
+////// Instantiate DUT //////// TODO do we need the LED?? It wasnt in there originally but I added it in to get rid of error
 LA_dig iDUT(.clk400MHz(clk400MHz),.RST_n(RST_n),.locked(locked),
             .VIH_PWM(VIH_PWM),.VIL_PWM(VIL_PWM),.CH1L(CH1L_mux),.CH1H(CH1H_mux),
 			.CH2L(CH2L_mux),.CH2H(CH2H_mux),.CH3L(CH3L_mux),.CH3H(CH3H_mux),.CH4L(CH4L),
-			.CH4H(CH4H),.CH5L(CH5L),.CH5H(CH5H),.RX(RX),.TX(TX));
+			.CH4H(CH4H),.CH5L(CH5L),.CH5H(CH5H),.RX(RX),.TX(TX), .LED());
+
+
 
 ///// Instantiate PLL to provide 400MHz clk from 50MHz ///////
 pll8x iPLL(.ref_clk(REF_CLK),.RST_n(RST_n),.out_clk(clk400MHz),.locked(locked));
@@ -76,16 +78,27 @@ always @(posedge clk400MHz, negedge locked)
 assign clk = clk_div[1];
 
 //// Instantiate Master UART (mimics host commands) //////
+/* unmodified version 
 UART_comm_mstr iMSTR(.clk(clk), .rst_n(RST_n), .RX(TX), .TX(RX),
                      .cmd(host_cmd), .send_cmd(send_cmd),
 					 .cmd_sent(cmd_sent), .resp_rdy(resp_rdy),
 					 .resp(resp), .clr_resp_rdy(clr_resp_rdy));
+*/
+CommMaster iMSTR(.clk(clk), .rst_n(RST_n), .RX(TX), .TX(RX),
+                     .cmd(host_cmd), .snd_cmd(send_cmd),
+					 .cmd_cmplt(cmd_sent), .resp_cmplt(resp_rdy),
+					 .resp(resp), .clr_rdy(clr_resp_rdy));
 					 
 ////////////////////////////////////////////////////////////////
 // Instantiate transmitter as source for protocol triggering //
 //////////////////////////////////////////////////////////////
+/* unmodified version
 uart_tx iTX(.clk(clk), .rst_n(RST_n), .tx(tx_prot), .strt_tx(strt_tx),
         .tx_data(8'h96), .tx_done());
+*/
+uart_tx iTX(.clk(clk), .rst_n(RST_n), .TX(tx_prot), .trmt(strt_tx),
+        .tx_data(8'h96), .tx_done());
+
 					 
 ////////////////////////////////////////////////////////////////////
 // Instantiate SPI transmitter as source for protocol triggering //
@@ -93,14 +106,30 @@ uart_tx iTX(.clk(clk), .rst_n(RST_n), .tx(tx_prot), .strt_tx(strt_tx),
 SPI_mstr iSPI(.clk(clk),.rst_n(rst_n),.SS_n(SS_n),.SCLK(SCLK),.wrt(strt_tx),.done(done),
               .data_out(16'h6600),.MOSI(MOSI),.pos_edge(1'b0),.width8(1'b1));
 
+
 initial begin
   //   put your testing code here.
+REF_CLK = 0;
+RST_n = 0;
+host_cmd = 16'h0000;//read address 0			
+send_cmd = 0;					
+clr_resp_rdy = 0;				
+clk_div = 0;				
+strt_tx = 0;	
+
+repeat(3) @(negedge clk)
+RST_n = 1;
+strt_tx = 1;
+send_cmd = 1;
+
+#100000;
+$stop;
 end
 
 always
   #100 REF_CLK = ~REF_CLK;
 
 ///// Perhaps put some basic tasks in a separate file to keep your test bench less cluttered /////
-`include "tb_tasks.v"
+//`include "tb_tasks.v"
 
 endmodule	

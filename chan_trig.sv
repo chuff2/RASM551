@@ -3,7 +3,7 @@
 module chan_trig(clk, armed, CHxTrigCfg, CHxTrig, CHxHff5, CHxLff5);
 
 	input clk, armed, CHxHff5, CHxLff5;
-	input logic [7:0] CHxTrigCfg;
+	input logic [4:0] CHxTrigCfg;
 	
 	output CHxTrig;
 
