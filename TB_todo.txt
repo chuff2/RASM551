@@ -1,14 +1,25 @@
 TB ToDo
 
-- Trigger Logic
-- Capture Logic
-- LA_dig (top level)
-- dig_core??
-- post synthesis TB for one of our tests
+- Trigger Logic - Conner
+- Channel Capture Logic - Adam (in progress)
+- LA_dig (top level) - Consists of 5 tests outlined below split amongs everyone
+- dig_core?? - Dont worry about until we find out that LAdig doesnt work
+- post synthesis TB for one of our tests - Adam
 
 Top Level TB tasks
 
-- Reading and writing to different registers
-- Reading a dump of channel RAM
-- Testing channel triggering and protocol triggering, under different settings
-- Do we need to test the channel sampling?
+- Reading and writing to different registers - Conner
+- Reading a dump of channel RAM (and plot data using Keshavs plotting script) - John
+- Testing channel triggering and protocol triggering, under different settings - Nick
+	- create task PollCapDone - mentioned in the testing top level document on moodle
+- Do we need to test the channel sampling? PWM? - Adam
+	-set the VIH and VIL to certain values (max, 0 with respect to the ordering of the signals noted) and expect all X's 
+	-set the VIH and VIL to half the range of the (.5*max, .5*max) so that nothing should be X
+
+
+Other
+-Synthesis script and post synth simulation (can use same top level test bench(s) from before) -Adam
+-Mapping to DEO-nano - John
+
+
+IMPORTANT: if anyone else has any more idea about what we should test, please let us know.
