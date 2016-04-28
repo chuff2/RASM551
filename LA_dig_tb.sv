@@ -134,5 +134,6 @@ always
 
 ///// Perhaps put some basic tasks in a separate file to keep your test bench less cluttered /////
 `include "tb_tasks.sv"
+`include "test1.sv"
 
 endmodule	
