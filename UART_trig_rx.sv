@@ -41,13 +41,15 @@ module UART_trig_rx(clk, rst_n, RX, baud_cnt, match, mask, UARTtrig);
 	//Baud counter
 	always_ff @(posedge clk, negedge rst_n)
 		if(!rst_n)
-			baud_counter <= 16'b0;
+			baud_counter <= (baud_cnt / 2);
 		else if(start)
-			baud_counter <= 16'b0;
+			baud_counter <= (baud_cnt / 2);
 		else if(shift)
 			baud_counter <= 16'b0;
-		else
+		else if(rxing)
 			baud_counter <= baud_counter + 1;
+		else
+			baud_counter <= baud_counter;
 	
 	// D-FF for tx_done signal	
 	always_ff @(posedge clk or negedge rst_n)
@@ -57,6 +59,15 @@ module UART_trig_rx(clk, rst_n, RX, baud_cnt, match, mask, UARTtrig);
 			rdy <= 1'b0;
 		else if(set_done)
 			rdy <= 1'b1;	
+	
+	// Bit counting MUX logic
+	always_ff @(posedge clk or negedge rst_n)
+		if(!rst_n)
+			bit_cnt <= 4'h0;
+		else if(start)
+			bit_cnt <= 4'h0;
+		else if(shift)
+			bit_cnt <= bit_cnt + 1;
 			
 	assign shift = (baud_counter == baud_cnt);
 	assign cmd = rx_sr[7:0];

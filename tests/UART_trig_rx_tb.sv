@@ -6,7 +6,7 @@ module UART_trig_rx_tb();
 
 
 	UART_trig_rx uart(.clk(clk), .rst_n(rst_n), .RX(RX), .baud_cnt(baud_cnt), .match(match), .mask(mask), .UARTtrig(UARTtrig));
-	uart_tx(.clk(clk), .rst_n(rst_n), .trmt(trmt), .tx_data(tx_data), .TX(RX), .tx_done(tx_done));
+	uart_tx uarttx(.clk(clk), .rst_n(rst_n), .trmt(trmt), .tx_data(tx_data), .TX(RX), .tx_done(tx_done));
 	
 	initial begin
 		rst_n = 1'b0;
@@ -23,7 +23,7 @@ module UART_trig_rx_tb();
 			trmt = 1'b1;
 		end
 
-		@(posedge tx_done) begin
+		/*@(posedge tx_done) begin
 			if(UARTtrig == 1'b1 ) $display("Success 1\n");
 			else begin
 				@(posedge clk) begin
@@ -36,12 +36,16 @@ module UART_trig_rx_tb();
 								$display("Test 1 failed\n");
 								$stop;
 							end	
+						end
 					end
 				end
 			end
+		
 		end
-		
-		
+		*/
+		@(posedge uart.rdy) begin
+			$stop;
+		end
 	end
 
 	always #2 clk = ~clk;
