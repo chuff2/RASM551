@@ -11,7 +11,6 @@ logic MOSI_ff1, MOSI_ff2, MOSI_ff3;
 logic SCLK_ff1, SCLK_ff2, SCLK_ff3;
 logic [15:0] shft_reg, shft_reg_in;
 logic shift;
-logic [15:0] masked_match;
 
 typedef enum reg {IDLE, BUSY} state_t;
 state_t state, nxt_state;
@@ -94,14 +93,14 @@ always_comb begin
 				if (len8_16 == 1) begin
 					//&((shft_reg ~^ match) | ~mask)
 					//if (shft_reg[15:8] ==? masked_match[7:0]) begin
-					if (&((shft_reg[15:8] ^ match[7:0]) | ~mask[7:0])) begin
+					if (&((shft_reg[15:8] ~^ match[7:0]) | mask[7:0])) begin
 						SPItrig = 1'b1;
 					end
 				end
 				else if (len8_16 == 0) begin
 					//&((shft_reg[15:0] ~^ match[15:0]) | ~mask[15:0])
 					//if (shft_reg[15:0] ==? masked_match[15:0]) begin
-					if (&((shft_reg[15:0] ^ match[15:0]) | ~mask[15:0])) begin
+					if (&((shft_reg[15:0] ~^ match[15:0]) | mask[15:0])) begin
 						SPItrig = 1'b1;
 					end
 				end
@@ -118,8 +117,6 @@ always_comb begin
 	endcase
 end
 
-//not mask, or with all x's, and with match
-assign masked_match = (~mask | 16'hXXXX) & match;
 
 
 //logic that determines the shift signal

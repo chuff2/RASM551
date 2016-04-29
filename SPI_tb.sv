@@ -88,6 +88,7 @@ initial begin
 	end
 	else begin
 		$display("Success!!!");
+$stop;
 	end
 
 	#1000;
