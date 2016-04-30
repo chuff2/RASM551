@@ -68,19 +68,19 @@ module AFE(smpl_clk,VIH_PWM,VIL_PWM,CH1L,CH1H,CH2L,CH2H,CH3L,CH3H,
   /////////////////////////////////////////////////////////////
   // Now model comparator function for the various channels //
   ///////////////////////////////////////////////////////////
-  assign CH1L = (CH1mem[ptr]<VIL) ? 1'b1 : 1'b0;
+  assign CH1L = (CH1mem[ptr]<VIL) ? 1'b0 : 1'b1;
   assign CH1H = (CH1mem[ptr]>VIH) ? 1'b1 : 1'b0; 
 
-  assign CH2L = (CH2mem[ptr]<VIL) ? 1'b1 : 1'b0;
+  assign CH2L = (CH2mem[ptr]<VIL) ? 1'b0 : 1'b1;
   assign CH2H = (CH2mem[ptr]>VIH) ? 1'b1 : 1'b0; 
 
-  assign CH3L = (CH3mem[ptr]<VIL) ? 1'b1 : 1'b0;
+  assign CH3L = (CH3mem[ptr]<VIL) ? 1'b0 : 1'b1;
   assign CH3H = (CH3mem[ptr]>VIH) ? 1'b1 : 1'b0; 
 
-  assign CH4L = (CH4mem[ptr]<VIL) ? 1'b1 : 1'b0;
-  assign CH4H = (CH4mem[ptr]>VIH) ? 1'b1 : 1'b0;
-  
-  assign CH5L = (CH5mem[ptr]<VIL) ? 1'b1 : 1'b0;
+  assign CH4L = (CH4mem[ptr]<VIL) ? 1'b0 : 1'b1;
+  assign CH4H = (CH4mem[ptr]>VIH) ? 1'b1 : 1'b0; 
+
+  assign CH5L = (CH5mem[ptr]<VIL) ? 1'b0 : 1'b1;
   assign CH5H = (CH5mem[ptr]>VIH) ? 1'b1 : 1'b0; 
 
 endmodule  
