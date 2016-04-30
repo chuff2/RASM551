@@ -24,6 +24,19 @@ repeat(10) @(posedge clk);
 cmd = {2'b10, 6'h01, 8'h00};
 sendCmd(cmd);
 
-RecvDump(3'b001);
+string filename = "CH1dmp.txt";
+RecvDump(3'b001, filename);
+
+string filename = "CH2dmp.txt";
+RecvDump(3'h2, filename);
+
+string filename = "CH3dmp.txt";
+RecvDump(3'h3, filename);
+
+string filename = "CH4dmp.txt";
+RecvDump(3'h4, filename);
+
+string filename = "CH5dmp.txt";
+RecvDump(3'h5, filename);
 
 endtask
