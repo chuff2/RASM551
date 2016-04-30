@@ -1,4 +1,3 @@
-`timescale 100ps / 10ps
 module AFE(smpl_clk,VIH_PWM,VIL_PWM,CH1L,CH1H,CH2L,CH2H,CH3L,CH3H,
            CH4L,CH4H,CH5L,CH5H);
 		   
@@ -11,19 +10,19 @@ module AFE(smpl_clk,VIH_PWM,VIL_PWM,CH1L,CH1H,CH2L,CH2H,CH3L,CH3H,
   output CH4L,CH4H;			// Logic low and logic high outputs for CH4
   output CH5L,CH5H;			// Logic low and logic high outputs for CH5
   
-  reg [7:0] CH1mem[65535:0];		// 2^16 entries of 8-bits analog for CH1
-  reg [7:0] CH2mem[65535:0];		// 2^16 entries of 8-bits analog for CH2
-  reg [7:0] CH3mem[65535:0];		// 2^16 entries of 8-bits analog for CH3
-  reg [7:0] CH4mem[65535:0];		// 2^16 entries of 8-bits analog for CH4 
-  reg [7:0] CH5mem[65535:0];		// 2^16 entries of 8-bits analog for CH5
+  reg [7:0] CH1mem[8191:0];		// 2^13 entries of 8-bits analog for CH1
+  reg [7:0] CH2mem[8191:0];		// 2^13 entries of 8-bits analog for CH2
+  reg [7:0] CH3mem[8191:0];		// 2^13 entries of 8-bits analog for CH3
+  reg [7:0] CH4mem[8191:0];		// 2^13 entries of 8-bits analog for CH4 
+  reg [7:0] CH5mem[8191:0];		// 2^13 entries of 8-bits analog for CH5
 
-  reg [15:0] ptr;					// pointer into CHXmem used for comparison
+  reg [12:0] ptr;					// pointer into CHXmem used for comparison
   reg [7:0] VIL,VIH;				// VIL & VIH as 8-bit quantities, start at .33 and .66
   reg en_VIL_PWM,en_VIH_PWM;
   reg [9:0] VIL_cntr,VIH_cntr;		// counters for capturing duty cycle of PWM signals.  
   
   initial begin
-    ptr = 16'h0000;
+    ptr = 13'h0000;
 	$readmemh("CH1mem.txt",CH1mem);
 	$readmemh("CH2mem.txt",CH2mem);
 	$readmemh("CH3mem.txt",CH3mem);
@@ -69,19 +68,19 @@ module AFE(smpl_clk,VIH_PWM,VIL_PWM,CH1L,CH1H,CH2L,CH2H,CH3L,CH3H,
   /////////////////////////////////////////////////////////////
   // Now model comparator function for the various channels //
   ///////////////////////////////////////////////////////////
-  assign CH1L = (CH1mem[ptr]<VIL) ? 1'b0 : 1'b1;
+  assign CH1L = (CH1mem[ptr]<VIL) ? 1'b1 : 1'b0;
   assign CH1H = (CH1mem[ptr]>VIH) ? 1'b1 : 1'b0; 
 
-  assign CH2L = (CH2mem[ptr]<VIL) ? 1'b0 : 1'b1;
+  assign CH2L = (CH2mem[ptr]<VIL) ? 1'b1 : 1'b0;
   assign CH2H = (CH2mem[ptr]>VIH) ? 1'b1 : 1'b0; 
 
-  assign CH3L = (CH3mem[ptr]<VIL) ? 1'b0 : 1'b1;
+  assign CH3L = (CH3mem[ptr]<VIL) ? 1'b1 : 1'b0;
   assign CH3H = (CH3mem[ptr]>VIH) ? 1'b1 : 1'b0; 
 
-  assign CH4L = (CH4mem[ptr]<VIL) ? 1'b0 : 1'b1;
-  assign CH4H = (CH4mem[ptr]>VIH) ? 1'b1 : 1'b0; 
-
-  assign CH5L = (CH5mem[ptr]<VIL) ? 1'b0 : 1'b1;
+  assign CH4L = (CH4mem[ptr]<VIL) ? 1'b1 : 1'b0;
+  assign CH4H = (CH4mem[ptr]>VIH) ? 1'b1 : 1'b0;
+  
+  assign CH5L = (CH5mem[ptr]<VIL) ? 1'b1 : 1'b0;
   assign CH5H = (CH5mem[ptr]>VIH) ? 1'b1 : 1'b0; 
 
 endmodule  

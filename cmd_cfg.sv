@@ -101,7 +101,7 @@ always_ff @(posedge clk, negedge rst_n)
 	else if((wrt_reg) && (cmd[12:8] == 5'h00))
 		TrigCfg <= cmd[5:0];
 	else if(set_capture_done)
-		TrigCfg <= TrigCfg | 6'h10;
+		TrigCfg <= TrigCfg | 6'h20;
 
 always_ff @(posedge clk, negedge rst_n)
 	if(!rst_n)

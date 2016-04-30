@@ -101,7 +101,7 @@ module dig_core(clk,rst_n,smpl_clk,wrt_smpl, decimator, VIH, VIL, CH1L, CH1H,
   //channel capture
   chan_capture chan_cap(.clk(clk), .rst_n(rst_n), .trig_pos(trig_pos), .set_capture_done(set_capture_done),
 	.run_mode(TrigCfg[4]), .wrt_smpl(wrt_smpl), .armed(armed), .capture_done(TrigCfg[5]),
-	.we(we), .trig(triggered));
+	.we(we), .waddr(waddr), .trig(triggered));
 
   //5 instances of channel sample logic
 	channel_sample chan_sample1(.CH_Hff5(CH1Hff5), .CH_Lff5(CH1Lff5), .smpl(wdataCH1),

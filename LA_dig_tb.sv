@@ -36,6 +36,9 @@ reg strt_tx;					// kick off unit used for protocol triggering
 // Define command bytes //
 /////////////////////////
 // May or may not want to make some localparams to represent command bytes to LA core
+localparam READ = 2'b00;
+localparam WRITE = 2'b01;
+localparam DUMP = 2'b10;
 
 /////////////////////////////////
 localparam UART_triggering = 1'b0;	// set to true if testing UART based triggering
@@ -106,7 +109,7 @@ uart_tx iTX(.clk(clk), .rst_n(RST_n), .TX(tx_prot), .trmt(strt_tx),
 ////////////////////////////////////////////////////////////////////
 // Instantiate SPI transmitter as source for protocol triggering //
 //////////////////////////////////////////////////////////////////
-SPI_mstr iSPI(.clk(clk),.rst_n(rst_n),.SS_n(SS_n),.SCLK(SCLK),.wrt(strt_tx),.done(done),
+SPI_mstr iSPI(.clk(clk),.rst_n(RST_n),.SS_n(SS_n),.SCLK(SCLK),.wrt(strt_tx),.done(done),
               .data_out(16'h6600),.MOSI(MOSI),.pos_edge(1'b0),.width8(1'b1));
 
 
@@ -124,8 +127,10 @@ repeat(3) @(negedge clk)
 RST_n = 1;
 strt_tx = 1;
 send_cmd = 1;
+@(negedge clk) send_cmd = 0;
 
-#100000;
+repeat (10) @(negedge clk);
+test2();
 $stop;
 end
 
@@ -134,6 +139,6 @@ always
 
 ///// Perhaps put some basic tasks in a separate file to keep your test bench less cluttered /////
 `include "tb_tasks.sv"
-`include "test1.sv"
+`include "test2.sv";
 
 endmodule	

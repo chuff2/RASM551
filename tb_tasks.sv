@@ -1,8 +1,8 @@
 // Basically just asserts and deasserts RST_n
 task Initialize();
 	RST_n = 0;
-	@(posedge clk);
-	@(negedge clk) RST_n = 1;
+	@(posedge REF_CLK);
+	@(negedge REF_CLK) RST_n = 1;
 endtask
 
 // sends UART command using commMaster to LA_dig
@@ -18,19 +18,38 @@ task checkResp(output logic [7:0] resp_recv);
 	@(posedge resp_rdy) resp_recv = resp;
 endtask
 
+// Check the cap_done bit in TrigCfg
+task waitCapDone;
+	@(posedge iDUT.iDIG.TrigCfg[5]);
+endtask
+
+// Setting the LA into run mode allows it to begin storing samples
+task setRunMode();
+	logic [15:0] cmd;
+	logic [7:0] run_mode_resp;
+	cmd = {2'b01, 6'h00, 8'h13};
+	sendCmd(cmd);
+	checkResp(run_mode_resp);
+	if(run_mode_resp !== 8'hA5) begin
+		$display("error: positive ACK (A5) not received");
+		$stop;
+	end
+endtask
+
 // Takes a channel as input (indexed from 1) dumps the channel's RAM_contents
 // Writes contents of RAM to a file
 task RecvDump(input logic[2:0] ch);
 	reg [LOG2-1:0] i;
 	reg [15:0] cmd;
 	logic [7:0] RAM_contents[ENTRIES-1:0];
+	logic capture_done;
 	static integer fd = $fopen("channel_dump.txt","w");
 	
 	cmd = {2'b10, 3'b000, ch, 8'h00};
 	sendCmd(cmd); 
 	for(i=0; i<ENTRIES; i=i+1'b1) begin
 		checkResp(RAM_contents[i]);
-		$fwrite("@0 %h\n", RAM_contents[i]);
+		$fwrite(fd,"@0 %h\n", RAM_contents[i]);
 	end
 	
 endtask
