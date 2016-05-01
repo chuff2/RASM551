@@ -93,7 +93,7 @@ always_comb begin
 				if (len8_16 == 1) begin
 					//&((shft_reg ~^ match) | ~mask)
 					//if (shft_reg[15:8] ==? masked_match[7:0]) begin
-					if (&((shft_reg[15:8] ~^ match[7:0]) | mask[7:0])) begin
+					if (&((shft_reg[7:0] ~^ match[7:0]) | mask[7:0])) begin
 						SPItrig = 1'b1;
 					end
 				end

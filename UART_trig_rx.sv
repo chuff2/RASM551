@@ -71,7 +71,8 @@ module UART_trig_rx(clk, rst_n, RX, baud_cnt, match, mask, UARTtrig);
 			
 	assign shift = (baud_counter == baud_cnt);
 	assign cmd = rx_sr[7:0];
-	assign UARTtrig = rdy & ((mask | cmd) == (mask | match));
+	assign UARTtrig = rdy & &((cmd ~^ match) | mask);//45 ~^ 05 | 40
+	//assign UARTtrig = rdy & ((mask | cmd) == (mask | match));//not sure if this works...
 	assign clr_rdy = rdy;
 	
 	always_comb begin

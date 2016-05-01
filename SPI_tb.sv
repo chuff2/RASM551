@@ -16,7 +16,8 @@ logic [15:0] masked_match;
 
 SPI_RX rx(.SPItrig(SPItrig), .clk(clk), .rst_n(rst_n), .SS_n(SS_n), 
 	.SCLK(SCLK), .MOSI(MOSI), .edg(rx_edg), .len8_16(width8_len8_16),
-	 .mask(mask), .match(match));
+	 .mask(mask), .match(
+));
 
 SPI_mstr mstr(.clk(clk), .rst_n(rst_n), .SS_n(SS_n), .SCLK(SCLK), .wrt(wrt), 
 	.done(done) , .data_out(data_out), .MOSI(MOSI), .pos_edge(mstr_edg),
@@ -88,7 +89,6 @@ initial begin
 	end
 	else begin
 		$display("Success!!!");
-$stop;
 	end
 
 	#1000;
