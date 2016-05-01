@@ -38,19 +38,22 @@ endtask
 
 // Takes a channel as input (indexed from 1) dumps the channel's RAM_contents
 // Writes contents of RAM to a file
-task RecvDump(input logic[2:0] ch, input string filename);
+task RecvDump(input logic[2:0] ch);
 	reg [LOG2-1:0] i;
 	reg [15:0] cmd;
 	logic [7:0] RAM_contents[ENTRIES-1:0];
 	logic capture_done;
-	static integer fd = $fopen(filename,"w");
+	static integer fid = $fopen($sformatf("CH%0ddmp.txt",ch),"w");
+	$display("filename = %s. fid=%d", $sformatf("CH%0ddmp.txt",ch), fid);
 	
+	// Send channel dump comand on channel ch
 	cmd = {2'b10, 3'b000, ch, 8'h00};
 	sendCmd(cmd); 
 	for(i=0; i<ENTRIES; i=i+1'b1) begin
 		checkResp(RAM_contents[i]);
-		$fwrite(fd,"%h\n", RAM_contents[i]);
+		$fwrite(fid,"%h\n", RAM_contents[i]);
 	end
+	$fclose(fid);
 	
 endtask
 

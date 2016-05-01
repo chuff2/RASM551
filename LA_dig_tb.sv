@@ -27,6 +27,9 @@ reg clr_resp_rdy;				// asserted to knock down resp_rdy
 reg [1:0] clk_div;				// counter used to derive 100MHz clk from clk400MHz
 reg strt_tx;					// kick off unit used for protocol triggering
 
+logic UART_triggering;
+logic SPI_triggering;
+
 /////////////////////////////////////////////////////////////
 // Channel Dumps can be written to file to aid in testing //
 ///////////////////////////////////////////////////////////
@@ -41,8 +44,11 @@ localparam WRITE = 2'b01;
 localparam DUMP = 2'b10;
 
 /////////////////////////////////
-localparam UART_triggering = 1'b0;	// set to true if testing UART based triggering
-localparam SPI_triggering = 1'b1;	// set to true if testing SPI based triggering
+// localparam UART_triggering = 1'b0;	// set to true if testing UART based triggering
+// localparam SPI_triggering = 1'b1;	// set to true if testing SPI based triggering
+// UART and SPI triggering is based off the TrigCfg register
+assign UART_triggering = iDUT.iDIG.TrigCfg[0];
+assign SPI_triggering = iDUT.iDIG.TrigCfg[1];
 
 
 ///// Instantiate Analog Front End model (provides stimulus to channels) ///////
