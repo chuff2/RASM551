@@ -136,6 +136,7 @@ send_cmd = 1;
 @(negedge clk) send_cmd = 0;
 
 repeat (10) @(negedge clk);
+//test1();
 test2();
 $stop;
 end
@@ -145,6 +146,7 @@ always
 
 ///// Perhaps put some basic tasks in a separate file to keep your test bench less cluttered /////
 `include "tb_tasks.sv"
+`include "test1.sv";
 `include "test2.sv";
 
 endmodule	
