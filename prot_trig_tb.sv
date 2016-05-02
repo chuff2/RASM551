@@ -101,9 +101,15 @@ SS_n_SPI = 1;
 	end
 end
 
+//wait some time between SPI and UART transactions (for the sake of this testbench
+//i.e. it has to do with the assigning of SS_n_RX)
+SPIgoing = 0;
+repeat (10000) @(posedge clk);
+
 
 //UART test
-SPIgoing = 0;
+
+uartTransInProg = 0;
 #1000
 //MOSIreg = 16'h2333;
 matchH = 8'h00;
@@ -111,9 +117,8 @@ matchL = 8'h23;
 maskH = 8'h00;
 maskL = 8'h00;
 TrigCfg = 6'b000010; //SCLK rise 16 bit word
-uartTransInProg = 0;
 repeat (15) @(negedge clk);
-SS_n_RXreg = 9'h023;
+SS_n_RXreg = 9'h046;//23->46
 uartTransInProg = 1;
 baud_cntH = 8'h03;//16?h0364 from slides
 baud_cntL = 8'h64;
