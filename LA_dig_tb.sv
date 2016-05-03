@@ -119,8 +119,10 @@ SPI_mstr iSPI(.clk(clk),.rst_n(RST_n),.SS_n(SS_n),.SCLK(SCLK),.wrt(strt_tx),.don
               .data_out(16'h6600),.MOSI(MOSI),.pos_edge(1'b0),.width8(1'b1));
 
 
+
+
 initial begin
-  //   put your testing code here.
+//   put your testing code here.
 REF_CLK = 0;
 RST_n = 0;
 host_cmd = 16'h0000;//read address 0			
@@ -136,7 +138,7 @@ send_cmd = 1;
 @(negedge clk) send_cmd = 0;
 
 repeat (10) @(negedge clk);
-//test1();
+test1();
 test2();
 $stop;
 end
