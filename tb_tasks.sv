@@ -43,8 +43,18 @@ task RecvDump(input logic[2:0] ch);
 	reg [15:0] cmd;
 	logic [7:0] RAM_contents[ENTRIES-1:0];
 	logic capture_done;
-	static integer fid = $fopen($sformatf("CH%0ddmp.txt",ch),"w");
-	$display("filename = %s. fid=%d", $sformatf("CH%0ddmp.txt",ch), fid);
+	integer fid;
+	string filename;
+	case(ch)
+		3'h1: filename = "CH1dmp.txt";
+		3'h2: filename = "CH2dmp.txt";
+		3'h3: filename = "CH3dmp.txt";
+		3'h4: filename = "CH4dmp.txt";
+		3'h5: filename = "CH5dmp.txt";
+		default: filename = "invalid_ch.txt";
+	endcase
+	fid = $fopen(filename,"w");
+	$display("filename = %s. fid=%d", filename, fid);
 	
 	// Send channel dump comand on channel ch
 	cmd = {2'b10, 3'b000, ch, 8'h00};
