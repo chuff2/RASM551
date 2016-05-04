@@ -1,0 +1,55 @@
+read_file -format sverilog { ./LA_dig.sv ./clk_rst_smpl.sv ./pwm8.sv ./UART_wrapper.sv \
+                            ./UART.sv ./uart_tx.sv ./uart_rx.sv ./dig_core.sv ./prot_trig.sv \
+                            ./SPI_RX.sv ./UART_trig_rx.sv ./chan_trig.sv ./trigger_logic.sv \
+                            ./cmd_cfg.sv ./chan_capture.sv ./channel_sample.sv}
+							 
+read_file -format verilog { ./dual_PWM.v ./RAMqueue.v }
+
+set current_design LA_dig
+
+#########################
+#unsure about these lines
+
+create_clock -name "clk400MHz" -period 0.8 -waveform {0 0.4} {clk400MHz}
+set_dont_touch_network [find port clk400MHz]
+
+create_generated_clock -name "clk" -source [get_port clk400MHz] -divide_by 4 [get_pins iCLKRST/clk]
+set_dont_touch_network [get_pins iCLKRST/clk]
+
+create_generated_clock -name "smpl_clk" -source [get_port clk400MHz] -divide_by 1 [get_pins iCLKRST/smpl_clk]
+set_dont_touch_network [get_pins smpl_clk]
+#############################
+
+####Treat RAMqueue as black box#####
+set_dont_touch [find design RAMqueue*]
+
+#########Input and output delays, drive strength, output load, wire model, transition time##########
+set prim_inputs [remove_from_collection  [all_inputs] [find port clk400MHz] ] 
+
+set_input_delay -clock smpl_clk -fall 0.25 [get_ports CH*]    
+set_input_delay -clock clk400MHz -rise 0.25 {RST_n locked}  
+set_input_delay -clock clk -rise 0.25 {RX}                 
+
+set_driving_cell -lib_cell ND2D2BWP -from_pin A1 -library tcbn40lpbwptc $prim_inputs
+set_drive 0.1 rst_n
+set_output_delay -clock clk 0.5 [all_outputs]
+set_load 0.05 [all_outputs]
+set_wire_load_model -name TSMC32K_Lowk_Conservative -library tcbn40lpbwptc
+set_max_transition 0.15 [current_design]
+
+######Compile for the first time and look at results#########
+compile -map_effort medium
+report_timing -delay max > max_delay1.rpt
+report_timing -delay min > min_delay1.rpt
+report_area > area1.rpt
+
+#######Do some fixes, and compile again###################
+set_clock_uncertainty 0.15 clk
+set_fix_hold clk
+compile -map_effort medium
+report_timing -delay max > max_delay2.rpt
+report_timing -delay min > min_delay2.rpt
+report_area > area2.rpt
+
+########Write out synthesized verilog gate level############
+write -format verilog LA_dig -output LA_dig.vg
