@@ -139,5 +139,19 @@ task WriteReadCheck(input logic [5:0] addr, output logic error, output logic [7:
 
 endtask
 
+task sendAndCheckAck(input logic [15:0] cmd);
+	logic [7:0] received_resp;	
+
+	// just some breathing room
+	repeat(5)  @(posedge clk);
+	sendCmd(cmd);
+	checkResp(received_resp);
+	// Check for a positive ACK
+	if(received_resp !== 8'hA5) begin
+		$display("error: positive ACK (A5) not received");
+		$stop;
+	end
+endtask
+
 
 

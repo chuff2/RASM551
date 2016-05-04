@@ -1,0 +1,9 @@
+echo "Please enter the file suffix:"
+read suffix;
+
+cp CH1dmp_$suffix.txt ../CH1dmp.txt
+cp CH2dmp_$suffix.txt ../CH2dmp.txt
+cp CH3dmp_$suffix.txt ../CH3dmp.txt
+cp CH4dmp_$suffix.txt ../CH4dmp.txt
+cp CH5dmp_$suffix.txt ../CH5dmp.txt
+

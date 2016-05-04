@@ -47,8 +47,8 @@ localparam DUMP = 2'b10;
 // localparam UART_triggering = 1'b0;	// set to true if testing UART based triggering
 // localparam SPI_triggering = 1'b1;	// set to true if testing SPI based triggering
 // UART and SPI triggering is based off the TrigCfg register
-assign UART_triggering = iDUT.iDIG.TrigCfg[0];
-assign SPI_triggering = iDUT.iDIG.TrigCfg[1];
+assign UART_triggering = ~iDUT.iDIG.TrigCfg[0];
+assign SPI_triggering = ~iDUT.iDIG.TrigCfg[1];
 
 
 ///// Instantiate Analog Front End model (provides stimulus to channels) ///////
@@ -138,8 +138,10 @@ send_cmd = 1;
 @(negedge clk) send_cmd = 0;
 
 repeat (10) @(negedge clk);
-test1();
-test2();
+// test1();
+//test2();
+test4(4'h1, 8'h86);
+//test5;
 $stop;
 end
 
@@ -150,5 +152,7 @@ always
 `include "tb_tasks.sv"
 `include "test1.sv";
 `include "test2.sv";
+`include "test4.sv";
+`include "test5.sv";
 
 endmodule	

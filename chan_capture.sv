@@ -21,7 +21,9 @@ logic [LOG2-1:0] trig_cnt;
 logic rst_smpl_cnt, rst_trig_cnt, inc_smpl_cnt, inc_trig_cnt; 
 logic set_armed, clr_armed, clr_cap_done;
 
-assign waddr = smpl_cnt;
+// This makes sure that the waddr rolls over when it gets to 384
+// smpl_cnt + trig_cnt should never be more than 2* ENTRIES so this should work
+assign waddr = (smpl_cnt + trig_cnt > ENTRIES-1) ? smpl_cnt + trig_cnt - ENTRIES : smpl_cnt + trig_cnt;
 
 typedef enum reg [2:0] {IDLE, WAIT_WRT_SMPL, INCR, CHECK_TRIG_CNT, CHECK_SMPL_CNT, WAIT_CAP_DONE} state_t;
 state_t state, nstate;
