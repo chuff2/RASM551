@@ -28,7 +28,7 @@ module chan_trig(clk, armed, CHxTrigCfg, CHxTrig, CHxHff5, CHxLff5);
 			CHxH_armed_ff <= 1'b1;
 	end
 	
-	always_ff @(posedge CHxLff5, negedge armed) begin
+	always_ff @(negedge CHxLff5, negedge armed) begin
 		if(!armed)
 			CHxL_armed_ff <= 1'b0;
 		else
