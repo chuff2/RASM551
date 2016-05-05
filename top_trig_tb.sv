@@ -1,3 +1,4 @@
+`timescale 100ps / 10ps
 module top_trig_tb();
 	
 	localparam TRIG_CFG_WR = {2'b01, 6'h0};
@@ -18,11 +19,6 @@ module top_trig_tb();
 	//Signals for top level
 	logic REF_CLK, RST_n, locked;
 	logic VIH_PWM, VIL_PWM;
-	logic CH1L, CH1H;
-	logic CH2L, CH2H;
-	logic CH3L, CH3H;
-	logic CH4L, CH4H;
-	logic CH5L, CH5H;
 	logic RX, TX, LED;
 	
 	//Signals for CommMaster
@@ -46,13 +42,17 @@ module top_trig_tb();
 	
 	
 	initial begin
+		REF_CLK = 1'b0;
 		channels = 11'b0;
 		locked = 1'b0;
 		VIH_PWM = 1'b0;
 		VIL_PWM = 1'b0;
 		send_cmd = 1'b0;
 		commRX = 1'b0;
-		Initialize;
+		
+		RST_n = 0;
+		@(posedge REF_CLK);
+		@(negedge REF_CLK) RST_n = 1;
 		
 		//Disabling UART and SPI triggering
 		$display("Disabling UART and SPI triggering...\n");
@@ -61,8 +61,10 @@ module top_trig_tb();
 		send_cmd = 1;
 		@(posedge REF_CLK);
 		@(negedge REF_CLK) send_cmd = 0;
-		
+		@(posedge cmd_cmplt);
+				
 		@(posedge top.iDIG.cmd_config.send_resp) begin
+			$display("entering ACK checking block...\n");
 			if(top.iDIG.cmd_config.resp != 8'ha5) begin
 				$display("ERROR: Recieved incorrect response from cmd_cfg");
 				$stop;
@@ -137,8 +139,9 @@ module top_trig_tb();
 			@(posedge REF_CLK);
 			@(negedge REF_CLK);
 
+				$display("Entering Channel Loop...\n");
 				while(~channels[10]) begin
-			
+						
 					repeat(6) begin
 						@(posedge REF_CLK);
 					end
@@ -361,7 +364,8 @@ module top_trig_tb();
 				prevChannels = 10'b0;
 				CHTrigCfg = CHTrigCfg + 1;	
 			end
-
+	$display("SUCCESS!!!!!!!!!!!!!!!!!!!!!!!!\n");
+	$stop;
 	end
 	
 	always #1.25 REF_CLK = ~REF_CLK;

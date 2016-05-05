@@ -90,7 +90,7 @@ always @(posedge clk)
 	if(snd_cmd)
 		cmd_lower <= cmd[7:0];
 		
-uart UART_INST(.clk(clk), .rst_n(rst_n), .trmt(trmt), .tx_data(tx_data), .TX(TX), .RX(RX), .tx_done(tx_done), .clr_rdy(clr_rdy), .cmd(resp), .rdy(resp_cmplt));
+UART UART_INST(.clk(clk), .rst_n(rst_n), .trmt(trmt), .tx_data(tx_data), .TX(TX), .RX(RX), .tx_done(tx_done), .clr_rdy(clr_rdy), .cmd(resp), .rdy(resp_cmplt));
 
 endmodule
 	
