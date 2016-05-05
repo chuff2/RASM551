@@ -7,7 +7,7 @@ Report : timing
         -max_paths 1
 Design : LA_dig
 Version: J-2014.09-SP5
-Date   : Mon May  2 15:37:23 2016
+Date   : Thu May  5 10:41:44 2016
 ****************************************
 
 Operating Conditions: NCCOM   Library: tcbn40lpbwptc
@@ -22,40 +22,29 @@ Wire Load Model Mode: segmented
 
   Des/Clust/Port     Wire Load Model       Library
   ------------------------------------------------
-  channel_sample_4   ZeroWireload          tcbn40lpbwptc
-  channel_sample_3   ZeroWireload          tcbn40lpbwptc
-  channel_sample_1   ZeroWireload          tcbn40lpbwptc
-  channel_sample_2   ZeroWireload          tcbn40lpbwptc
-  channel_sample_0   ZeroWireload          tcbn40lpbwptc
-  dig_core_ENTRIES384_LOG29
-                     ZeroWireload          tcbn40lpbwptc
-  clk_rst_smpl       ZeroWireload          tcbn40lpbwptc
   LA_dig             TSMC32K_Lowk_Conservative
                                            tcbn40lpbwptc
-  chan_trig_0        ZeroWireload          tcbn40lpbwptc
 
   Point                                                   Incr       Path
   --------------------------------------------------------------------------
   clock smpl_clk (fall edge)                              2.80       2.80
   clock network delay (ideal)                             0.00       2.80
   iDIG/chan_sample1/CH_Lff5_reg/CPN (DFND1BWP)            0.00       2.80 f
-  iDIG/chan_sample1/CH_Lff5_reg/Q (DFND1BWP)              0.14       2.94 r
-  iDIG/chan_sample1/CH_Lff5 (channel_sample_0)            0.00       2.94 r
-  iDIG/chan1Trig/CHxLff5 (chan_trig_0)                    0.00       2.94 r
-  iDIG/chan1Trig/CHxL_flop_reg/SN (DFKSND1BWP)            0.00       2.94 r
-  data arrival time                                                  2.94
+  iDIG/chan_sample1/CH_Lff5_reg/Q (DFND1BWP)              0.15       2.95 r
+  iDIG/chan1Trig/CHxL_flop_reg/SN (DFKSND4BWP)            0.00       2.95 r
+  data arrival time                                                  2.95
 
   clock clk (rise edge)                                   3.20       3.20
   clock network delay (ideal)                             0.00       3.20
   clock uncertainty                                      -0.15       3.05
-  iDIG/chan1Trig/CHxL_flop_reg/CP (DFKSND1BWP)            0.00       3.05 r
-  library setup time                                     -0.07       2.98
-  data required time                                                 2.98
+  iDIG/chan1Trig/CHxL_flop_reg/CP (DFKSND4BWP)            0.00       3.05 r
+  library setup time                                     -0.09       2.96
+  data required time                                                 2.96
   --------------------------------------------------------------------------
-  data required time                                                 2.98
-  data arrival time                                                 -2.94
+  data required time                                                 2.96
+  data arrival time                                                 -2.95
   --------------------------------------------------------------------------
-  slack (MET)                                                        0.04
+  slack (MET)                                                        0.01
 
 
   Startpoint: iDIG/cmd_config/decimator_reg[1]
@@ -67,32 +56,6 @@ Wire Load Model Mode: segmented
 
   Des/Clust/Port     Wire Load Model       Library
   ------------------------------------------------
-  channel_sample_4   ZeroWireload          tcbn40lpbwptc
-  channel_sample_3   ZeroWireload          tcbn40lpbwptc
-  channel_sample_1   ZeroWireload          tcbn40lpbwptc
-  chan_trig_3        ZeroWireload          tcbn40lpbwptc
-  chan_trig_2        ZeroWireload          tcbn40lpbwptc
-  UART_trig_rx       ZeroWireload          tcbn40lpbwptc
-  SPI_RX             ZeroWireload          tcbn40lpbwptc
-  uart_rx            ZeroWireload          tcbn40lpbwptc
-  uart_tx            ZeroWireload          tcbn40lpbwptc
-  channel_sample_2   ZeroWireload          tcbn40lpbwptc
-  channel_sample_0   ZeroWireload          tcbn40lpbwptc
-  chan_capture       ZeroWireload          tcbn40lpbwptc
-  cmd_cfg            ZeroWireload          tcbn40lpbwptc
-  trigger_logic      ZeroWireload          tcbn40lpbwptc
-  chan_trig_1        ZeroWireload          tcbn40lpbwptc
-  chan_trig_4        ZeroWireload          tcbn40lpbwptc
-  chan_trig_0        ZeroWireload          tcbn40lpbwptc
-  prot_trig          ZeroWireload          tcbn40lpbwptc
-  UART               ZeroWireload          tcbn40lpbwptc
-  pwm8_1             ZeroWireload          tcbn40lpbwptc
-  pwm8_0             ZeroWireload          tcbn40lpbwptc
-  dig_core_ENTRIES384_LOG29
-                     ZeroWireload          tcbn40lpbwptc
-  UART_wrapper       ZeroWireload          tcbn40lpbwptc
-  dual_PWM           ZeroWireload          tcbn40lpbwptc
-  clk_rst_smpl       ZeroWireload          tcbn40lpbwptc
   LA_dig             TSMC32K_Lowk_Conservative
                                            tcbn40lpbwptc
 
@@ -101,27 +64,24 @@ Wire Load Model Mode: segmented
   clock clk (rise edge)                                   0.00       0.00
   clock network delay (ideal)                             0.00       0.00
   iDIG/cmd_config/decimator_reg[1]/CP (DFCNQD4BWP)        0.00       0.00 r
-  iDIG/cmd_config/decimator_reg[1]/Q (DFCNQD4BWP)         0.12       0.12 f
-  iDIG/cmd_config/decimator[1] (cmd_cfg)                  0.00       0.12 f
-  iDIG/decimator[1] (dig_core_ENTRIES384_LOG29)           0.00       0.12 f
-  iCLKRST/decimator[1] (clk_rst_smpl)                     0.00       0.12 f
-  iCLKRST/U43/ZN (MUX2ND0BWP)                             0.06       0.18 f
-  iCLKRST/U44/ZN (MUX2ND0BWP)                             0.04       0.22 r
-  iCLKRST/U48/Z (MUX3D1BWP)                               0.11       0.33 r
-  iCLKRST/U49/ZN (OAI21D1BWP)                             0.03       0.36 f
-  iCLKRST/smpl_clk_div_reg/D (DFND1BWP)                   0.00       0.36 f
-  data arrival time                                                  0.36
+  iDIG/cmd_config/decimator_reg[1]/Q (DFCNQD4BWP)         0.15       0.15 r
+  U1399/Z (MUX2D1BWP)                                     0.07       0.22 f
+  U782/ZN (AOI22D2BWP)                                    0.05       0.27 r
+  U727/Z (AO222D2BWP)                                     0.08       0.34 r
+  U728/ZN (IOA21D2BWP)                                    0.02       0.37 f
+  iCLKRST/smpl_clk_div_reg/D (DFND2BWP)                   0.00       0.37 f
+  data arrival time                                                  0.37
 
   clock clk400MHz (fall edge)                             0.40       0.40
   clock network delay (ideal)                             0.00       0.40
-  iCLKRST/smpl_clk_div_reg/CPN (DFND1BWP)                 0.00       0.40 f
+  iCLKRST/smpl_clk_div_reg/CPN (DFND2BWP)                 0.00       0.40 f
   library setup time                                     -0.04       0.36
   data required time                                                 0.36
   --------------------------------------------------------------------------
   data required time                                                 0.36
-  data arrival time                                                 -0.36
+  data arrival time                                                 -0.37
   --------------------------------------------------------------------------
-  slack (MET)                                                        0.00
+  slack (VIOLATED: increase significant digits)                      0.00
 
 
   Startpoint: CH1L (input port clocked by smpl_clk)
@@ -132,14 +92,8 @@ Wire Load Model Mode: segmented
 
   Des/Clust/Port     Wire Load Model       Library
   ------------------------------------------------
-  UART_trig_rx       ZeroWireload          tcbn40lpbwptc
-  SPI_RX             ZeroWireload          tcbn40lpbwptc
-  channel_sample_0   ZeroWireload          tcbn40lpbwptc
-  prot_trig          ZeroWireload          tcbn40lpbwptc
   LA_dig             TSMC32K_Lowk_Conservative
                                            tcbn40lpbwptc
-  dig_core_ENTRIES384_LOG29
-                     ZeroWireload          tcbn40lpbwptc
 
   Point                                                   Incr       Path
   --------------------------------------------------------------------------
@@ -147,8 +101,6 @@ Wire Load Model Mode: segmented
   clock network delay (ideal)                             0.00       0.00
   input external delay                                    0.25       0.25 f
   CH1L (in)                                               0.01       0.26 f
-  iDIG/CH1L (dig_core_ENTRIES384_LOG29)                   0.00       0.26 f
-  iDIG/chan_sample1/CH_L (channel_sample_0)               0.00       0.26 f
   iDIG/chan_sample1/CH_Lff1_reg/D (DFND1BWP)              0.00       0.26 f
   data arrival time                                                  0.26
 

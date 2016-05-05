@@ -46,6 +46,7 @@ report_area > area1.rpt
 #######Do some fixes, and compile again###################
 set_clock_uncertainty 0.15 clk
 set_fix_hold clk
+ungroup -all -flatten
 compile -map_effort medium
 report_timing -delay max > max_delay2.rpt
 report_timing -delay min > min_delay2.rpt
