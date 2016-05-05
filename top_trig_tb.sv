@@ -39,7 +39,7 @@ module top_trig_tb();
 	CommMaster comm(.clk(REF_CLK), .rst_n(RST_n), .snd_cmd(send_cmd), .cmd(cmd), .TX(commTX), .RX(commRX),
 		.cmd_cmplt(cmd_cmplt), .resp(resp), .resp_cmplt(resp_cmplt), .clr_rdy(clr_rdy));
 	
-	LA_dig top(.clk400MHz(REF_CLK), .RST_n(RST_n), locked(locked), .VIH_PWM(VIH_PWM), .VIL_PWM(VIL_PWM), 
+	LA_dig top(.clk400MHz(REF_CLK), .RST_n(RST_n), .locked(locked), .VIH_PWM(VIH_PWM), .VIL_PWM(VIL_PWM), 
 		.CH1L(CH1L), .CH1H(CH1H), .CH2L(CH2L), .CH2H(CH2H), .CH3L(CH3L), .CH3H(CH3H), .CH4L(CH4L), .CH4H(CH4H),
 		.CH5L(CH5L), .CH5H(CH5H), .RX(commTX), .TX(), .LED(LED));
 	
@@ -122,13 +122,13 @@ module top_trig_tb();
 					end
 					
 					//Channel triggering testing block
-					if(top.iDIG.cmd_config.CH1TrigCfg & 5'h01){
+					if(top.iDIG.cmd_config.CH1TrigCfg & 5'h01) begin
 
 						if(~top.iDIG.CH1Trig) begin
 							$display("ERROR: Don't care set and Channel 1 not triggered\n");
 							$stop;
 						end		
-					}	
+					end	
 					
 					if((top.iDIG.cmd_config.CH1TrigCfg & 5'h02) & ~CH1L) begin
 						
@@ -164,13 +164,13 @@ module top_trig_tb();
 					//End of channel block	
 					
 					//Channel triggering testing block
-					if(top.iDIG.cmd_config.CH2TrigCfg & 5'h01){
+					if(top.iDIG.cmd_config.CH2TrigCfg & 5'h01) begin
 
 						if(~top.iDIG.CH2Trig) begin
 							$display("ERROR: Don't care set and Channel 2 not triggered\n");
 							$stop;
 						end		
-					}	
+					end
 					
 					if((top.iDIG.cmd_config.CH2TrigCfg & 5'h02) & ~CH2L) begin
 						
@@ -206,13 +206,13 @@ module top_trig_tb();
 					//End of channel block	
 										
 					//Channel triggering testing block
-					if(top.iDIG.cmd_config.CH3TrigCfg & 5'h01){
+					if(top.iDIG.cmd_config.CH3TrigCfg & 5'h01) begin
 
 						if(~top.iDIG.CH3Trig) begin
 							$display("ERROR: Don't care set and Channel 3 not triggered\n");
 							$stop;
 						end		
-					}	
+					end
 					
 					if((top.iDIG.cmd_config.CH3TrigCfg & 5'h02) & ~CH3L) begin
 						
@@ -248,13 +248,13 @@ module top_trig_tb();
 					//End of channel block	
 										
 					//Channel triggering testing block
-					if(top.iDIG.cmd_config.CH4TrigCfg & 5'h01){
+					if(top.iDIG.cmd_config.CH4TrigCfg & 5'h01) begin
 
 						if(~top.iDIG.CH4Trig) begin
 							$display("ERROR: Don't care set and Channel 4 not triggered\n");
 							$stop;
 						end		
-					}	
+					end
 					
 					if((top.iDIG.cmd_config.CH4TrigCfg & 5'h02) & ~CH4L) begin
 						
@@ -291,13 +291,13 @@ module top_trig_tb();
 					
 						
 					//Channel triggering testing block
-					if(top.iDIG.cmd_config.CH5TrigCfg & 5'h01){
+					if(top.iDIG.cmd_config.CH5TrigCfg & 5'h01) begin
 
 						if(~top.iDIG.CH5Trig) begin
 							$display("ERROR: Don't care set and Channel 5 not triggered\n");
 							$stop;
 						end		
-					}	
+					end
 					
 					if((top.iDIG.cmd_config.CH5TrigCfg & 5'h02) & ~CH5L) begin
 						
