@@ -52,6 +52,10 @@ module top_trig_tb();
 		
 		RST_n = 0;
 		@(posedge REF_CLK);
+		@(posedge REF_CLK);
+		@(posedge REF_CLK);
+		@(posedge REF_CLK);
+		@(posedge REF_CLK);
 		@(negedge REF_CLK) RST_n = 1;
 		
 		//Disabling UART and SPI triggering
@@ -357,7 +361,7 @@ module top_trig_tb();
 					end
 					//End of channel block	
 
-					prevChannels = channels;
+					prevChannels = channels[9:0];
 					channels = channels + 1;
 				end
 				channels = 11'b0;

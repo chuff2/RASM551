@@ -1,15 +1,30 @@
 `timescale 100ps / 10ps
 module LA_dig_tb();
-
  parameter ENTRIES = 384,	// defaults to 384 for simulation, use 12288 for DE-0
             LOG2 = 9;		// Log base 2 of number of entries
 			
+			
+localparam TRIG_CFG_WR = {2'b01, 6'h0};
+localparam TRIG_CFG_RD = {2'b00, 6'h0};
+	
+localparam CH1TrigCfgWr = {2'b01, 6'h01};
+localparam CH2TrigCfgWr = {2'b01, 6'h02};
+localparam CH3TrigCfgWr = {2'b01, 6'h03};
+localparam CH4TrigCfgWr = {2'b01, 6'h04};
+localparam CH5TrigCfgWr = {2'b01, 6'h05};
+	
+localparam CH1TrigCfgRd = {2'b0, 6'h01};
+localparam CH2TrigCfgRd = {2'b0, 6'h02};
+localparam CH3TrigCfgRd = {2'b0, 6'h03};
+localparam CH4TrigCfgRd = {2'b0, 6'h04};
+localparam CH5TrigCfgRd = {2'b0, 6'h05};
+	
 //// Interconnects to DUT/support defined as type wire /////
 wire clk400MHz,locked;			// PLL output signals to DUT
 wire clk;						// 100MHz clock generated at this level from clk400MHz
 wire VIH_PWM,VIL_PWM;			// connect to PWM outputs to monitor
-wire CH1L,CH1H,CH2L,CH2H,CH3L;	// channel data inputs from AFE model
-wire CH3H,CH4L,CH4H,CH5L,CH5H;	// channel data inputs from AFE model
+logic CH1L,CH1H,CH2L,CH2H,CH3L;	// channel data inputs from AFE model
+logic CH3H,CH4L,CH4H,CH5L,CH5H;	// channel data inputs from AFE model
 wire RX,TX;						// interface to host
 wire cmd_sent,resp_rdy;			// from master UART, monitored in test bench
 wire [7:0] resp;				// from master UART, reponse received from DUT
@@ -119,7 +134,15 @@ SPI_mstr iSPI(.clk(clk),.rst_n(RST_n),.SS_n(SS_n),.SCLK(SCLK),.wrt(strt_tx),.don
               .data_out(16'h6600),.MOSI(MOSI),.pos_edge(1'b0),.width8(1'b1));
 
 
-
+/********************************************************************
+* Signals for chan_trig_test
+********************************************************************/
+logic [10:0] channels;
+logic [5:0] CHTrigCfg;
+logic [9:0] prevChannels;
+		
+logic [7:0] dataRead;
+logic error;
 
 initial begin
 //   put your testing code here.
@@ -140,8 +163,9 @@ send_cmd = 1;
 repeat (10) @(negedge clk);
 // test1();
 //test2();
-test4(4'h1, 8'h86);
+//test4(4'h1, 8'h86);
 //test5;
+chan_trig_test;
 $stop;
 end
 
@@ -154,5 +178,6 @@ always
 `include "test2.sv";
 `include "test4.sv";
 `include "test5.sv";
+`include "chan_trig_test.sv";
 
 endmodule	
